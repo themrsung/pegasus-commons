@@ -7,17 +7,15 @@ import java.util.function.*;
 import java.util.stream.Stream;
 
 /**
- * A triple of objects.
+ * A triple of objects of the same type.
  *
  * @param a   The first object
  * @param b   The second object
  * @param c   The third object
- * @param <A> The first object's type
- * @param <B> The second object's type
- * @param <C> The third object's type
+ * @param <T> The objects' type
  * @see Tuple
  */
-public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
+public record UnaryTriple<T>(T a, T b, T c) implements Tuple<T> {
     @Serial
     private static final long serialVersionUID = 0;
 
@@ -38,7 +36,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public boolean contains(Object value) {
+    public boolean contains(T value) {
         return Objects.equals(a, value) || Objects.equals(b, value) || Objects.equals(c, value);
     }
 
@@ -50,7 +48,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public boolean containsAll(Tuple<?> t) {
+    public boolean containsAll(Tuple<? extends T> t) {
         return t.stream().allMatch(this::contains);
     }
 
@@ -62,7 +60,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
-    public Object get(int i) throws IndexOutOfBoundsException {
+    public T get(int i) throws IndexOutOfBoundsException {
         return switch (i) {
             case 0 -> a;
             case 1 -> b;
@@ -80,7 +78,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public <U> Tuple<U> map(Function<? super Object, ? extends U> mapper) {
+    public <U> Tuple<U> map(Function<? super T, ? extends U> mapper) {
         return Tuple.of(mapper.apply(a), mapper.apply(b), mapper.apply(c));
     }
 
@@ -92,7 +90,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public DoubleTuple mapToDouble(ToDoubleFunction<? super Object> mapper) {
+    public DoubleTuple mapToDouble(ToDoubleFunction<? super T> mapper) {
         return DoubleTuple.of(
                 mapper.applyAsDouble(a),
                 mapper.applyAsDouble(b),
@@ -108,7 +106,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public LongTuple mapToLong(ToLongFunction<? super Object> mapper) {
+    public LongTuple mapToLong(ToLongFunction<? super T> mapper) {
         return LongTuple.of(
                 mapper.applyAsLong(a),
                 mapper.applyAsLong(b),
@@ -124,7 +122,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public IntTuple mapToInt(ToIntFunction<? super Object> mapper) {
+    public IntTuple mapToInt(ToIntFunction<? super T> mapper) {
         return IntTuple.of(
                 mapper.applyAsInt(a),
                 mapper.applyAsInt(b),
@@ -153,7 +151,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public Stream<Object> stream() {
+    public Stream<T> stream() {
         return Stream.of(a, b, c);
     }
 
@@ -163,8 +161,9 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public Object[] toArray() {
-        return new Object[]{a, b, c};
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        return (T[]) new Object[]{a, b, c};
     }
 
     /**
@@ -173,7 +172,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public Iterator<Object> iterator() {
+    public Iterator<T> iterator() {
         return stream().iterator();
     }
 

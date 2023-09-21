@@ -46,6 +46,82 @@ public final class Tuples {
     }
 
     //
+    // Boxing / Unboxing
+    //
+
+    /**
+     * Converts the provided tuple {@code t} into boxed object form, then returns
+     * the converted tuple.
+     *
+     * @param t The tuple of which to convert into boxed form
+     * @return The converted tuple
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static Tuple<Double> boxed(DoubleTuple t) {
+        return Tuple.from(t.stream().boxed());
+    }
+
+    /**
+     * Converts the provided tuple {@code t} into boxed object form, then returns
+     * the converted tuple.
+     *
+     * @param t The tuple of which to convert into boxed form
+     * @return The converted tuple
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static Tuple<Long> boxed(LongTuple t) {
+        return Tuple.from(t.stream().boxed());
+    }
+
+    /**
+     * Converts the provided tuple {@code t} into boxed object form, then returns
+     * the converted tuple.
+     *
+     * @param t The tuple of which to convert into boxed form
+     * @return The converted tuple
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static Tuple<Integer> boxed(IntTuple t) {
+        return Tuple.from(t.stream().boxed());
+    }
+
+    /**
+     * Converts the provided tuple {@code t} into unboxed primitive form, then returns
+     * the converted tuple.
+     *
+     * @param t The tuple of which to convert into unboxed form
+     * @return The converted tuple
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static DoubleTuple unboxToDouble(Tuple<? extends Number> t) {
+        return DoubleTuple.from(t.stream().mapToDouble(Number::doubleValue));
+    }
+
+    /**
+     * Converts the provided tuple {@code t} into unboxed primitive form, then returns
+     * the converted tuple.
+     *
+     * @param t The tuple of which to convert into unboxed form
+     * @return The converted tuple
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static LongTuple unboxToLong(Tuple<? extends Number> t) {
+        return LongTuple.from(t.stream().mapToLong(Number::longValue));
+    }
+
+    /**
+     * Converts the provided tuple {@code t} into unboxed primitive form, then returns
+     * the converted tuple.
+     *
+     * @param t The tuple of which to convert into unboxed form
+     * @return The converted tuple
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static IntTuple unboxToInt(Tuple<? extends Number> t) {
+        return IntTuple.from(t.stream().mapToInt(Number::intValue));
+    }
+
+    //
     // Conversion
     //
 
@@ -56,7 +132,7 @@ public final class Tuples {
      * @return The converted vector
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
      */
-    public static Vector2 asVector2(DoubleTuple t) {
+    public static Vector2 toVector2(DoubleTuple t) {
         if (t.size() != 2) {
             throw new IllegalArgumentException("The provided tuple's size is not 2.");
         }
@@ -71,7 +147,7 @@ public final class Tuples {
      * @return The converted vector
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
      */
-    public static Vector3 asVector3(DoubleTuple t) {
+    public static Vector3 toVector3(DoubleTuple t) {
         if (t.size() != 3) {
             throw new IllegalArgumentException("The provided tuple's size is not 3.");
         }
@@ -86,7 +162,7 @@ public final class Tuples {
      * @return The converted vector
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
      */
-    public static Vector4 asVector4(DoubleTuple t) {
+    public static Vector4 toVector4(DoubleTuple t) {
         if (t.size() != 4) {
             throw new IllegalArgumentException("The provided tuple's size is not 4.");
         }
@@ -101,7 +177,7 @@ public final class Tuples {
      * @return The converted vector
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
      */
-    public static Quaternion asQuaternion(DoubleTuple t) {
+    public static Quaternion toQuaternion(DoubleTuple t) {
         if (t.size() != 4) {
             throw new IllegalArgumentException("The provided tuple's size is not 4.");
         }

@@ -26,7 +26,11 @@ public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
      */
     @SafeVarargs
     static <T> Tuple<T> of(T... values) {
-        return new ArrayTuple<>(values);
+        return switch (values.length) {
+            case 2 -> new UnaryPair<>(values[0], values[1]);
+            case 3 -> new UnaryTriple<>(values[0], values[1], values[2]);
+            default -> new ArrayTuple<>(values);
+        };
     }
 
     /**

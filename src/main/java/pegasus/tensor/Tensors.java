@@ -1036,7 +1036,7 @@ public final class Tensors {
      * @return The converted tuple
      * @throws NullPointerException When the provided vector {@code v} is {@code null}
      */
-    public static DoubleTuple asTuple(Vector<?> v) {
+    public static DoubleTuple toTuple(Vector<?> v) {
         return DoubleTuple.from(v.stream());
     }
 
@@ -1048,8 +1048,25 @@ public final class Tensors {
      * @return The converted tuple
      * @throws NullPointerException When the provided vector {@code v} is {@code null}
      */
-    public static Tuple<Double> asBoxedTuple(Vector<?> v) {
+    public static Tuple<Double> toBoxedTuple(Vector<?> v) {
         return Tuple.from(v.stream().boxed());
+    }
+
+    /**
+     * Converts the provided matrix {@code m} into a layered tuple.
+     *
+     * @param m The matrix of which to convert into a layered tuple
+     * @return The converted tuple
+     * @throws NullPointerException When the provided matrix {@code m} is {@code null}
+     */
+    public static Tuple<DoubleTuple> toLayeredTuple(Matrix m) {
+        DoubleTuple[] rows = new DoubleTuple[m.rows()];
+
+        for (int r = 0; r < m.rows(); r++) {
+            rows[r] = DoubleTuple.of(m.rows());
+        }
+
+        return Tuple.of(rows);
     }
 
     //

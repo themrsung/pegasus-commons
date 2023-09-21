@@ -7,17 +7,14 @@ import java.util.function.*;
 import java.util.stream.Stream;
 
 /**
- * A triple of objects.
+ * A pair of objects of the same type.
  *
  * @param a   The first object
  * @param b   The second object
- * @param c   The third object
- * @param <A> The first object's type
- * @param <B> The second object's type
- * @param <C> The third object's type
+ * @param <T> The objects' type
  * @see Tuple
  */
-public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
+public record UnaryPair<T>(T a, T b) implements Tuple<T> {
     @Serial
     private static final long serialVersionUID = 0;
 
@@ -28,7 +25,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      */
     @Override
     public int size() {
-        return 3;
+        return 2;
     }
 
     /**
@@ -38,8 +35,8 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public boolean contains(Object value) {
-        return Objects.equals(a, value) || Objects.equals(b, value) || Objects.equals(c, value);
+    public boolean contains(T value) {
+        return Objects.equals(a, value) || Objects.equals(b, value);
     }
 
     /**
@@ -50,7 +47,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public boolean containsAll(Tuple<?> t) {
+    public boolean containsAll(Tuple<? extends T> t) {
         return t.stream().allMatch(this::contains);
     }
 
@@ -62,11 +59,10 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
-    public Object get(int i) throws IndexOutOfBoundsException {
+    public T get(int i) throws IndexOutOfBoundsException {
         return switch (i) {
             case 0 -> a;
             case 1 -> b;
-            case 2 -> c;
             default -> throw new IndexOutOfBoundsException(i);
         };
     }
@@ -80,8 +76,8 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public <U> Tuple<U> map(Function<? super Object, ? extends U> mapper) {
-        return Tuple.of(mapper.apply(a), mapper.apply(b), mapper.apply(c));
+    public <U> Tuple<U> map(Function<? super T, ? extends U> mapper) {
+        return Tuple.of(mapper.apply(a), mapper.apply(b));
     }
 
     /**
@@ -92,12 +88,8 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public DoubleTuple mapToDouble(ToDoubleFunction<? super Object> mapper) {
-        return DoubleTuple.of(
-                mapper.applyAsDouble(a),
-                mapper.applyAsDouble(b),
-                mapper.applyAsDouble(c)
-        );
+    public DoubleTuple mapToDouble(ToDoubleFunction<? super T> mapper) {
+        return DoubleTuple.of(mapper.applyAsDouble(a), mapper.applyAsDouble(b));
     }
 
     /**
@@ -108,12 +100,8 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public LongTuple mapToLong(ToLongFunction<? super Object> mapper) {
-        return LongTuple.of(
-                mapper.applyAsLong(a),
-                mapper.applyAsLong(b),
-                mapper.applyAsLong(c)
-        );
+    public LongTuple mapToLong(ToLongFunction<? super T> mapper) {
+        return LongTuple.of(mapper.applyAsLong(a), mapper.applyAsLong(b));
     }
 
     /**
@@ -124,12 +112,8 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public IntTuple mapToInt(ToIntFunction<? super Object> mapper) {
-        return IntTuple.of(
-                mapper.applyAsInt(a),
-                mapper.applyAsInt(b),
-                mapper.applyAsInt(c)
-        );
+    public IntTuple mapToInt(ToIntFunction<? super T> mapper) {
+        return IntTuple.of(mapper.applyAsInt(a), mapper.applyAsInt(b));
     }
 
     /**
@@ -144,7 +128,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
     @Override
     @SuppressWarnings("unchecked")
     public <U> Tuple<U> cast(Class<? extends U> target) {
-        return Tuple.of((U) a, (U) b, (U) c);
+        return Tuple.of((U) a, (U) b);
     }
 
     /**
@@ -153,8 +137,8 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public Stream<Object> stream() {
-        return Stream.of(a, b, c);
+    public Stream<T> stream() {
+        return Stream.of(a, b);
     }
 
     /**
@@ -163,8 +147,9 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public Object[] toArray() {
-        return new Object[]{a, b, c};
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        return (T[]) new Object[]{a, b};
     }
 
     /**
@@ -173,7 +158,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      * @return {@inheritDoc}
      */
     @Override
-    public Iterator<Object> iterator() {
+    public Iterator<T> iterator() {
         return stream().iterator();
     }
 
@@ -184,7 +169,7 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(a, b, c);
+        return Objects.hash(a, b);
     }
 
     /**
@@ -196,8 +181,20 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Tuple<?> t)) return false;
-        if (t.size() != 3) return false;
-        return Objects.equals(a, t.get(0)) && Objects.equals(b, t.get(1)) && Objects.equals(c, t.get(2));
+        if (t.size() != 2) return false;
+        return Objects.equals(a, t.get(0)) && Objects.equals(b, t.get(1));
+    }
+
+    /**
+     * Checks for equality without regard to order.
+     *
+     * @param other The other pair to compare to
+     * @return {@code true} if the pairs are equal regardless of their elements' order
+     */
+    public boolean equalsIgnoreOrder(UnaryPair<?> other) {
+        if (other == null) return false;
+        return (Objects.equals(a, other.a) && Objects.equals(b, other.b)) &&
+                (Objects.equals(a, other.b) && Objects.equals(b, other.a));
     }
 
     /**
@@ -207,6 +204,6 @@ public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
      */
     @Override
     public String toString() {
-        return "[" + a + ", " + b + ", " + "]";
+        return "[" + a + ", " + b + "]";
     }
 }

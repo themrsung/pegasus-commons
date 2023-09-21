@@ -1,19 +1,16 @@
 package pegasus;
 
-import pegasus.tensor.Tensors;
-import pegasus.tensor.Vector8;
-import pegasus.tuple.Tuple;
-import pegasus.tuple.Tuples;
+import pegasus.tensor.Quaternion;
+import pegasus.tensor.Vector3;
 
 public class LosAlamos {
     public static void main(String[] args) {
-        Vector8 v = new Vector8(1, 2, 3, 4, 5, 6, 7, 8);
-        Vector8 p = new Vector8(8, 7, 6, 5, 4, 3, 2, 1);
+        double quarterTurn = Math.PI / 2;
+        Vector3 axis = Vector3.POSITIVE_Z;
 
-        Tuple<Double> t1 = Tensors.asBoxedTuple(v);
-        Tuple<Double> t2 = Tensors.asBoxedTuple(p);
-        Tuple<Double> t3 = Tuples.join(t1, t2);
+        Quaternion rotation = Quaternion.from(quarterTurn, 0, 0);
+        Vector3 identity = new Vector3(0, 100, 0);
 
-        System.out.println(t3);
+        System.out.println(rotation.direction());
     }
 }

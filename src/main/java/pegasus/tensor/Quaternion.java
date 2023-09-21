@@ -10,6 +10,15 @@ import java.util.stream.DoubleStream;
 
 /**
  * An immutable complex number with one real component and three imaginary components.
+ * Conversion to and from axis/angle notation follows the right-handed coordinate system,
+ * and conversion to and from Euler angles is performed in the following manner.
+ * <ul>
+ *     <li>Pitch is defined as counter-clockwise rotation along the X axis</li>
+ *     <li>Yaw is defined as counter-clockwise rotation along the Y axis</li>
+ *     <li>Roll is defined as counter-clockwise rotation along the Z axis</li>
+ * </ul>
+ * The identity quaternion corresponds to no rotation along {@link Vector3#POSITIVE_Y
+ * the positive Y axis}, and Euler angles of {@code 0, 0, 0}.
  *
  * @see Tensor
  * @see Vector
@@ -33,6 +42,63 @@ public class Quaternion implements Vector<Quaternion> {
      * The identity quaternion.
      */
     public static final Quaternion IDENTITY = new Quaternion(1, 0, 0, 0);
+
+    /**
+     * Creates a new rotation quaternion from Euler angle representation. This method
+     * uses the right-handed coordinate system.
+     *
+     * @param pitch The pitch of the rotation in radians (rotation along X axis)
+     * @param yaw   The yaw of the rotation in radians (rotation along Y axis)
+     * @param roll  The roll of the rotation in radians (rotation along Z axis)
+     * @return The constructed quaternion
+     */
+    public static Quaternion from(double pitch, double yaw, double roll) {
+        double halfRoll = roll * 0.5;
+        double sinHalfRoll = Math.sin(halfRoll);
+        double cosHalfRoll = Math.cos(halfRoll);
+
+        double halfYaw = yaw * 0.5;
+        double sinHalfYaw = Math.sin(halfYaw);
+        double cosHalfYaw = Math.cos(halfYaw);
+
+        double halfPitch = pitch * 0.5;
+        double sinHalfPitch = Math.sin(halfPitch);
+        double negatedSinHalfPitch = -sinHalfPitch;
+        double cosHalfPitch = Math.cos(halfPitch);
+
+        double crcy = cosHalfRoll * cosHalfYaw;
+        double srsy = -sinHalfRoll * -sinHalfYaw;
+        double crsy = cosHalfRoll * -sinHalfYaw;
+        double srcy = sinHalfRoll * cosHalfYaw;
+
+        return new Quaternion(
+                crcy * cosHalfPitch - srsy * negatedSinHalfPitch,
+                crcy * negatedSinHalfPitch + srsy * cosHalfPitch,
+                crsy * cosHalfPitch + srcy * negatedSinHalfPitch,
+                -crsy * negatedSinHalfPitch + srcy * cosHalfPitch
+        );
+    }
+
+    /**
+     * Creates a new rotation quaternion from an axis/angle notation. This method uses
+     * the right-handed coordinate system.
+     *
+     * @param axis  The axis of rotation as a unit vector
+     * @param angle The angle of rotation in radians
+     * @return The constructed quaternion
+     * @throws NullPointerException When the provided axis is {@code null}
+     */
+    public static Quaternion from(Vector3 axis, double angle) {
+        double halfAngle = angle * 0.5;
+        double sinHalfAngle = Math.sin(halfAngle);
+
+        double w = Math.cos(halfAngle);
+        double x = -axis.x * sinHalfAngle; // Inversion is required
+        double y = -axis.y * sinHalfAngle; // Inversion is required
+        double z = axis.z * sinHalfAngle;
+
+        return new Quaternion(w, x, y, z);
+    }
 
     /**
      * Creates a new quaternion.
@@ -218,6 +284,97 @@ public class Quaternion implements Vector<Quaternion> {
     @Override
     public double normManhattan() {
         return Math.abs(w) + Math.abs(x) + Math.abs(y) + Math.abs(z);
+    }
+
+    /**
+     * Returns the pitch of this quaternion. (angle of counter-clockwise rotation along the X axis)
+     *
+     * @return The pitch of this quaternion in radians
+     */
+    public double pitch() {
+        double sinHalfPitch = 2 * (w * x - y * z);
+        double cosHalfPitch = 1 - 2 * (x * x + y * y);
+        return -Math.atan2(sinHalfPitch, cosHalfPitch);
+    }
+
+    /**
+     * Returns the yaw of this quaternion. (angle of counter-clockwise rotation along the Y axis)
+     *
+     * @return The yaw of this quaternion in radians
+     */
+    public double yaw() {
+        double sinHalfYaw = 2 * (w * y + x * z);
+        double cosHalfYaw = 1 - 2 * (y * y + z * z);
+        return -Math.atan2(sinHalfYaw, cosHalfYaw);
+    }
+
+    /**
+     * Returns the roll of this quaternion. (angle of counter-clockwise rotation along the Z axis)
+     *
+     * @return The roll of this quaternion in radians
+     */
+    public double roll() {
+        double sinHalfRoll = 2 * (w * z - x * y);
+        double cosHalfRoll = 1 - 2 * (z * z + y * y);
+        return Math.atan2(sinHalfRoll, cosHalfRoll);
+    }
+
+    /**
+     * Returns the axis of rotation of this quaternion. This method fallbacks to {@link Vector3#POSITIVE_Y
+     * the positive Y qxis} when this quaternion represents no rotation.
+     *
+     * @return The axis of rotation of this quaternion
+     */
+    public Vector3 axis() {
+        if (Math.abs(w) >= 1) {
+            return Vector3.POSITIVE_Y; // Fallback to POSITIVE_Y for the identity quaternion
+        }
+
+        double sinHalfAngle = Math.sqrt(x * x + y * y + z * z);
+        double angle = 2 * Math.atan2(sinHalfAngle, w);
+
+        if (angle == 0) {
+            return Vector3.POSITIVE_Y; // Fallback to POSITIVE_Y for zero angle
+        }
+
+        double inv = 1 / sinHalfAngle;
+        return new Vector3(-x * inv, -y * inv, z * inv);
+    }
+
+    /**
+     * Returns the angle of rotation of this quaternion.
+     *
+     * @return The angle of rotation of this quaternion in radians
+     */
+    public double angle() {
+        if (Math.abs(w) >= 1) {
+            return 0; // Angle is zero for the identity quaternion
+        }
+
+        double sinHalfAngle = Math.sqrt(x * x + y * y + z * z);
+        return 2 * Math.atan2(sinHalfAngle, w);
+    }
+
+    /**
+     * Returns the direction this rotation quaternion is facing. In other words, this is the
+     * result of rotating the {@link Vector3#POSITIVE_Z positive Z unit vector} by this quaternion.
+     * When this is the identity quaternion, this will return the zero vector.
+     *
+     * @return The direction this quaternion is facing
+     */
+    public Vector3 direction() {
+        if (Math.abs(w) >= 1) {
+            return Vector3.ZERO;
+        }
+
+        double minusX = -x;
+        double minusZ = -z;
+
+        return new Vector3(
+                (2 * minusX * minusZ) + (2 * w * y),
+                (2 * w * minusX) - (2 * y * minusZ),
+                w * w - minusX * minusX - y * y + minusZ * minusZ
+        );
     }
 
     /**

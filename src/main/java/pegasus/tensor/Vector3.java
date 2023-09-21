@@ -9,7 +9,14 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.stream.DoubleStream;
 
 /**
- * An immutable three-dimensional vector.
+ * An immutable three-dimensional vector. Three-dimensional vectors have three components
+ * labeled {@code x, y, z}. When used in a geometric context, the components represent a coordinate
+ * along their corresponding axes. The axes and their directions are defined as follows.
+ * <ul>
+ *     <li>X axis - Represents horizontal movement, and increments to the right</li>
+ *     <li>Y axis - Represents height, and increments upwards.</li>
+ *     <li>Z axis - Represents depth, and increments as the coordinate recedes from the viewer.</li>
+ * </ul>
  *
  * @see Tensor
  * @see Vector

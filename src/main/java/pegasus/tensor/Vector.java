@@ -13,6 +13,8 @@ import java.util.stream.DoubleStream;
  * @see Vector2
  * @see Vector3
  * @see Vector4
+ * @see Vector5
+ * @see Vector6
  * @see Quaternion
  */
 public interface Vector<V extends Vector<V>> extends Tensor {
@@ -29,6 +31,7 @@ public interface Vector<V extends Vector<V>> extends Tensor {
             case 3 -> new Vector3(values[0], values[1], values[2]);
             case 4 -> new Vector4(values[0], values[1], values[2], values[3]);
             case 5 -> new Vector5(values[0], values[1], values[2], values[3], values[4]);
+            case 6 -> new Vector6(values[0], values[1], values[2], values[3], values[4], values[5]);
             default -> throw new IllegalArgumentException("There is no defined vector of size " + values.length + ".");
         };
     }
@@ -39,6 +42,15 @@ public interface Vector<V extends Vector<V>> extends Tensor {
      * @return {@inheritDoc}
      */
     int size();
+
+    /**
+     * Returns the {@code i}th component's value of this vector.
+     *
+     * @param i The index of the component to get
+     * @return The {@code i}th component's value of this vector
+     * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
+     */
+    double valueAt(int i) throws IndexOutOfBoundsException;
 
     /**
      * {@inheritDoc}
@@ -81,15 +93,6 @@ public interface Vector<V extends Vector<V>> extends Tensor {
      * @return The Manhattan norm of this vector
      */
     double normManhattan();
-
-    /**
-     * Returns the {@code i}th component's value of this vector.
-     *
-     * @param i The index of the component to get
-     * @return The {@code i}th component's value of this vector
-     * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
-     */
-    double valueAt(int i) throws IndexOutOfBoundsException;
 
     /**
      * Adds a scalar to this vector, then returns the resulting vector.

@@ -1,15 +1,20 @@
 package pegasus;
 
-import pegasus.tensor.Matrix;
+import pegasus.grid.Grids;
+import pegasus.tensor.Quaternion;
 import pegasus.tensor.Vector3;
 
 public class LosAlamos {
     public static void main(String[] args) {
-        var identity = Matrix.newIdentity(3);
+        var q = Quaternion.from(2, -3, 1);
+        var m = q.toRotationMatrix();
         var vector = new Vector3(1, 2, 3);
 
-        Vector3 result = identity.multiply(vector);
+        System.out.println(vector.rotate(q));
+        System.out.println(m.multiply(vector));
 
-        System.out.println(result);
+        var map = Grids.toMap(m);
+
+        System.out.println(map);
     }
 }

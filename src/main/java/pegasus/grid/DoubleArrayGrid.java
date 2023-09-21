@@ -251,11 +251,11 @@ public class DoubleArrayGrid implements DoubleGrid {
     @Override
     public void fillRange(int r1, int c1, int r2, int c2, DoubleGrid g)
             throws BinaryIndexOutOfBoundsException {
-        if (r1 < 0 || r1 >= rows || c1 < 0 || c1 >= columns) {
+        if (r1 < 0 || r1 > rows || c1 < 0 || c1 > columns) {
             throw new BinaryIndexOutOfBoundsException(r1, c1);
         }
 
-        if (r2 < 0 || r2 >= rows || c2 < 0 || c2 >= columns) {
+        if (r2 < 0 || r2 > rows || c2 < 0 || c2 > columns) {
             throw new BinaryIndexOutOfBoundsException(r2, c2);
         }
 

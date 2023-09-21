@@ -738,6 +738,40 @@ public class Quaternion implements Vector<Quaternion> {
     }
 
     /**
+     * Converts this quaternion into a {@code 3x3} rotation matrix, then returns
+     * the converted matrix.
+     *
+     * @return The rotation matrix representation of this quaternion
+     */
+    public Matrix toRotationMatrix() {
+        double xx = x * x;
+        double xy = x * y;
+        double xz = x * z;
+        double xw = x * w;
+
+        double yy = y * y;
+        double yz = y * z;
+        double yw = y * w;
+
+        double zz = z * z;
+        double zw = z * w;
+
+        double[] values = {
+                1 - 2 * (yy + zz),
+                2 * (xy - zw),
+                2 * (xz + yw),
+                2 * (xy + zw),
+                1 - 2 * (xx + zz),
+                2 * (yz - xw),
+                2 * (xz - yw),
+                2 * (yz + xw),
+                1 - 2 * (xx + yy)
+        };
+
+        return new Matrix(3, 3, (r, c) -> values[r * 3 + c]);
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

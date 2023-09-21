@@ -1,6 +1,11 @@
 package pegasus.grid;
 
 import pegasus.exception.IllegalInstanceException;
+import pegasus.function.IntBiFunction;
+import pegasus.tuple.IntPair;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Contains grid utilities.
@@ -80,6 +85,79 @@ public final class Grids {
      */
     public static IntGrid unboxToInt(Grid<? extends Number> g) {
         return new IntArrayGrid(g.rows(), g.columns(), (r, c) -> g.get(r, c).intValue());
+    }
+
+    //
+    // Conversion
+    //
+
+    /**
+     * Converts the provided grid into a map of {@link IntPair indices} and values.
+     *
+     * @param g   The grid of which to convert into a map
+     * @param <T> The type of element the grid contains
+     * @return The converted map
+     * @throws NullPointerException When the provided grid {@code g} is {@code null}
+     */
+    public static <T> Map<IntPair, T> toMap(Grid<? extends T> g) {
+        Map<IntPair, T> result = new HashMap<>();
+        g.forEachIndexed((r, c, v) -> result.put(new IntPair(r, c), v));
+        return result;
+    }
+
+    /**
+     * Converts the provided grid into a map of custom keys and values.
+     *
+     * @param g            The grid of which to convert into a map
+     * @param keyGenerator The generator function to construct the keys
+     * @param <T>          The type of element the grid contains
+     * @param <K>          The key object to use
+     * @return The converted map
+     * @throws NullPointerException When the provided grid {@code g} is {@code null}
+     */
+    public static <K, T> Map<K, T> toMap(Grid<? extends T> g, IntBiFunction<? extends K> keyGenerator) {
+        Map<K, T> result = new HashMap<>();
+        g.forEachIndexed((r, c, v) -> result.put(keyGenerator.apply(r, c), v));
+        return result;
+    }
+
+    /**
+     * Converts the provided grid into a map of {@link IntPair indices} and values.
+     *
+     * @param g The grid of which to convert into a map
+     * @return The converted map
+     * @throws NullPointerException When the provided grid {@code g} is {@code null}
+     */
+    public static Map<IntPair, Double> toMap(DoubleGrid g) {
+        Map<IntPair, Double> result = new HashMap<>();
+        g.forEachIndexed((r, c, v) -> result.put(new IntPair(r, c), v));
+        return result;
+    }
+
+    /**
+     * Converts the provided grid into a map of {@link IntPair indices} and values.
+     *
+     * @param g The grid of which to convert into a map
+     * @return The converted map
+     * @throws NullPointerException When the provided grid {@code g} is {@code null}
+     */
+    public static Map<IntPair, Long> toMap(LongGrid g) {
+        Map<IntPair, Long> result = new HashMap<>();
+        g.forEachIndexed((r, c, v) -> result.put(new IntPair(r, c), v));
+        return result;
+    }
+
+    /**
+     * Converts the provided grid into a map of {@link IntPair indices} and values.
+     *
+     * @param g The grid of which to convert into a map
+     * @return The converted map
+     * @throws NullPointerException When the provided grid {@code g} is {@code null}
+     */
+    public static Map<IntPair, Integer> toMap(IntGrid g) {
+        Map<IntPair, Integer> result = new HashMap<>();
+        g.forEachIndexed((r, c, v) -> result.put(new IntPair(r, c), v));
+        return result;
     }
 
     //

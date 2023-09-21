@@ -8,6 +8,10 @@ import java.util.stream.BaseStream;
  * The base interface for all tuples.
  *
  * @param <T> The type of object this tuple is to hold
+ * @see Tuple
+ * @see DoubleTuple
+ * @see LongTuple
+ * @see IntTuple
  */
 public interface BaseTuple<T> extends Iterable<T>, Serializable {
     /**

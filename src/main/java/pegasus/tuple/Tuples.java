@@ -20,12 +20,14 @@ public final class Tuples {
     //
 
     /**
-     * Joins the provided tuples into a single tuple.
+     * Joins the provided tuples into a single tuple. Note that IntelliJ IDEA throws a
+     * warning for unchecked generic array handling, but it can be safely ignored.
      *
      * @param tuples The tuples to join into one tuple
      * @param <T>    The type of element to join to
      * @return The joint tuple
-     * @throws NullPointerException When the provided array of tuples is {@code null}
+     * @throws NullPointerException When the provided array of tuples is {@code null}, or there
+     *                              is a {@code null} tuple within the array
      */
     @SuppressWarnings("unchecked")
     public static <T> Tuple<T> join(Tuple<? extends T>... tuples) {

@@ -10,6 +10,9 @@ import java.util.stream.DoubleStream;
  * A value-based primitive tuple of {@code double} values.
  *
  * @see BaseTuple
+ * @see DoublePair
+ * @see DoubleTriple
+ * @see DoubleArrayTuple
  */
 public interface DoubleTuple extends BaseTuple<Double>, IndexedDoubleIterable {
     /**

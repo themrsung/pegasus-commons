@@ -10,6 +10,9 @@ import java.util.stream.IntStream;
  * A value-based primitive tuple of {@code int} values.
  *
  * @see BaseTuple
+ * @see IntPair
+ * @see IntTriple
+ * @see IntArrayTuple
  */
 public interface IntTuple extends BaseTuple<Integer>, IndexedIntIterable {
     /**

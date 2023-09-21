@@ -10,6 +10,9 @@ import java.util.stream.LongStream;
  * A value-based primitive tuple of {@code long} values.
  *
  * @see BaseTuple
+ * @see LongPair
+ * @see LongTriple
+ * @see LongArrayTuple
  */
 public interface LongTuple extends BaseTuple<Long>, IndexedLongIterable {
     /**

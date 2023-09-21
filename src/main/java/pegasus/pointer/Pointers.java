@@ -2,6 +2,7 @@ package pegasus.pointer;
 
 import pegasus.exception.IllegalInstanceException;
 import pegasus.function.*;
+import pegasus.tuple.*;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -10,6 +11,55 @@ import java.util.Random;
  * Contains pointer utilities.
  */
 public final class Pointers {
+    //
+    // Conversion
+    //
+
+    /**
+     * Converts the provided pointer {@code p} into a tuple, then returns the converted tuple.
+     *
+     * @param p   The pointer of which to convert into a tuple
+     * @param <T> The type of value to convert
+     * @return The converted tuple
+     * @throws NullPointerException When the provided pointer {@code p} is {@code null}
+     */
+    public static <T> Tuple<T> toTuple(ObjectPointer<? extends T> p) {
+        return Tuple.from(p.stream());
+    }
+
+    /**
+     * Converts the provided pointer {@code p} into a tuple, then returns the converted tuple.
+     *
+     * @param p The pointer of which to convert into a tuple
+     * @return The converted tuple
+     * @throws NullPointerException When the provided pointer {@code p} is {@code null}
+     */
+    public static DoubleTuple toTuple(DoublePointer p) {
+        return DoubleTuple.from(p.stream());
+    }
+
+    /**
+     * Converts the provided pointer {@code p} into a tuple, then returns the converted tuple.
+     *
+     * @param p The pointer of which to convert into a tuple
+     * @return The converted tuple
+     * @throws NullPointerException When the provided pointer {@code p} is {@code null}
+     */
+    public static LongTuple toTuple(LongPointer p) {
+        return LongTuple.from(p.stream());
+    }
+
+    /**
+     * Converts the provided pointer {@code p} into a tuple, then returns the converted tuple.
+     *
+     * @param p The pointer of which to convert into a tuple
+     * @return The converted tuple
+     * @throws NullPointerException When the provided pointer {@code p} is {@code null}
+     */
+    public static IntTuple toTuple(IntPointer p) {
+        return IntTuple.from(p.stream());
+    }
+
     //
     // Internal
     //

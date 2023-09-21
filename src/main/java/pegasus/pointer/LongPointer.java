@@ -28,6 +28,17 @@ public interface LongPointer extends BasePointer<Long>, IndexedLongIterable {
     }
 
     /**
+     * Creates a new pointer from the values of the provided stream {@code s}.
+     *
+     * @param s The stream of which to retrieve the values from
+     * @return The constructed pointer
+     * @throws NullPointerException When the provided stream {@code s} is {@code null}
+     */
+    static LongPointer from(LongStream s) {
+        return new LongArrayPointer(s.toArray());
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

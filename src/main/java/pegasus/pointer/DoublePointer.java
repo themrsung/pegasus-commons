@@ -28,6 +28,17 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
     }
 
     /**
+     * Creates a new pointer from the values of the provided stream {@code s}.
+     *
+     * @param s The stream of which to retrieve the values from
+     * @return The constructed pointer
+     * @throws NullPointerException When the provided stream {@code s} is {@code null}
+     */
+    static DoublePointer from(DoubleStream s) {
+        return new DoubleArrayPointer(s.toArray());
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

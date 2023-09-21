@@ -29,6 +29,18 @@ public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
     }
 
     /**
+     * Creates a new pointer from the values of the provided stream {@code s}.
+     *
+     * @param s The stream of which to retrieve the values from
+     * @return The constructed pointer
+     * @throws NullPointerException When the provided stream {@code s} is {@code null}
+     */
+    @SuppressWarnings("unchecked")
+    static <T> ObjectPointer<T> from(Stream<? extends T> s) {
+        return new ArrayPointer<>((T[]) s.toArray());
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

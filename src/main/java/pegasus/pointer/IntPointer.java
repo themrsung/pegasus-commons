@@ -28,6 +28,17 @@ public interface IntPointer extends BasePointer<Integer>, IndexedIntIterable {
     }
 
     /**
+     * Creates a new pointer from the values of the provided stream {@code s}.
+     *
+     * @param s The stream of which to retrieve the values from
+     * @return The constructed pointer
+     * @throws NullPointerException When the provided stream {@code s} is {@code null}
+     */
+    static IntPointer from(IntStream s) {
+        return new IntArrayPointer(s.toArray());
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

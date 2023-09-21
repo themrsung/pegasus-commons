@@ -11,13 +11,17 @@ import java.util.stream.Stream;
  *
  * @param <T> The type of object this tuple is to hold
  * @see BaseTuple
+ * @see Pair
+ * @see Triple
+ * @see ArrayTuple
  */
 public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
     /**
      * Creates a new tuple from the provided array of values.
+     *
      * @param values The values of which to contain
+     * @param <T>    The type of object to contain
      * @return The created tuple
-     * @param <T> The type of object to contain
      * @throws NullPointerException When the provided array is {@code null}
      */
     @SafeVarargs
@@ -27,9 +31,10 @@ public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
 
     /**
      * Creates a new tuple from the provided stream of values.
-     * @param s The stream of which to retrieve elements from
-     * @return The created tuple
+     *
+     * @param s   The stream of which to retrieve elements from
      * @param <T> The type of object to contain
+     * @return The created tuple
      * @throws NullPointerException When the provided stream {@code s} is {@code null}
      */
     static <T> Tuple<T> from(Stream<? extends T> s) {

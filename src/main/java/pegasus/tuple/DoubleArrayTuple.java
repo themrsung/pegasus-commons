@@ -7,6 +7,7 @@ import java.util.stream.DoubleStream;
 
 /**
  * An array-based {@code double} tuple.
+ *
  * @see DoubleTuple
  */
 public class DoubleArrayTuple implements DoubleTuple {
@@ -15,6 +16,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * Creates a new array tuple.
+     *
      * @param values The values of which to contain
      * @throws NullPointerException When the provided array is {@code null}
      */
@@ -24,6 +26,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * Creates a new array tuple.
+     *
      * @param s The stream of which to retrieve elements from
      * @throws NullPointerException When the provided stream {@code s} is {@code null}
      */
@@ -38,6 +41,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -47,6 +51,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param value The value of which to check for containment
      * @return {@inheritDoc}
      */
@@ -57,6 +62,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param t The tuple of which to check for containment
      * @return {@inheritDoc}
      */
@@ -67,6 +73,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of the element to get
      * @return {@inheritDoc}
      * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -78,6 +85,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -89,9 +97,10 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -101,6 +110,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -112,6 +122,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -123,6 +134,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -132,6 +144,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -141,6 +154,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -150,6 +164,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @SuppressWarnings("RedundantCast")
@@ -160,6 +175,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @param obj The object to compare to
      * @return {@inheritDoc}
      */
@@ -177,6 +193,7 @@ public class DoubleArrayTuple implements DoubleTuple {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

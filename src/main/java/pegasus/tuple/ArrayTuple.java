@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 /**
  * An array-based tuple.
+ *
  * @param <T> The type of object this tuple is to hold
  * @see Tuple
  */
@@ -16,6 +17,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * Creates a new array tuple.
+     *
      * @param values The values of which to contain
      * @throws NullPointerException When the provided array is {@code null}
      */
@@ -25,6 +27,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * Creates a new array tuple.
+     *
      * @param s The stream of which to retrieve elements from
      * @throws NullPointerException When the provided stream {@code s} is {@code null}
      */
@@ -35,7 +38,8 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * Direct assignment constructor.
-     * @param values The array to assign directly
+     *
+     * @param values  The array to assign directly
      * @param ignored Ignored
      */
     private ArrayTuple(T[] values, boolean ignored) {
@@ -49,6 +53,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -58,6 +63,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param value The value of which to check for containment
      * @return {@inheritDoc}
      */
@@ -68,6 +74,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param t The tuple of which to check for containment
      * @return {@inheritDoc}
      */
@@ -78,6 +85,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of the element to get
      * @return {@inheritDoc}
      * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -89,9 +97,10 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -101,6 +110,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -112,6 +122,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -123,6 +134,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to each element of this tuple
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -134,9 +146,11 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param target The target class of which to cast to
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
+     * @throws ClassCastException   {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -147,6 +161,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -156,6 +171,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -165,6 +181,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -174,6 +191,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -183,6 +201,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param obj The object to compare to
      * @return {@inheritDoc}
      */
@@ -192,7 +211,7 @@ public class ArrayTuple<T> implements Tuple<T> {
         if (values.length != t.size()) return false;
 
         for (int i = 0; i < values.length; i++) {
-            if(!(Objects.equals(values[i], t.get(i)))) return false;
+            if (!(Objects.equals(values[i], t.get(i)))) return false;
         }
 
         return true;
@@ -200,6 +219,7 @@ public class ArrayTuple<T> implements Tuple<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

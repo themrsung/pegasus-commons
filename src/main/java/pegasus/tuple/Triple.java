@@ -1,44 +1,22 @@
 package pegasus.tuple;
 
-import java.io.Serial;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.*;
-import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 /**
- * An array-based {@code long} tuple.
+ * A triple of objects.
  *
- * @see LongTuple
+ * @param a   The first object
+ * @param b   The second object
+ * @param c   The third object
+ * @param <A> The first object's type
+ * @param <B> The second object's type
+ * @param <C> The third object's type
+ * @see Tuple
  */
-public class LongArrayTuple implements LongTuple {
-    @Serial
-    private static final long serialVersionUID = 0;
-
-    /**
-     * Creates a new array tuple.
-     *
-     * @param values The values of which to contain
-     * @throws NullPointerException When the provided array is {@code null}
-     */
-    public LongArrayTuple(long[] values) {
-        this.values = Arrays.copyOf(values, values.length);
-    }
-
-    /**
-     * Creates a new array tuple.
-     *
-     * @param s The stream of which to retrieve elements from
-     * @throws NullPointerException When the provided stream {@code s} is {@code null}
-     */
-    public LongArrayTuple(LongStream s) {
-        this.values = s.toArray();
-    }
-
-    /**
-     * The internal array of values.
-     */
-    private final long[] values;
-
+public record Triple<A, B, C>(A a, B b, C c) implements Tuple<Object> {
     /**
      * {@inheritDoc}
      *
@@ -46,7 +24,7 @@ public class LongArrayTuple implements LongTuple {
      */
     @Override
     public int size() {
-        return values.length;
+        return 3;
     }
 
     /**
@@ -56,8 +34,8 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public boolean contains(long value) {
-        return stream().anyMatch(v -> v == value);
+    public boolean contains(Object value) {
+        return Objects.equals(a, value) || Objects.equals(b, value) || Objects.equals(c, value);
     }
 
     /**
@@ -67,7 +45,7 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public boolean containsAll(LongTuple t) {
+    public boolean containsAll(Tuple<?> t) {
         return t.stream().allMatch(this::contains);
     }
 
@@ -79,20 +57,13 @@ public class LongArrayTuple implements LongTuple {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
-    public long get(int i) throws IndexOutOfBoundsException {
-        return values[i];
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param mapper The mapper function of which to apply to each element of this tuple
-     * @return {@inheritDoc}
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public LongTuple map(LongUnaryOperator mapper) {
-        return LongTuple.from(stream().map(mapper));
+    public Object get(int i) throws IndexOutOfBoundsException {
+        return switch (i) {
+            case 0 -> a;
+            case 1 -> b;
+            case 2 -> c;
+            default -> throw new IndexOutOfBoundsException(i);
+        };
     }
 
     /**
@@ -104,8 +75,8 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public <U> Tuple<U> mapToObj(LongFunction<? extends U> mapper) {
-        return Tuple.from(stream().mapToObj(mapper));
+    public <U> Tuple<U> map(Function<? super Object, ? extends U> mapper) {
+        return Tuple.of(mapper.apply(a), mapper.apply(b), mapper.apply(c));
     }
 
     /**
@@ -116,7 +87,7 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public DoubleTuple mapToDouble(LongToDoubleFunction mapper) {
+    public DoubleTuple mapToDouble(ToDoubleFunction<? super Object> mapper) {
         return DoubleTuple.from(stream().mapToDouble(mapper));
     }
 
@@ -128,18 +99,35 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public IntTuple mapToInt(LongToIntFunction mapper) {
+    public LongTuple mapToLong(ToLongFunction<? super Object> mapper) {
+        return LongTuple.from(stream().mapToLong(mapper));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to each element of this tuple
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
+    @Override
+    public IntTuple mapToInt(ToIntFunction<? super Object> mapper) {
         return IntTuple.from(stream().mapToInt(mapper));
     }
 
     /**
      * {@inheritDoc}
      *
+     * @param target The target class of which to cast to
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
+     * @throws ClassCastException   {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public LongStream stream() {
-        return Arrays.stream(values);
+    @SuppressWarnings("unchecked")
+    public <U> Tuple<U> cast(Class<? extends U> target) {
+        return Tuple.of((U) a, (U) b, (U) c);
     }
 
     /**
@@ -148,8 +136,8 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public long[] toArray() {
-        return Arrays.copyOf(values, values.length);
+    public Stream<Object> stream() {
+        return Stream.of(a, b, c);
     }
 
     /**
@@ -158,7 +146,17 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public Iterator<Long> iterator() {
+    public Object[] toArray() {
+        return new Object[]{a, b, c};
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public Iterator<Object> iterator() {
         return stream().iterator();
     }
 
@@ -167,10 +165,9 @@ public class LongArrayTuple implements LongTuple {
      *
      * @return {@inheritDoc}
      */
-    @SuppressWarnings("RedundantCast")
     @Override
     public int hashCode() {
-        return Objects.hash((Object) values);
+        return Objects.hash(a, b, c);
     }
 
     /**
@@ -181,14 +178,9 @@ public class LongArrayTuple implements LongTuple {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LongTuple t)) return false;
-        if (values.length != t.size()) return false;
-
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] != t.get(i)) return false;
-        }
-
-        return true;
+        if (!(obj instanceof Tuple<?> t)) return false;
+        if (t.size() != 3) return false;
+        return Objects.equals(a, t.get(0)) && Objects.equals(b, t.get(1)) && Objects.equals(c, t.get(2));
     }
 
     /**
@@ -198,6 +190,6 @@ public class LongArrayTuple implements LongTuple {
      */
     @Override
     public String toString() {
-        return Arrays.toString(values);
+        return "[" + a + ", " + b + ", " + "]";
     }
 }

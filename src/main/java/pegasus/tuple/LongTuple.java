@@ -14,6 +14,7 @@ import java.util.stream.LongStream;
 public interface LongTuple extends BaseTuple<Long>, IndexedLongIterable {
     /**
      * Creates a new tuple from the provided array of values.
+     *
      * @param values The values of which to contain
      * @return The created tuple
      * @throws NullPointerException When the provided array is {@code null}
@@ -24,6 +25,7 @@ public interface LongTuple extends BaseTuple<Long>, IndexedLongIterable {
 
     /**
      * Creates a new tuple from the provided stream of values.
+     *
      * @param s The stream of which to retrieve elements from
      * @return The created tuple
      * @throws NullPointerException When the provided stream {@code s} is {@code null}

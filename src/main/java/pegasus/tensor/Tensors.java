@@ -1,6 +1,7 @@
 package pegasus.tensor;
 
 import pegasus.exception.IllegalInstanceException;
+import pegasus.tuple.DoubleTuple;
 
 import java.util.Arrays;
 
@@ -1164,6 +1165,22 @@ public final class Tensors {
                 (2 * w * x) - (2 * y * z),
                 w * w - x * x - y * y + z * z
         );
+    }
+
+    //
+    // Tuple Conversion
+    //
+
+    /**
+     * Converts the provided vector {@code v} into a primitive tuple of {@code double} values,
+     * then returns the converted tuple.
+     *
+     * @param v The vector of which to convert into a tuple
+     * @return The converted tuple
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoubleTuple asTuple(Vector<?> v) {
+        return DoubleTuple.from(v.stream());
     }
 
     //

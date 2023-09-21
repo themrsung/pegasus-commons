@@ -10,6 +10,12 @@ import java.util.stream.DoubleStream;
 
 /**
  * An immutable two-dimensional vector.
+ *
+ * @see Tensor
+ * @see Vector
+ * @see Vector3
+ * @see Vector4
+ * @see Quaternion
  */
 public class Vector2 implements Vector<Vector2> {
     @Serial

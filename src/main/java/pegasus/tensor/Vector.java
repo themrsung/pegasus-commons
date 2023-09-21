@@ -10,6 +10,10 @@ import java.util.stream.DoubleStream;
  *
  * @param <V> The vector itself (the input parameters and return values of various operations)
  * @see Tensor
+ * @see Vector2
+ * @see Vector3
+ * @see Vector4
+ * @see Quaternion
  */
 public interface Vector<V extends Vector<V>> extends Tensor {
     /**

@@ -10,6 +10,12 @@ import java.util.stream.DoubleStream;
 
 /**
  * An immutable complex number with one real component and three imaginary components.
+ *
+ * @see Tensor
+ * @see Vector
+ * @see Vector2
+ * @see Vector3
+ * @see Vector4
  */
 public class Quaternion implements Vector<Quaternion> {
     @Serial

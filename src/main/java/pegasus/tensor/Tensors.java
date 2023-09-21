@@ -437,6 +437,24 @@ public final class Tensors {
         }
     }
 
+    /**
+     * Returns a random rotation quaternion.
+     *
+     * @return A random rotation quaternion
+     */
+    public static Quaternion randomQuaternion() {
+        try {
+            return new Quaternion(
+                    random(-1, 1),
+                    random(-1, 1),
+                    random(-1, 1),
+                    random(-1, 1)
+            ).normalize();
+        } catch (ArithmeticException e) {
+            return Quaternion.IDENTITY;
+        }
+    }
+
     //
     // Range Validation
     //
@@ -765,6 +783,74 @@ public final class Tensors {
         );
     }
 
+    /**
+     * Performs linear interpolation (LERP) between the starting value {@code s} and the ending value {@code e}.
+     *
+     * @param s The starting value
+     * @param e The ending value
+     * @param t The interpolation parameter ({@code [0, 1]})
+     * @return The interpolated value between the starting and ending values {@code s} and {@code e}
+     * @throws NullPointerException When a {@code null} parameter is provided
+     */
+    public static Quaternion lerp(Quaternion s, Quaternion e, double t) {
+        final double s1 = s.w();
+        final double e1 = e.w();
+        final double s2 = s.x();
+        final double e2 = e.x();
+        final double s3 = s.y();
+        final double e3 = e.y();
+        final double s4 = s.z();
+        final double e4 = e.z();
+
+        return new Quaternion(
+                s1 + (e1 - s1) * t,
+                s2 + (e2 - s2) * t,
+                s3 + (e3 - s3) * t,
+                s4 + (e4 - s4) * t
+        );
+    }
+
+    //
+    // Spherical Linear Interpolation (SLERP)
+    //
+
+    /**
+     * Performs spherical linear interpolation (SLERP) between two quaternions.
+     * This assumes that the input quaternions are already normalized.
+     *
+     * @param start The starting quaternion
+     * @param end   The end quaternion
+     * @param t     The interpolation parameter {@code t} ({@code 0-1})
+     * @return The interpolated quaternion
+     * @throws NullPointerException When a {@code null} parameter is provided
+     */
+    public static Quaternion slerp(Quaternion start, Quaternion end, double t) {
+        // Get the dot product of the two quaternions
+        double dot = start.dot(end);
+
+        // Determine direction and adjust end quaternion if required
+        if (dot < 0) {
+            end = end.negate();
+            dot = -dot;
+        }
+
+        if (1 - dot < EPSILON) {
+            // Quaternions are very close, use linear interpolation
+            return lerp(start, end, t);
+        }
+
+        // Calculate the angle between the quaternions
+        final double theta0 = Math.acos(dot);
+        final double theta1 = theta0 * t;
+
+        // Calculate the interpolation coefficients
+        final double s0 = Math.sin((1 - t) * theta0) / Math.sin(theta0);
+        final double s1 = Math.sin(theta1) / Math.sin(theta0);
+
+        // Perform spherical linear interpolation
+        return start.multiply(s0).add(end.multiply(s1));
+    }
+
     //
     // Vector Clamping
     //
@@ -920,6 +1006,163 @@ public final class Tensors {
         return new Vector2(
                 (focalLength * (focalLength + v.z)) * v.x,
                 (focalLength * (focalLength + v.z)) * (invertY ? -v.y : v.y)
+        );
+    }
+
+    //
+    // Euler Angles
+    //
+
+    /**
+     * Creates a new rotation quaternion from Euler angle representation. This method
+     * uses the right-handed coordinate system.
+     *
+     * @param pitch The pitch of the rotation in radians (rotation along X axis)
+     * @param yaw   The yaw of the rotation in radians (rotation along Y axis)
+     * @param roll  The roll of the rotation in radians (rotation along Z axis)
+     * @return The constructed quaternion
+     */
+    public static Quaternion from(double pitch, double yaw, double roll) {
+        double cy = Math.cos(yaw * 0.5);
+        double sy = Math.sin(yaw * 0.5);
+        double cr = Math.cos(roll * 0.5);
+        double sr = Math.sin(roll * 0.5);
+        double cp = Math.cos(pitch * 0.5);
+        double sp = Math.sin(pitch * 0.5);
+
+        double w = cy * cr * cp + sy * sr * sp;
+        double x = cy * sr * cp - sy * cr * sp;
+        double y = cy * cr * sp + sy * sr * cp;
+        double z = sy * cr * cp - cy * sr * sp;
+
+        return new Quaternion(w, x, y, z);
+    }
+
+    /**
+     * Given a rotation quaternion {@code q}, this returns the pitch of the rotation.
+     * Pitch is defined as rotation along the X axis, and follows a right-handed coordinate system.
+     *
+     * @param q The quaternion of which to get the pitch of
+     * @return The pitch of the quaternion in radians
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static double pitch(Quaternion q) {
+        double sinP = 2 * (q.y * q.z + q.w * q.x);
+        double cosP = 1 - 2 * (q.x * q.x + q.y * q.y);
+        return Math.atan2(sinP, cosP);
+    }
+
+    /**
+     * Given a rotation quaternion {@code q}, this returns the yaw of the rotation.
+     * Yaw is defined as rotation along the Y axis, and follows a right-handed coordinate system.
+     *
+     * @param q The quaternion of which to get the yaw of
+     * @return The yaw of the quaternion in radians
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static double yaw(Quaternion q) {
+        double sinY = 2 * (q.x * q.z + q.w * q.y);
+        double cosY = 1 - 2 * (q.y * q.y + q.z * q.z);
+        return Math.atan2(sinY, cosY);
+    }
+
+    /**
+     * Given a rotation quaternion {@code q}, this returns the roll of this rotation.
+     * Roll is defined as rotation along the Z axis, and follows a right-handed coordinate system.
+     *
+     * @param q The quaternion of which to get the roll of
+     * @return The roll of the quaternion in radians
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static double roll(Quaternion q) {
+        double sinR = 2 * (q.x * q.y + q.w * q.z);
+        double cosR = 1 - 2 * (q.y * q.y + q.z * q.z);
+        return Math.atan2(sinR, cosR);
+    }
+
+    //
+    // Axis Angle
+    //
+
+    /**
+     * Creates a new rotation quaternion from an axis/angle notation. This method uses
+     * the right-handed coordinate system.
+     *
+     * @param axis  The axis of rotation as a unit vector
+     * @param angle The angle of rotation in radians
+     * @return The constructed quaternion
+     * @throws NullPointerException When the provided axis is {@code null}
+     */
+    public static Quaternion from(Vector3 axis, double angle) {
+        double halfAngle = angle * 0.5;
+        double sinHalfAngle = Math.sin(halfAngle);
+
+        double w = Math.cos(halfAngle);
+        double x = axis.x * sinHalfAngle;
+        double y = axis.y * sinHalfAngle;
+        double z = axis.z * sinHalfAngle;
+
+        return new Quaternion(w, x, y, z);
+    }
+
+    /**
+     * Given a rotation quaternion {@code q}, this returns the angle of the rotation,
+     * in the context of axis/angle notation. Axis/angle notation follows the right-handed coordinate system.
+     *
+     * @param q The quaternion of which to get the angle of
+     * @return The angle of rotation of the quaternion in radians
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static double angle(Quaternion q) {
+        return 2 * Math.acos(q.w);
+    }
+
+    /**
+     * Given a rotation quaternion {@code q}, this returns the axis of the rotation.
+     * If the quaternion represents no rotation (the Euclidean norm is nearly zero),
+     * this will return a fallback value {@link Vector3#POSITIVE_Y}.
+     *
+     * @param q The quaternion of which to get the axis of
+     * @return The axis of rotation of the quaternion as a unit vector
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static Vector3 axis(Quaternion q) {
+        double n = q.norm();
+        if (n < EPSILON) {
+            return Vector3.POSITIVE_Y; // Default to Y axis if the quaternion is nearly zero
+        }
+
+        double i = 1 / n;
+
+        return new Vector3(q.x * i, q.y * i, q.z * i);
+    }
+
+    //
+    // Direction
+    //
+
+    /**
+     * Returns the directional vector of the provided rotation quaternion {@code q}.
+     *
+     * @param q The rotation quaternion of which to get the directional vector of
+     * @return The directional vector of the provided rotation quaternion {@code q}
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static Vector3 direction(Quaternion q) {
+
+        /*
+         * This is the equivalent of Vector3.POSITIVE_Z.rotate(q);
+         */
+
+        double w = q.w;
+        double x = -q.x;
+        double y = q.y;
+        double z = -q.z;
+
+        return new Vector3(
+                (2 * x * z) + (2 * w * y),
+                (2 * w * x) - (2 * y * z),
+                w * w - x * x - y * y + z * z
         );
     }
 

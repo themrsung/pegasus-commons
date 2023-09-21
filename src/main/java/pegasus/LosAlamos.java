@@ -1,13 +1,15 @@
 package pegasus;
 
-import pegasus.grid.Grid;
+import pegasus.tensor.Matrix;
+import pegasus.tensor.Vector3;
 
 public class LosAlamos {
     public static void main(String[] args) {
-        Grid<String> strings = Grid.of(new String[][]{
-                {"hi"}
-        });
+        var identity = Matrix.newIdentity(3);
+        var vector = new Vector3(1, 2, 3);
 
-        System.out.println(strings);
+        Vector3 result = identity.multiply(vector);
+
+        System.out.println(result);
     }
 }

@@ -353,6 +353,14 @@ public class DoubleArrayPointer implements DoublePointer {
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public void shuffle() {
+        Pointers.shuffleArray(values);
+    }
+
+    /**
+     * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */

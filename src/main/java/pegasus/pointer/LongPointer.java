@@ -13,6 +13,7 @@ import java.util.stream.LongStream;
  * A value-based primitive pointer of {@code long} values.
  *
  * @see BasePointer
+ * @see LongArrayPointer
  */
 public interface LongPointer extends BasePointer<Long>, IndexedLongIterable {
     /**
@@ -238,6 +239,11 @@ public interface LongPointer extends BasePointer<Long>, IndexedLongIterable {
      * will become {@code ["world", "hello"]}.
      */
     void reverse();
+
+    /**
+     * Shuffles this pointer's values in a randomized manner.
+     */
+    void shuffle();
 
     /**
      * {@inheritDoc}

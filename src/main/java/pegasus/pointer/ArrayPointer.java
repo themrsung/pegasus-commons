@@ -375,6 +375,14 @@ public class ArrayPointer<T> implements ObjectPointer<T> {
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public void shuffle() {
+        Pointers.shuffleArray(values);
+    }
+
+    /**
+     * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */

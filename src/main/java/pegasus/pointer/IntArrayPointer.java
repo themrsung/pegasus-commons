@@ -353,6 +353,14 @@ public class IntArrayPointer implements IntPointer {
 
     /**
      * {@inheritDoc}
+     */
+    @Override
+    public void shuffle() {
+        Pointers.shuffleArray(values);
+    }
+
+    /**
+     * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */

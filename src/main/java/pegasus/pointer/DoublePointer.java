@@ -13,6 +13,7 @@ import java.util.stream.DoubleStream;
  * A value-based primitive pointer of {@code double} values.
  *
  * @see BasePointer
+ * @see DoubleArrayPointer
  */
 public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterable {
     /**
@@ -238,6 +239,11 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
      * will become {@code ["world", "hello"]}.
      */
     void reverse();
+
+    /**
+     * Shuffles this pointer's values in a randomized manner.
+     */
+    void shuffle();
 
     /**
      * {@inheritDoc}

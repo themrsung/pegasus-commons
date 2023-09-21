@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
  * A value-based primitive pointer of {@code int} values.
  *
  * @see BasePointer
+ * @see IntArrayPointer
  */
 public interface IntPointer extends BasePointer<Integer>, IndexedIntIterable {
     /**
@@ -238,6 +239,11 @@ public interface IntPointer extends BasePointer<Integer>, IndexedIntIterable {
      * will become {@code ["world", "hello"]}.
      */
     void reverse();
+
+    /**
+     * Shuffles this pointer's values in a randomized manner.
+     */
+    void shuffle();
 
     /**
      * {@inheritDoc}

@@ -12,6 +12,7 @@ import java.util.stream.Stream;
  *
  * @param <T> The type of object to reference
  * @see BasePointer
+ * @see ArrayPointer
  */
 public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
     /**
@@ -257,6 +258,11 @@ public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
      * will become {@code ["world", "hello"]}.
      */
     void reverse();
+
+    /**
+     * Shuffles this pointer's values in a randomized manner.
+     */
+    void shuffle();
 
     /**
      * {@inheritDoc}

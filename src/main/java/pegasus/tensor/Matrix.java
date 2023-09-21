@@ -24,6 +24,11 @@ public class Matrix extends DoubleArrayGrid implements DoubleGrid, Tensor {
     private static final long serialVersionUID = 0;
 
     /**
+     * The generator function for identity matrices.
+     */
+    public static final IntToDoubleBiFunction IDENTITY_GENERATOR = (r, c) -> r == c ? 1 : 0;
+
+    /**
      * Creates a new matrix containing the provided values.
      *
      * @param values The rectangular array of values
@@ -59,7 +64,7 @@ public class Matrix extends DoubleArrayGrid implements DoubleGrid, Tensor {
      * @throws IllegalArgumentException When {@code n} is negative
      */
     public static Matrix newIdentity(int n) {
-        return new Matrix(n, n, (r, c) -> r == c ? 1 : 0);
+        return new Matrix(n, n, IDENTITY_GENERATOR);
     }
 
     /**

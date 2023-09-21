@@ -298,7 +298,7 @@ public class LongArrayGrid implements LongGrid {
      * {@inheritDoc}
      *
      * @param oldValue The old value of which to replace
-     * @param newValue The new value of which to replace
+     * @param newValue The new value of which to replace to
      */
     @Override
     public void replaceAll(long oldValue, long newValue) {

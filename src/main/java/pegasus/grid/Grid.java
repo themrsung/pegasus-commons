@@ -167,7 +167,7 @@ public interface Grid<T> extends BaseGrid<T>, BinaryIndexedIterable<T> {
      * Replaces all instances of the old value to the new value.
      *
      * @param oldValue The old value of which to replace
-     * @param newValue The new value of which to replace
+     * @param newValue The new value of which to replace to
      */
     void replaceAll(T oldValue, T newValue);
 

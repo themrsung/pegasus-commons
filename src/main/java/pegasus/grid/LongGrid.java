@@ -164,7 +164,7 @@ public interface LongGrid extends BaseGrid<Long>, BinaryIndexedLongIterable {
      * Replaces all instances of the old value to the new value.
      *
      * @param oldValue The old value of which to replace
-     * @param newValue The new value of which to replace
+     * @param newValue The new value of which to replace to
      */
     void replaceAll(long oldValue, long newValue);
 
@@ -225,7 +225,7 @@ public interface LongGrid extends BaseGrid<Long>, BinaryIndexedLongIterable {
 
     /**
      * Returns a new grid with the provided dimensions whose elements are populated from that of this
-     * grid's elements, trimmed or padded with {@code null} values as necessary.
+     * grid's elements, trimmed or padded with {@code 0} values as necessary.
      *
      * @param rows    The number of rows to resize to
      * @param columns The number of columns to resize to

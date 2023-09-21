@@ -17,6 +17,23 @@ import java.util.stream.DoubleStream;
  */
 public interface Vector<V extends Vector<V>> extends Tensor {
     /**
+     * Creates and returns a new vector from the provided array of component values.
+     *
+     * @param values The array of values to construct the vector from
+     * @return The created vector
+     * @throws IllegalArgumentException When the array's length is invalid ({@code length < 2 || length > 5})
+     */
+    static Vector<?> newVector(double... values) throws IllegalArgumentException {
+        return switch (values.length) {
+            case 2 -> new Vector2(values[0], values[1]);
+            case 3 -> new Vector3(values[0], values[1], values[2]);
+            case 4 -> new Vector4(values[0], values[1], values[2], values[3]);
+            case 5 -> new Vector5(values[0], values[1], values[2], values[3], values[4]);
+            default -> throw new IllegalArgumentException("There is no defined vector of size " + values.length + ".");
+        };
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

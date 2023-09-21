@@ -12,7 +12,8 @@ import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleUnaryOperator;
 
 /**
- * A mathematical matrix.
+ * A tensor of order {@code 2}. Matrices are mutable two-dimensional structures of
+ * scalar components, which are stored as primitive {@code double}s.
  *
  * @see Tensor
  * @see DoubleGrid
@@ -299,13 +300,13 @@ public class Matrix extends DoubleArrayGrid implements DoubleGrid, Tensor {
             throw new IncompatibleDimensionsException();
         }
 
-        double[] vector = v.toArray();
+        double[] vectorAsArray = v.toArray();
         double[] result = new double[rows];
 
         for (int r = 0; r < rows; r++) {
             double sum = 0;
             for (int c = 0; c < columns; c++) {
-                sum += values[r * columns + c] * vector[c];
+                sum += values[r * columns + c] * vectorAsArray[c];
             }
             result[r] = sum;
         }

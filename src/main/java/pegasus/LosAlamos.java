@@ -1,24 +1,15 @@
 package pegasus;
 
+import pegasus.grid.AtomicArrayGrid;
+import pegasus.grid.Grid;
 import pegasus.pointer.DoublePointer;
 import pegasus.pointer.ObjectPointer;
+import pegasus.tuple.IntPair;
 
 public class LosAlamos {
     public static void main(String[] args) {
-        DoublePointer doubles = DoublePointer.to(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-
-        System.out.println(doubles);
-
-        doubles.reverse();
-
-        System.out.println(doubles);
-
-        doubles.sort();
-
-        System.out.println(doubles);
-
-        ObjectPointer<String> strings = ObjectPointer.to("hello", "world", "foo", "bar");
-        strings.reverse();
-        System.out.println(strings);
+        Grid<String> strings = new AtomicArrayGrid<>(10, 10);
+        strings.setAll((r, c) -> new IntPair(r, c).toString());
+        strings.forEachIndexed((r, c, v) -> System.out.println(new IntPair(r, c) + " = " + v));
     }
 }

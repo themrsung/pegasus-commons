@@ -7,6 +7,7 @@ import java.util.stream.DoubleStream;
  * A mathematical tensor.
  *
  * @see Vector
+ * @see Matrix
  */
 public interface Tensor extends Serializable {
     /**

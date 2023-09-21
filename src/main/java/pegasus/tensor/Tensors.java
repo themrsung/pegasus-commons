@@ -719,6 +719,19 @@ public final class Tensors {
      * @return The interpolated value between the starting and ending values {@code s} and {@code e}
      * @throws NullPointerException When a {@code null} parameter is provided
      */
+    public static <V extends Vector<V>> V lerp(V s, V e, double t) {
+        return s.add(e.subtract(s).multiply(t));
+    }
+
+    /**
+     * Performs linear interpolation (LERP) between the starting value {@code s} and the ending value {@code e}.
+     *
+     * @param s The starting value
+     * @param e The ending value
+     * @param t The interpolation parameter ({@code [0, 1]})
+     * @return The interpolated value between the starting and ending values {@code s} and {@code e}
+     * @throws NullPointerException When a {@code null} parameter is provided
+     */
 
     public static Vector2 lerp(Vector2 s, Vector2 e, double t) {
         final double s1 = s.x;

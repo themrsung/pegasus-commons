@@ -20,7 +20,11 @@ public interface LongTuple extends BaseTuple<Long>, IndexedLongIterable {
      * @throws NullPointerException When the provided array is {@code null}
      */
     static LongTuple of(long... values) {
-        return new LongArrayTuple(values);
+        return switch (values.length) {
+            case 2 -> new LongPair(values[0], values[1]);
+            case 3 -> new LongTriple(values[0], values[1], values[2]);
+            default -> new LongArrayTuple(values);
+        };
     }
 
     /**

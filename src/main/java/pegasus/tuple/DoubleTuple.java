@@ -20,7 +20,11 @@ public interface DoubleTuple extends BaseTuple<Double>, IndexedDoubleIterable {
      * @throws NullPointerException When the provided array is {@code null}
      */
     static DoubleTuple of(double... values) {
-        return new DoubleArrayTuple(values);
+        return switch (values.length) {
+            case 2 -> new DoublePair(values[0], values[1]);
+            case 3 -> new DoubleTriple(values[0], values[1], values[2]);
+            default -> new DoubleArrayTuple(values);
+        };
     }
 
     /**

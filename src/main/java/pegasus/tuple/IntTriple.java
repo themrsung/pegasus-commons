@@ -188,4 +188,3 @@ public record IntTriple(int x, int y, int z) implements IntTuple {
         return "[" + x + ", " + y + ", " + z + "]";
     }
 }
-}

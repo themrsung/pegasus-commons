@@ -20,7 +20,11 @@ public interface IntTuple extends BaseTuple<Integer>, IndexedIntIterable {
      * @throws NullPointerException When the provided array is {@code null}
      */
     static IntTuple of(int... values) {
-        return new IntArrayTuple(values);
+        return switch (values.length) {
+            case 2 -> new IntPair(values[0], values[1]);
+            case 3 -> new IntTriple(values[0], values[1], values[2]);
+            default -> new IntArrayTuple(values);
+        };
     }
 
     /**

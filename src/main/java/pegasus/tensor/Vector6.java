@@ -30,6 +30,11 @@ public class Vector6 implements Vector<Vector6> {
     private static final long serialVersionUID = 0;
 
     /**
+     * The zero vector.
+     */
+    public static final Vector6 ZERO = new Vector6(0, 0, 0, 0, 0, 0);
+
+    /**
      * Creates a new vector.
      *
      * @param i The I component of this vector

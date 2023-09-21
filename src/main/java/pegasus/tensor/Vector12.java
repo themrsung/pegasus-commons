@@ -26,6 +26,12 @@ public class Vector12 extends ArrayVector<Vector12> {
     private static final long serialVersionUID = 0;
 
     /**
+     * The zero vector.
+     */
+    public static final Vector12 ZERO =
+            new Vector12(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    /**
      * Creates a new vector.
      *
      * @param i The I component of this vector

@@ -26,7 +26,7 @@ public interface IntGrid extends BaseGrid<Integer>, BinaryIndexedIntIterable {
      * @throws NullPointerException     When the array contains a {@code null} row
      */
     static IntGrid of(int[][] values) {
-        if (values.length > 0 && Arrays.stream(values).mapToInt(Array::getLength).distinct().count() != 1) {
+        if (Arrays.stream(values).mapToInt(Array::getLength).distinct().count() >= 1) {
             throw new IllegalArgumentException("The provided array is not rectangular.");
         }
 

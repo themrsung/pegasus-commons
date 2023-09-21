@@ -1,44 +1,18 @@
 package pegasus.tuple;
 
-import java.io.Serial;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Objects;
 import java.util.function.*;
-import java.util.stream.LongStream;
+import java.util.stream.IntStream;
 
 /**
- * An array-based {@code long} tuple.
+ * A pair of {@code int} values.
  *
- * @see LongTuple
+ * @param x The first value
+ * @param y The second value
+ * @see IntTuple
  */
-public class LongArrayTuple implements LongTuple {
-    @Serial
-    private static final long serialVersionUID = 0;
-
-    /**
-     * Creates a new array tuple.
-     *
-     * @param values The values of which to contain
-     * @throws NullPointerException When the provided array is {@code null}
-     */
-    public LongArrayTuple(long[] values) {
-        this.values = Arrays.copyOf(values, values.length);
-    }
-
-    /**
-     * Creates a new array tuple.
-     *
-     * @param s The stream of which to retrieve elements from
-     * @throws NullPointerException When the provided stream {@code s} is {@code null}
-     */
-    public LongArrayTuple(LongStream s) {
-        this.values = s.toArray();
-    }
-
-    /**
-     * The internal array of values.
-     */
-    private final long[] values;
-
+public record IntPair(int x, int y) implements IntTuple {
     /**
      * {@inheritDoc}
      *
@@ -46,7 +20,7 @@ public class LongArrayTuple implements LongTuple {
      */
     @Override
     public int size() {
-        return values.length;
+        return 2;
     }
 
     /**
@@ -56,8 +30,8 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public boolean contains(long value) {
-        return stream().anyMatch(v -> v == value);
+    public boolean contains(int value) {
+        return x == value || y == value;
     }
 
     /**
@@ -68,7 +42,7 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public boolean containsAll(LongTuple t) {
+    public boolean containsAll(IntTuple t) {
         return t.stream().allMatch(this::contains);
     }
 
@@ -80,8 +54,12 @@ public class LongArrayTuple implements LongTuple {
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */
     @Override
-    public long get(int i) throws IndexOutOfBoundsException {
-        return values[i];
+    public int get(int i) throws IndexOutOfBoundsException {
+        return switch (i) {
+            case 0 -> x;
+            case 1 -> y;
+            default -> throw new IndexOutOfBoundsException(i);
+        };
     }
 
     /**
@@ -92,8 +70,8 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public LongTuple map(LongUnaryOperator mapper) {
-        return LongTuple.from(stream().map(mapper));
+    public IntTuple map(IntUnaryOperator mapper) {
+        return new IntPair(mapper.applyAsInt(x), mapper.applyAsInt(y));
     }
 
     /**
@@ -105,8 +83,8 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public <U> Tuple<U> mapToObj(LongFunction<? extends U> mapper) {
-        return Tuple.from(stream().mapToObj(mapper));
+    public <U> Tuple<U> mapToObj(IntFunction<? extends U> mapper) {
+        return Tuple.of(mapper.apply(x), mapper.apply(y));
     }
 
     /**
@@ -117,8 +95,8 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public DoubleTuple mapToDouble(LongToDoubleFunction mapper) {
-        return DoubleTuple.from(stream().mapToDouble(mapper));
+    public DoubleTuple mapToDouble(IntToDoubleFunction mapper) {
+        return new DoublePair(mapper.applyAsDouble(x), mapper.applyAsDouble(y));
     }
 
     /**
@@ -129,8 +107,8 @@ public class LongArrayTuple implements LongTuple {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public IntTuple mapToInt(LongToIntFunction mapper) {
-        return IntTuple.from(stream().mapToInt(mapper));
+    public LongTuple mapToLong(IntToLongFunction mapper) {
+        return new LongPair(mapper.applyAsLong(x), mapper.applyAsLong(y));
     }
 
     /**
@@ -139,8 +117,8 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public LongStream stream() {
-        return Arrays.stream(values);
+    public IntStream stream() {
+        return IntStream.of(x, y);
     }
 
     /**
@@ -149,8 +127,8 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public long[] toArray() {
-        return Arrays.copyOf(values, values.length);
+    public int[] toArray() {
+        return new int[]{x, y};
     }
 
     /**
@@ -159,7 +137,7 @@ public class LongArrayTuple implements LongTuple {
      * @return {@inheritDoc}
      */
     @Override
-    public Iterator<Long> iterator() {
+    public Iterator<Integer> iterator() {
         return stream().iterator();
     }
 
@@ -168,10 +146,9 @@ public class LongArrayTuple implements LongTuple {
      *
      * @return {@inheritDoc}
      */
-    @SuppressWarnings("RedundantCast")
     @Override
     public int hashCode() {
-        return Objects.hash((Object) values);
+        return Objects.hash(x, y);
     }
 
     /**
@@ -182,14 +159,9 @@ public class LongArrayTuple implements LongTuple {
      */
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof LongTuple t)) return false;
-        if (values.length != t.size()) return false;
-
-        for (int i = 0; i < values.length; i++) {
-            if (values[i] != t.get(i)) return false;
-        }
-
-        return true;
+        if (!(obj instanceof IntTuple t)) return false;
+        if (t.size() != 2) return false;
+        return x == t.get(0) && y == t.get(1);
     }
 
     /**
@@ -199,6 +171,6 @@ public class LongArrayTuple implements LongTuple {
      */
     @Override
     public String toString() {
-        return Arrays.toString(values);
+        return "[" + x + ", " + y + "]";
     }
 }

@@ -65,6 +65,7 @@ public class DoubleArrayTuple implements DoubleTuple {
      *
      * @param t The tuple of which to check for containment
      * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
     public boolean containsAll(DoubleTuple t) {

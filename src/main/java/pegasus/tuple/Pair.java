@@ -45,6 +45,7 @@ public record Pair<A, B>(A a, B b) implements Tuple<Object> {
      *
      * @param t The tuple of which to check for containment
      * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
     public boolean containsAll(Tuple<?> t) {
@@ -89,7 +90,7 @@ public record Pair<A, B>(A a, B b) implements Tuple<Object> {
      */
     @Override
     public DoubleTuple mapToDouble(ToDoubleFunction<? super Object> mapper) {
-        return DoubleTuple.from(stream().mapToDouble(mapper));
+        return DoubleTuple.of(mapper.applyAsDouble(a), mapper.applyAsDouble(b));
     }
 
     /**
@@ -101,7 +102,7 @@ public record Pair<A, B>(A a, B b) implements Tuple<Object> {
      */
     @Override
     public LongTuple mapToLong(ToLongFunction<? super Object> mapper) {
-        return LongTuple.from(stream().mapToLong(mapper));
+        return LongTuple.of(mapper.applyAsLong(a), mapper.applyAsLong(b));
     }
 
     /**
@@ -113,7 +114,7 @@ public record Pair<A, B>(A a, B b) implements Tuple<Object> {
      */
     @Override
     public IntTuple mapToInt(ToIntFunction<? super Object> mapper) {
-        return IntTuple.from(stream().mapToInt(mapper));
+        return IntTuple.of(mapper.applyAsInt(a), mapper.applyAsInt(b));
     }
 
     /**

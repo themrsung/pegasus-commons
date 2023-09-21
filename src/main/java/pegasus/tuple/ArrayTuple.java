@@ -37,6 +37,16 @@ public class ArrayTuple<T> implements Tuple<T> {
     }
 
     /**
+     * Creates a new array tuple.
+     *
+     * @param t The tuple of which to copy elements from
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    protected ArrayTuple(Tuple<? extends T> t) {
+        this.values = t.toArray();
+    }
+
+    /**
      * Direct assignment constructor.
      *
      * @param values  The array to assign directly
@@ -77,6 +87,7 @@ public class ArrayTuple<T> implements Tuple<T> {
      *
      * @param t The tuple of which to check for containment
      * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
     public boolean containsAll(Tuple<? extends T> t) {

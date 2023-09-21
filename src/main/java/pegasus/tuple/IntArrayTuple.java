@@ -65,6 +65,7 @@ public class IntArrayTuple implements IntTuple {
      *
      * @param t The tuple of which to check for containment
      * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
     @Override
     public boolean containsAll(IntTuple t) {

@@ -9,7 +9,7 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.stream.DoubleStream;
 
 /**
- * An immutable six-dimensional vector.
+ * An immutable seven-dimensional vector.
  *
  * @see Tensor
  * @see Vector
@@ -17,10 +17,10 @@ import java.util.stream.DoubleStream;
  * @see Vector3
  * @see Vector4
  * @see Vector5
- * @see Vector7
+ * @see Vector6
  * @see Quaternion
  */
-public class Vector6 implements Vector<Vector6> {
+public class Vector7 implements Vector<Vector7> {
     @Serial
     private static final long serialVersionUID = 0;
 
@@ -33,26 +33,28 @@ public class Vector6 implements Vector<Vector6> {
      * @param l The L component of this vector
      * @param m The M component of this vector
      * @param n The N component of this vector
+     * @param o The O component of this vector
      */
-    public Vector6(double i, double j, double k, double l, double m, double n) {
+    public Vector7(double i, double j, double k, double l, double m, double n, double o) {
         this.i = i;
         this.j = j;
         this.k = k;
         this.l = l;
         this.m = m;
         this.n = n;
+        this.o = o;
     }
 
     /**
      * Creates a new vector.
      *
      * @param v The vector of which to copy component values from
-     * @throws IllegalArgumentException When the provided vector {@code v}'s size is not {@code 6}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s size is not {@code 7}
      * @throws NullPointerException     When the provided vector {@code v} is {@code null}
      */
-    public Vector6(Vector<?> v) {
-        if (v.size() != 6) {
-            throw new IllegalArgumentException("The provided vector's size is not 6.");
+    public Vector7(Vector<?> v) {
+        if (v.size() != 7) {
+            throw new IllegalArgumentException("The provided vector's size is not 7.");
         }
 
         this.i = v.valueAt(0);
@@ -61,6 +63,7 @@ public class Vector6 implements Vector<Vector6> {
         this.l = v.valueAt(3);
         this.m = v.valueAt(4);
         this.n = v.valueAt(5);
+        this.o = v.valueAt(6);
     }
 
     /**
@@ -94,13 +97,18 @@ public class Vector6 implements Vector<Vector6> {
     protected final double n;
 
     /**
+     * The O component of this vector.
+     */
+    protected final double o;
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */
     @Override
     public int size() {
-        return 6;
+        return 7;
     }
 
     /**
@@ -119,6 +127,7 @@ public class Vector6 implements Vector<Vector6> {
             case 3 -> l;
             case 4 -> m;
             case 5 -> n;
+            case 6 -> o;
             default -> throw new IndexOutOfBoundsException(index);
         };
     }
@@ -178,18 +187,22 @@ public class Vector6 implements Vector<Vector6> {
     }
 
     /**
+     * Returns the O component of this vector.
+     *
+     * @return The O component of this vector
+     */
+    public double o() {
+        return o;
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */
     @Override
     public boolean isNaN() {
-        return Double.isNaN(i) ||
-                Double.isNaN(j) ||
-                Double.isNaN(k) ||
-                Double.isNaN(l) ||
-                Double.isNaN(m) ||
-                Double.isNaN(n);
+        return stream().anyMatch(Double::isNaN);
     }
 
     /**
@@ -199,12 +212,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public boolean isFinite() {
-        return Double.isFinite(i) &&
-                Double.isFinite(j) &&
-                Double.isFinite(k) &&
-                Double.isFinite(l) &&
-                Double.isFinite(m) &&
-                Double.isFinite(n);
+        return stream().allMatch(Double::isFinite);
     }
 
     /**
@@ -214,12 +222,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public boolean isInfinite() {
-        return Double.isInfinite(i) ||
-                Double.isInfinite(j) ||
-                Double.isInfinite(k) ||
-                Double.isInfinite(l) ||
-                Double.isInfinite(m) ||
-                Double.isInfinite(n);
+        return stream().anyMatch(Double::isInfinite);
     }
 
     /**
@@ -229,7 +232,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public double norm() {
-        return Math.sqrt(i * i + j * j + k * k + l * l + m * m + n * n);
+        return Math.sqrt(stream().map(x -> x * x).sum());
     }
 
     /**
@@ -239,7 +242,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public double normSquared() {
-        return i * i + j * j + k * k + l * l + m * m + n * n;
+        return stream().map(x -> x * x).sum();
     }
 
     /**
@@ -249,7 +252,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public double normManhattan() {
-        return Math.abs(i) + Math.abs(j) + Math.abs(k) + Math.abs(l) + Math.abs(m) + Math.abs(n);
+        return stream().map(Math::abs).sum();
     }
 
     /**
@@ -259,8 +262,8 @@ public class Vector6 implements Vector<Vector6> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector6 add(double s) {
-        return new Vector6(i + s, j + s, k + s, l + s, m + s, n + s);
+    public Vector7 add(double s) {
+        return new Vector7(i + s, j + s, k + s, l + s, m + s, n + s, o + s);
     }
 
     /**
@@ -270,8 +273,8 @@ public class Vector6 implements Vector<Vector6> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector6 subtract(double s) {
-        return new Vector6(i - s, j - s, k - s, l - s, m - s, n - s);
+    public Vector7 subtract(double s) {
+        return new Vector7(i - s, j - s, k - s, l - s, m - s, n - s, o - s);
     }
 
     /**
@@ -281,8 +284,8 @@ public class Vector6 implements Vector<Vector6> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector6 multiply(double s) {
-        return new Vector6(i * s, j * s, k * s, l * s, m * s, n * s);
+    public Vector7 multiply(double s) {
+        return new Vector7(i * s, j * s, k * s, l * s, m * s, n * s, o * s);
     }
 
     /**
@@ -293,10 +296,10 @@ public class Vector6 implements Vector<Vector6> {
      * @throws ArithmeticException {@inheritDoc}
      */
     @Override
-    public Vector6 divide(double s) throws ArithmeticException {
+    public Vector7 divide(double s) throws ArithmeticException {
         if (s == 0) throw new DivisionByZeroException();
         double inv = 1 / s;
-        return new Vector6(i * inv, j * inv, k * inv, l * inv, m * inv, n * inv);
+        return new Vector7(i * inv, j * inv, k * inv, l * inv, m * inv, n * inv, o * inv);
     }
 
     /**
@@ -307,8 +310,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 add(Vector6 v) {
-        return new Vector6(i + v.i, j + v.j, k + v.k, l + v.l, m + v.m, n + v.n);
+    public Vector7 add(Vector7 v) {
+        return new Vector7(i + v.i, j + v.j, k + v.k, l + v.l, m + v.m, n + v.n, o + v.o);
     }
 
     /**
@@ -319,8 +322,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 subtract(Vector6 v) {
-        return new Vector6(i - v.i, j - v.j, k - v.k, l - v.l, m - v.m, n - v.n);
+    public Vector7 subtract(Vector7 v) {
+        return new Vector7(i - v.i, j - v.j, k - v.k, l - v.l, m - v.m, n - v.n, o - v.o);
     }
 
     /**
@@ -331,8 +334,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double dot(Vector6 v) {
-        return i * v.i + j * v.j + k * v.k + l * v.l + m * v.m + n * v.n;
+    public double dot(Vector7 v) {
+        return i * v.i + j * v.j + k * v.k + l * v.l + m * v.m + n * v.n + o * v.o;
     }
 
     /**
@@ -341,8 +344,8 @@ public class Vector6 implements Vector<Vector6> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector6 abs() {
-        return new Vector6(Math.abs(i), Math.abs(j), Math.abs(k), Math.abs(l), Math.abs(m), Math.abs(n));
+    public Vector7 abs() {
+        return new Vector7(Math.abs(i), Math.abs(j), Math.abs(k), Math.abs(l), Math.abs(m), Math.abs(n), Math.abs(o));
     }
 
     /**
@@ -351,14 +354,15 @@ public class Vector6 implements Vector<Vector6> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector6 round() {
-        return new Vector6(
+    public Vector7 round() {
+        return new Vector7(
                 Math.round(i),
                 Math.round(j),
                 Math.round(k),
                 Math.round(l),
                 Math.round(m),
-                Math.round(n)
+                Math.round(n),
+                Math.round(o)
         );
     }
 
@@ -368,8 +372,8 @@ public class Vector6 implements Vector<Vector6> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector6 negate() {
-        return new Vector6(-i, -j, -k, -l, -m, -n);
+    public Vector7 negate() {
+        return new Vector7(-i, -j, -k, -l, -m, -n, -o);
     }
 
     /**
@@ -379,11 +383,11 @@ public class Vector6 implements Vector<Vector6> {
      * @throws ArithmeticException {@inheritDoc}
      */
     @Override
-    public Vector6 normalize() throws ArithmeticException {
-        double s = Math.sqrt(i * i + j * j + k * k + l * l + m * m + n * n);
-        if (s == 0) throw new DivisionByZeroException();
-        double inv = 1 / s;
-        return new Vector6(i * inv, j * inv, k * inv, l * inv, m * inv, n * inv);
+    public Vector7 normalize() throws ArithmeticException {
+        double norm = Math.sqrt(stream().map(x -> x * x).sum());
+        if (norm == 0) throw new DivisionByZeroException();
+        double inv = 1 / norm;
+        return new Vector7(i * inv, j * inv, k * inv, l * inv, m * inv, n * inv, o * inv);
     }
 
     /**
@@ -394,14 +398,15 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 map(DoubleUnaryOperator mapper) {
-        return new Vector6(
+    public Vector7 map(DoubleUnaryOperator mapper) {
+        return new Vector7(
                 mapper.applyAsDouble(i),
                 mapper.applyAsDouble(j),
                 mapper.applyAsDouble(k),
                 mapper.applyAsDouble(l),
                 mapper.applyAsDouble(m),
-                mapper.applyAsDouble(n)
+                mapper.applyAsDouble(n),
+                mapper.applyAsDouble(o)
         );
     }
 
@@ -414,14 +419,15 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 merge(Vector6 v, DoubleBinaryOperator merger) {
-        return new Vector6(
+    public Vector7 merge(Vector7 v, DoubleBinaryOperator merger) {
+        return new Vector7(
                 merger.applyAsDouble(i, v.i),
                 merger.applyAsDouble(j, v.j),
                 merger.applyAsDouble(k, v.k),
                 merger.applyAsDouble(l, v.l),
                 merger.applyAsDouble(m, v.m),
-                merger.applyAsDouble(n, v.n)
+                merger.applyAsDouble(n, v.n),
+                merger.applyAsDouble(o, v.o)
         );
     }
 
@@ -433,15 +439,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 min(Vector6 v) {
-        return new Vector6(
-                Math.min(i, v.i),
-                Math.min(j, v.j),
-                Math.min(k, v.k),
-                Math.min(l, v.l),
-                Math.min(m, v.m),
-                Math.min(n, v.n)
-        );
+    public Vector7 min(Vector7 v) {
+        return merge(v, Math::min);
     }
 
     /**
@@ -452,15 +451,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 max(Vector6 v) {
-        return new Vector6(
-                Math.max(i, v.i),
-                Math.max(j, v.j),
-                Math.max(k, v.k),
-                Math.max(l, v.l),
-                Math.max(m, v.m),
-                Math.max(n, v.n)
-        );
+    public Vector7 max(Vector7 v) {
+        return merge(v, Math::max);
     }
 
     /**
@@ -472,15 +464,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector6 clamp(Vector6 min, Vector6 max) {
-        return new Vector6(
-                Math.min(Math.max(i, min.i), max.i),
-                Math.min(Math.max(j, min.j), max.j),
-                Math.min(Math.max(k, min.k), max.k),
-                Math.min(Math.max(l, min.l), max.l),
-                Math.min(Math.max(m, min.m), max.m),
-                Math.min(Math.max(n, min.n), max.n)
-        );
+    public Vector7 clamp(Vector7 min, Vector7 max) {
+        return max(min).min(max);
     }
 
     /**
@@ -491,15 +476,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double distance(Vector6 v) {
-        double di = i - v.i;
-        double dj = j - v.j;
-        double dk = k - v.k;
-        double dl = l - v.l;
-        double dm = m - v.m;
-        double dn = n - v.n;
-
-        return Math.sqrt(di * di + dj * dj + dk * dk + dl * dl + dm * dm + dn * dn);
+    public double distance(Vector7 v) {
+        return subtract(v).norm();
     }
 
     /**
@@ -510,15 +488,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double distanceSquared(Vector6 v) {
-        double di = i - v.i;
-        double dj = j - v.j;
-        double dk = k - v.k;
-        double dl = l - v.l;
-        double dm = m - v.m;
-        double dn = n - v.n;
-
-        return di * di + dj * dj + dk * dk + dl * dl + dm * dm + dn * dn;
+    public double distanceSquared(Vector7 v) {
+        return subtract(v).normSquared();
     }
 
     /**
@@ -529,15 +500,8 @@ public class Vector6 implements Vector<Vector6> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double distanceManhattan(Vector6 v) {
-        double ai = Math.abs(i - v.i);
-        double aj = Math.abs(j - v.j);
-        double ak = Math.abs(k - v.k);
-        double al = Math.abs(l - v.l);
-        double am = Math.abs(m - v.m);
-        double an = Math.abs(n - v.n);
-
-        return ai + aj + ak + al + am + an;
+    public double distanceManhattan(Vector7 v) {
+        return subtract(v).normManhattan();
     }
 
     /**
@@ -547,7 +511,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public DoubleStream stream() {
-        return DoubleStream.of(i, j, k, l, m, n);
+        return DoubleStream.of(i, j, k, l, m, n, o);
     }
 
     /**
@@ -557,7 +521,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public double[] toArray() {
-        return new double[]{i, j, k, l, m, n};
+        return new double[]{i, j, k, l, m, n, o};
     }
 
     /**
@@ -567,7 +531,7 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(i, j, k, l, m, n);
+        return Objects.hash(i, j, k, l, m, n, o);
     }
 
     /**
@@ -579,13 +543,14 @@ public class Vector6 implements Vector<Vector6> {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Vector<?> v)) return false;
-        if (v.size() != 6) return false;
+        if (v.size() != 7) return false;
         return i == v.valueAt(0) &&
                 j == v.valueAt(1) &&
                 k == v.valueAt(2) &&
                 l == v.valueAt(3) &&
                 k == v.valueAt(4) &&
-                l == v.valueAt(5);
+                l == v.valueAt(5) &&
+                o == v.valueAt(6);
     }
 
     /**
@@ -595,6 +560,6 @@ public class Vector6 implements Vector<Vector6> {
      */
     @Override
     public String toString() {
-        return "[" + i + ", " + j + ", " + k + ", " + l + ", " + m + ", " + n + "]";
+        return "[" + i + ", " + j + ", " + k + ", " + l + ", " + m + ", " + n + ", " + o + "]";
     }
 }

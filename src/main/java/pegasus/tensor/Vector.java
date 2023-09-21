@@ -15,6 +15,7 @@ import java.util.stream.DoubleStream;
  * @see Vector4
  * @see Vector5
  * @see Vector6
+ * @see Vector7
  * @see Quaternion
  */
 public interface Vector<V extends Vector<V>> extends Tensor {
@@ -23,7 +24,7 @@ public interface Vector<V extends Vector<V>> extends Tensor {
      *
      * @param values The array of values to construct the vector from
      * @return The created vector
-     * @throws IllegalArgumentException When the array's length is invalid ({@code length < 2 || length > 5})
+     * @throws IllegalArgumentException When the array's length is invalid ({@code length < 2 || length > 7})
      */
     static Vector<?> newVector(double... values) throws IllegalArgumentException {
         return switch (values.length) {
@@ -32,6 +33,7 @@ public interface Vector<V extends Vector<V>> extends Tensor {
             case 4 -> new Vector4(values[0], values[1], values[2], values[3]);
             case 5 -> new Vector5(values[0], values[1], values[2], values[3], values[4]);
             case 6 -> new Vector6(values[0], values[1], values[2], values[3], values[4], values[5]);
+            case 7 -> new Vector7(values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
             default -> throw new IllegalArgumentException("There is no defined vector of size " + values.length + ".");
         };
     }

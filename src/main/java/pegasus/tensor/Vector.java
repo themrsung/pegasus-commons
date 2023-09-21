@@ -5,7 +5,7 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.stream.DoubleStream;
 
 /**
- * A tensor of order {@code 2}. Vectors represent a one-dimensional set of scalar
+ * A tensor of order {@code 1}. Vectors represent a one-dimensional set of scalar
  * components, which are represented by the primitive type {@code double}. All vectors
  * are immutable, and a new instance is created after each transformative operation.
  * <p>

@@ -18,6 +18,11 @@ import java.util.stream.DoubleStream;
  * @see Vector5
  * @see Vector6
  * @see Vector7
+ * @see Vector8
+ * @see Vector9
+ * @see Vector10
+ * @see Vector11
+ * @see Vector12
  * @see Quaternion
  */
 public class Vector2 implements Vector<Vector2> {

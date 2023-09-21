@@ -6,7 +6,28 @@ import java.util.stream.DoubleStream;
 
 /**
  * A tensor of order {@code 2}. Vectors represent a one-dimensional set of scalar
- * components, which are represented by the primitive type {@code double}.
+ * components, which are represented by the primitive type {@code double}. All vectors
+ * are immutable, and a new instance is created after each transformative operation.
+ * <p>
+ * A {@link #newVector(double...) factory method} is available for varargs parameters,
+ * although it should not be used as a primary means of instantiation. The individual
+ * constructors for final types such as {@link Vector2} or {@link Vector3} should be
+ * called instead for optimal performance.
+ * </p>
+ * <p>
+ * Sizes {@code 2-8} are component-based, meaning that the individual components are
+ * declared as independent variables. (e.g. {@code x, y, z}) Sizes {@code 9} and above
+ * are {@link ArrayVector array-based}, meaning the components are stored as a primitive
+ * array of {@code double} values. ({@code double[]})
+ * </p>
+ * <p>
+ * While compound operations can be achieved by method chaining, it is not recommended
+ * to do so for complex operations which require several iterations, as unnecessary
+ * intermediary vector instances are created in the process. Static methods such as
+ * {@link Tensors#rotate(Vector3, Quaternion) quaternion-vector rotation} should be used
+ * instead of chaining two quaternion multiplications and two vector-quaternion conversions.
+ * (which creates 4 new instances in total)
+ * </p>
  *
  * @param <V> The vector itself (the input parameters and return values of various operations)
  * @see Tensor
@@ -16,6 +37,11 @@ import java.util.stream.DoubleStream;
  * @see Vector5
  * @see Vector6
  * @see Vector7
+ * @see Vector8
+ * @see Vector9
+ * @see Vector10
+ * @see Vector11
+ * @see Vector12
  * @see Quaternion
  */
 public interface Vector<V extends Vector<V>> extends Tensor {
@@ -24,7 +50,7 @@ public interface Vector<V extends Vector<V>> extends Tensor {
      *
      * @param values The array of values to construct the vector from
      * @return The created vector
-     * @throws IllegalArgumentException When the array's length is invalid ({@code length < 2 || length > 7})
+     * @throws IllegalArgumentException When the array's length is invalid ({@code length < 2 || length > 12})
      */
     static Vector<?> newVector(double... values) throws IllegalArgumentException {
         return switch (values.length) {
@@ -34,6 +60,16 @@ public interface Vector<V extends Vector<V>> extends Tensor {
             case 5 -> new Vector5(values[0], values[1], values[2], values[3], values[4]);
             case 6 -> new Vector6(values[0], values[1], values[2], values[3], values[4], values[5]);
             case 7 -> new Vector7(values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
+            case 8 ->
+                    new Vector8(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            case 9 ->
+                    new Vector9(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8]);
+            case 10 ->
+                    new Vector10(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9]);
+            case 11 ->
+                    new Vector11(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10]);
+            case 12 ->
+                    new Vector12(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11]);
             default -> throw new IllegalArgumentException("There is no defined vector of size " + values.length + ".");
         };
     }

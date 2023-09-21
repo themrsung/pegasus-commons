@@ -12,10 +12,11 @@ import java.util.Objects;
 public class BoundingBox {
     /**
      * Creates a bounding box of the provided vertices.
+     *
      * @param vertices The vertices of which to represent
      * @return The created bounding box
      * @throws NullPointerException When the provided array is {@code null}, or it
-     * contains a {@code null} vector
+     *                              contains a {@code null} vector
      */
     public static BoundingBox of(Vector3... vertices) {
         return new BoundingBox(Tensors.min(vertices), Tensors.max(vertices));
@@ -23,6 +24,7 @@ public class BoundingBox {
 
     /**
      * Creates a new bounding box.
+     *
      * @param min The minimum boundary vector
      * @param max The maximum boundary vector
      * @throws NullPointerException When either of the provided boundary vectors is {@code null}
@@ -34,6 +36,7 @@ public class BoundingBox {
 
     /**
      * Creates a new bounding box.
+     *
      * @param other The box of which to copy boundary vectors from
      * @throws NullPointerException When the provided boundary box is {@code null}
      */
@@ -54,6 +57,7 @@ public class BoundingBox {
 
     /**
      * Returns whether this bounding box contains the provided vertex {@code v}.
+     *
      * @param v The vertex of which to check for containment
      * @return {@code true} if this bounding box contains the provided vertex {@code v}
      * @throws NullPointerException When the provided vertex {@code v} is {@code null}
@@ -64,6 +68,7 @@ public class BoundingBox {
 
     /**
      * Returns the minimum boundary vector of this bounding box.
+     *
      * @return The minimum boundary vector of this bounding box
      */
     public Vector3 min() {
@@ -72,6 +77,7 @@ public class BoundingBox {
 
     /**
      * Returns the maximum boundary vector of this bounding box.
+     *
      * @return The maximum boundary vector of this bounding box
      */
     public Vector3 max() {
@@ -80,6 +86,7 @@ public class BoundingBox {
 
     /**
      * Returns a tuple containing the corners of this bounding box.
+     *
      * @return A tuple of the corners of this bounding box
      */
     public Tuple<Vector3> corners() {
@@ -97,6 +104,7 @@ public class BoundingBox {
 
     /**
      * Serializes this bounding box into a string.
+     *
      * @return The string representation of this bounding box
      */
     @Override

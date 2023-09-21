@@ -1,0 +1,286 @@
+package pegasus.grid;
+
+import pegasus.exception.BinaryIndexOutOfBoundsException;
+import pegasus.exception.IncompatibleDimensionsException;
+import pegasus.function.IntToLongBiFunction;
+import pegasus.util.BinaryIndexedLongIterable;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.function.*;
+import java.util.stream.LongStream;
+
+/**
+ * A value-based primitive grid of {@code long} values.
+ *
+ * @see BaseGrid
+ * @see LongArrayGrid
+ */
+public interface LongGrid extends BaseGrid<Long>, BinaryIndexedLongIterable {
+    /**
+     * Creates a new grid containing the provided values.
+     *
+     * @param values The rectangular array of values
+     * @return The constructed grid
+     * @throws IllegalArgumentException When the array is not rectangular
+     * @throws NullPointerException     When the array contains a {@code null} row
+     */
+    static LongGrid of(long[][] values) {
+        if (values.length > 0 && Arrays.stream(values).mapToInt(Array::getLength).distinct().count() != 1) {
+            throw new IllegalArgumentException("The provided array is not rectangular.");
+        }
+
+        int rows = values.length;
+        int columns = rows > 0 ? values[0].length : 0;
+
+        LongArrayGrid result = new LongArrayGrid(rows, columns);
+
+        int i = 0;
+        for (long[] row : values) {
+            for (int c = 0; c < columns; c++) {
+                result.values[i++] = row[c];
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    int size();
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    int rows();
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    int columns();
+
+    /**
+     * Returns the {@code r}th row of this grid as an array.
+     *
+     * @param r The row index
+     * @return The {@code r}th row of this grid
+     * @throws IndexOutOfBoundsException When the provided index {@code r} is out of bounds
+     */
+    long[] row(int r) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns the {@code c}th column of this grid as an array.
+     *
+     * @param c The column index
+     * @return The {@code c}th column of this grid
+     * @throws IndexOutOfBoundsException When the provided index {@code c} is out of bounds
+     */
+    long[] column(int c) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns whether this grid contains the provided value.
+     *
+     * @param value The value of which to check for containment
+     * @return {@code true} if this grid contains the provided value
+     */
+    boolean contains(long value);
+
+    /**
+     * Returns whether this grid contains every element of the provided grid {@code g}.
+     *
+     * @param g The grid of which to check for containment
+     * @return {@code true} if this grid contains every element of the provided grid {@code g}
+     * @throws NullPointerException When the provided grid {@code g} is {@code null}
+     */
+    boolean containsAll(LongGrid g);
+
+    /**
+     * Returns the value at the specified index.
+     *
+     * @param r The row index
+     * @param c The column index
+     * @return The value at the specified index
+     * @throws BinaryIndexOutOfBoundsException When the provided index is out of bounds
+     */
+    long get(int r, int c) throws BinaryIndexOutOfBoundsException;
+
+    /**
+     * Sets the value at the specified index.
+     *
+     * @param r     The row index
+     * @param c     The column index
+     * @param value The value to set to
+     * @throws BinaryIndexOutOfBoundsException When the provided index is out of bounds
+     */
+    void set(int r, int c, long value) throws BinaryIndexOutOfBoundsException;
+
+    /**
+     * Fills this grid with the provided value.
+     *
+     * @param value The value of which to fill this grid with
+     */
+    void fill(long value);
+
+    /**
+     * Fills a sub-portion of this grid with the values of the provided grid {@code g}.
+     *
+     * @param r1 The starting row index (inclusive)
+     * @param c1 The starting column index (inclusive)
+     * @param r2 The ending row index (exclusive)
+     * @param c2 The ending column index (exclusive)
+     * @param g  The source grid of which to retrieve elements from
+     * @throws BinaryIndexOutOfBoundsException When the range is invalid, or is out of bounds
+     * @throws NullPointerException            When the provided grid {@code g} is {@code null}
+     */
+    void fillRange(int r1, int c1, int r2, int c2, LongGrid g)
+            throws BinaryIndexOutOfBoundsException;
+
+    /**
+     * Sets all elements of this grid using the provided generator function.
+     *
+     * @param generator The generator function of which to use to populate this grid
+     * @throws NullPointerException When the provided generator function is {@code null}
+     */
+    void setAll(IntToLongBiFunction generator);
+
+    /**
+     * Applies the provided update function to each element of this grid, then assigns each element
+     * to the return value of the provided update function.
+     *
+     * @param operator The update function of which to apply to each element of this grid
+     * @throws NullPointerException When the provided update function is {@code null}
+     */
+    void replace(LongUnaryOperator operator);
+
+    /**
+     * Replaces all instances of the old value to the new value.
+     *
+     * @param oldValue The old value of which to replace
+     * @param newValue The new value of which to replace
+     */
+    void replaceAll(long oldValue, long newValue);
+
+    /**
+     * Applies the provided mapper function to each element of this grid, then returns a new grid whose
+     * elements are populated from that of the return values of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to each element of this grid
+     * @return The resulting grid
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    LongGrid map(LongUnaryOperator mapper);
+
+    /**
+     * Applies the provided mapper function to each element of this grid, then returns a new grid whose
+     * elements are populated from that of the return values of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to each element of this grid
+     * @param <U>    The type of element to map this grid into
+     * @return The resulting grid
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    <U> Grid<U> mapToObj(LongFunction<? extends U> mapper);
+
+    /**
+     * Applies the provided mapper function to each element of this grid, then returns a new grid whose
+     * elements are populated from that of the return values of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to each element of this grid
+     * @return The resulting grid
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    DoubleGrid mapToDouble(LongToDoubleFunction mapper);
+
+    /**
+     * Applies the provided mapper function to each element of this grid, then returns a new grid whose
+     * elements are populated from that of the return values of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to each element of this grid
+     * @return The resulting grid
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    IntGrid mapToInt(LongToIntFunction mapper);
+
+    /**
+     * Applies the provided merger function to each corresponding pair of elements between this grid and
+     * the provided grid {@code g}, then returns a new grid whose elements are populated from that of the
+     * return values of the provided merger function.
+     *
+     * @param g      The grid of which to merge this grid with
+     * @param merger The merger function of which to handle the merging of the two grids
+     * @return The resulting grid
+     * @throws IncompatibleDimensionsException When the grids' dimensions are different
+     * @throws NullPointerException            When either the provided grid {@code g} or the merger function is {@code null}
+     */
+    LongGrid merge(LongGrid g, LongBinaryOperator merger)
+            throws IncompatibleDimensionsException;
+
+    /**
+     * Returns a new grid with the provided dimensions whose elements are populated from that of this
+     * grid's elements, trimmed or padded with {@code null} values as necessary.
+     *
+     * @param rows    The number of rows to resize to
+     * @param columns The number of columns to resize to
+     * @return The resized grid
+     * @throws IllegalArgumentException When the dimensions produce negative area
+     */
+    LongGrid resize(int rows, int columns);
+
+    /**
+     * Returns the transpose of this grid.
+     *
+     * @return The transpose of this grid
+     */
+    LongGrid transpose();
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    LongStream stream();
+
+    /**
+     * Returns an array containing the elements of this grid.
+     *
+     * @return The array representation of this grid
+     */
+    long[] toArray();
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    Iterator<Long> iterator();
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    int hashCode();
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param obj The object to compare to
+     * @return {@inheritDoc}
+     */
+    boolean equals(Object obj);
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    String toString();
+}

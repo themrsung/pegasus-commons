@@ -3,7 +3,7 @@ package pegasus.util;
 import pegasus.function.IndexedIntConsumer;
 
 /**
- * An indexed iterable object of {@code double} values.
+ * An indexed iterable object of {@code int} values.
  */
 public interface IndexedIntIterable extends Iterable<Integer> {
     /**

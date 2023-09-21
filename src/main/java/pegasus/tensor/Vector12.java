@@ -5,7 +5,7 @@ import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleUnaryOperator;
 
 /**
- * An immutable ten-dimensional vector.
+ * An immutable twelve-dimensional vector.
  *
  * @see Tensor
  * @see Vector

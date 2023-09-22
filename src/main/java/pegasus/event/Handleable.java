@@ -6,6 +6,10 @@ import java.util.UUID;
 /**
  * The base interface for handleable objects. Handleable objects can be enqueued to an
  * event manager as an event in order to be processed.
+ *
+ * @see Event
+ * @see EventHandler
+ * @see EventManager
  */
 public interface Handleable extends Serializable {
     /**

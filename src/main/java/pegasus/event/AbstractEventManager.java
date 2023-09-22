@@ -81,7 +81,7 @@ public abstract class AbstractEventManager extends Thread implements EventManage
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public <E extends Handleable> void enqueue(E event) {
+    public <E extends Handleable> void enqueueEvent(E event) {
         eventQueue.add(Objects.requireNonNull(event));
     }
 

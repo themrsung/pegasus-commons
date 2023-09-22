@@ -8,6 +8,9 @@ import java.util.Vector;
 
 /**
  * Contains event utilities.
+ *
+ * @see Handleable
+ * @see Event
  */
 public final class Events {
     //
@@ -36,7 +39,7 @@ public final class Events {
 
     static boolean isValidHandler(Method handler) {
         if (!handler.isAnnotationPresent(EventHandler.class)) return false;
-        if (handler.getReturnType() != Void.class) return false;
+        if (handler.getReturnType() != void.class) return false;
         if (handler.getParameterCount() != 1) return false;
         return Handleable.class.isAssignableFrom(handler.getParameterTypes()[0]);
     }

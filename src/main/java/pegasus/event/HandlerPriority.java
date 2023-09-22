@@ -3,6 +3,8 @@ package pegasus.event;
 /**
  * The execution priority of an event handler. Lower enum ordinals will be executed
  * earlier than higher enum ordinals.
+ *
+ * @see EventHandler
  */
 public enum HandlerPriority {
     PREEMPTIVE,

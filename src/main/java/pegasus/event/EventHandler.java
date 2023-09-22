@@ -4,6 +4,11 @@ import java.lang.annotation.*;
 
 /**
  * A marker annotation for declared event handler methods.
+ *
+ * @see Handleable
+ * @see Event
+ * @see EventManager
+ * @see HandlerPriority
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

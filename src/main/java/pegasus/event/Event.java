@@ -7,6 +7,8 @@ import java.util.UUID;
  * The default implementation of {@link Handleable}. All Pegasus events extend this class.
  *
  * @see Handleable
+ * @see EventHandler
+ * @see EventManager
  */
 public class Event implements Handleable {
     @Serial

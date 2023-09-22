@@ -1,19 +1,19 @@
 package pegasus;
 
-import pegasus.event.*;
-import pegasus.tensor.LargeVector;
-import pegasus.tuple.StringTuple;
-import pegasus.tuple.Tuple;
 
-import java.util.List;
-import java.util.Queue;
+import pegasus.event.EventManager;
+import pegasus.event.SyncEventManager;
+import pegasus.scheduler.*;
 
 public class LosAlamos {
-    public static void main(String[] args) {
-        LargeVector v = new LargeVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
-        LargeVector p = new LargeVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
+    static EventManager eventManager = new SyncEventManager();
+    static Scheduler scheduler = new AtomicScheduler();
 
-        System.out.println(v.add(p));
-        System.out.println(p.normalize());
+    public static void main(String[] args) {
+        scheduler.start();
+
+        scheduler.registerRepeatingTask(Task.LOG_CURRENT_TIME_AND_DELTA, 50);
+        scheduler.registerDelayedTask(Task.println("hello world"), 100);
+        scheduler.registerDelayedTask((t, d) -> scheduler.interrupt(), 1000);
     }
 }

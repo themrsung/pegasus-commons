@@ -7,6 +7,11 @@ import java.util.Collection;
 
 /**
  * An event manager.
+ *
+ * @see Handleable
+ * @see Event
+ * @see EventHandler
+ * @see SyncEventManager
  */
 public interface EventManager {
     /**
@@ -31,7 +36,7 @@ public interface EventManager {
      * @param <E>   The type of event of which to enqueue
      * @throws NullPointerException When the provided event is {@code null}
      */
-    <E extends Handleable> void enqueue(E event);
+    <E extends Handleable> void enqueueEvent(E event);
 
     /**
      * Registers an event listener to this event manager.

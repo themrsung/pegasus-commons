@@ -1,11 +1,15 @@
 package pegasus;
 
+import pegasus.tensor.LargeVector;
 import pegasus.tuple.StringTuple;
 import pegasus.tuple.Tuple;
 
 public class LosAlamos {
     public static void main(String[] args) {
-        StringTuple test = Tuple.of("hello", "world");
-        var test2 = test.map(String::toLowerCase);
+        LargeVector v = new LargeVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
+        LargeVector p = new LargeVector(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17);
+
+        System.out.println(v.add(p));
+        System.out.println(p.normalize());
     }
 }

@@ -150,7 +150,17 @@ public class LargeVector extends ArrayVector<LargeVector> {
      * @param v8 The eighth component of this vector
      * @param v9 The ninth component of this vector
      */
-    public LargeVector(double v1, double v2, double v3, double v4, double v5, double v6, double v7, double v8, double v9) {
+    public LargeVector(
+            double v1,
+            double v2,
+            double v3,
+            double v4,
+            double v5,
+            double v6,
+            double v7,
+            double v8,
+            double v9
+    ) {
         super(v1, v2, v3, v4, v5, v6, v7, v8, v9);
     }
 
@@ -168,7 +178,18 @@ public class LargeVector extends ArrayVector<LargeVector> {
      * @param v9  The ninth component of this vector
      * @param v10 The tenth component of this vector
      */
-    public LargeVector(double v1, double v2, double v3, double v4, double v5, double v6, double v7, double v8, double v9, double v10) {
+    public LargeVector(
+            double v1,
+            double v2,
+            double v3,
+            double v4,
+            double v5,
+            double v6,
+            double v7,
+            double v8,
+            double v9,
+            double v10
+    ) {
         super(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10);
     }
 
@@ -187,7 +208,19 @@ public class LargeVector extends ArrayVector<LargeVector> {
      * @param v10 The tenth component of this vector
      * @param v11 The eleventh component of this vector
      */
-    public LargeVector(double v1, double v2, double v3, double v4, double v5, double v6, double v7, double v8, double v9, double v10, double v11) {
+    public LargeVector(
+            double v1,
+            double v2,
+            double v3,
+            double v4,
+            double v5,
+            double v6,
+            double v7,
+            double v8,
+            double v9,
+            double v10,
+            double v11
+    ) {
         super(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11);
     }
 
@@ -207,7 +240,20 @@ public class LargeVector extends ArrayVector<LargeVector> {
      * @param v11 The eleventh component of this vector
      * @param v12 The twelfth component of this vector
      */
-    public LargeVector(double v1, double v2, double v3, double v4, double v5, double v6, double v7, double v8, double v9, double v10, double v11, double v12) {
+    public LargeVector(
+            double v1,
+            double v2,
+            double v3,
+            double v4,
+            double v5,
+            double v6,
+            double v7,
+            double v8,
+            double v9,
+            double v10,
+            double v11,
+            double v12
+    ) {
         super(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12);
     }
 

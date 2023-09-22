@@ -22,7 +22,7 @@ public abstract class AbstractTriangle<V extends Vector<V>> implements Triangle<
      * @param c The third vertex of this triangle
      * @throws NullPointerException When a {@code null} vector is provided
      */
-    public AbstractTriangle(V a, V b, V c) {
+    protected AbstractTriangle(V a, V b, V c) {
         this.a = Objects.requireNonNull(a);
         this.b = Objects.requireNonNull(b);
         this.c = Objects.requireNonNull(c);
@@ -34,7 +34,7 @@ public abstract class AbstractTriangle<V extends Vector<V>> implements Triangle<
      * @param t The triangle of which to copy properties from
      * @throws NullPointerException When the provided triangle {@code t} is {@code null}
      */
-    public AbstractTriangle(AbstractTriangle<V> t) {
+    protected AbstractTriangle(AbstractTriangle<V> t) {
         this.a = t.a;
         this.b = t.b;
         this.c = t.c;
@@ -192,5 +192,18 @@ public abstract class AbstractTriangle<V extends Vector<V>> implements Triangle<
         return Objects.equals(a, t.getA()) &&
                 Objects.equals(b, t.getB()) &&
                 Objects.equals(c, t.getC());
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+                "a=" + a +
+                ", b=" + b +
+                ", c=" + c +
+                '}';
     }
 }

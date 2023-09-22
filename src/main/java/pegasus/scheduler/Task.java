@@ -1,5 +1,7 @@
 package pegasus.scheduler;
 
+import java.util.Objects;
+
 /**
  * A task which can be registered to a scheduler.
  */
@@ -42,5 +44,16 @@ public interface Task {
      */
     static Task println(Object obj) {
         return (t, c) -> System.out.println(obj);
+    }
+
+    /**
+     * Returns a task which unregisters the provided scheduler.
+     * @param scheduler The scheduler of which to interrupt
+     * @return The constructed task
+     * @throws NullPointerException When the provided scheduler is {@code null}
+     */
+    static Task interruptScheduler(Scheduler scheduler) {
+        Objects.requireNonNull(scheduler);
+        return (t, c) -> scheduler.interrupt();
     }
 }

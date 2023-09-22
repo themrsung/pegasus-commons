@@ -3,7 +3,10 @@ package pegasus.event;
 import java.lang.annotation.*;
 
 /**
- * A marker annotation for declared event handler methods.
+ * A marker annotation for declared event handler methods. Handles methods must have only
+ * one input parameter which is an instance of {@link Handleable}, return the primitive type
+ * {@code void}, and be marked as an event handler with this annotation. (the return type
+ * {@link Void} is invalid)
  *
  * @see Handleable
  * @see Event

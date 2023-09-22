@@ -17,10 +17,27 @@ public final class Events {
     // Handler Extraction
     //
 
+    /**
+     * Returns a collection of every valid event handler of the provided listener object. All methods,
+     * including those declared in the listener's superclasses will be collected.
+     *
+     * @param listener The listener object of which to retrieve event handlers from
+     * @return A collection of every valid event handler of the provided event listener
+     * @param <T> The type of the listener
+     * @throws NullPointerException When the provided listener is {@code null}
+     */
     public static <T> Collection<HandlerReference> getHandlersOf(T listener) {
         return getHandlersOf(listener.getClass(), listener);
     }
 
+    /**
+     * Returns a collection of every valid event handler.
+     * @param c The class of the listener
+     * @param l The listener instance
+     * @return A collection of event handlers
+     * @param <T> The type of listener
+     * @throws NullPointerException When a parameter is {@code null}
+     */
     static <T> Collection<HandlerReference> getHandlersOf(Class<? extends T> c, T l) {
         Vector<HandlerReference> handlers = new Vector<>();
 
@@ -37,6 +54,12 @@ public final class Events {
         return handlers;
     }
 
+    /**
+     * Returns whether the provided method is a valid event handler method.
+     * @param handler The handler of which to validate
+     * @return {@code true} if the method is a valid event handler
+     * @throws NullPointerException When the method is {@code null}
+     */
     static boolean isValidHandler(Method handler) {
         if (!handler.isAnnotationPresent(EventHandler.class)) return false;
         if (handler.getReturnType() != void.class) return false;

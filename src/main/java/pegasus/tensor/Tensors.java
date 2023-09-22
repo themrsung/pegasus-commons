@@ -1025,6 +1025,26 @@ public final class Tensors {
         );
     }
 
+    /**
+     * Inverts the Y component of the provided vector {@code v}, then returns the resulting vector.
+     * @param v The vector of which to invert the Y component of
+     * @return The resulting vector
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static Vector2 invertY(Vector2 v) {
+        return new Vector2(v.x, -v.y);
+    }
+
+    /**
+     * Inverts the Y component of the provided vector {@code v}, then returns the resulting vector.
+     * @param v The vector of which to invert the Y component of
+     * @return The resulting vector
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static Vector3 invertY(Vector3 v) {
+        return new Vector3(v.x, -v.y, v.z);
+    }
+
     //
     // Tuple Conversion
     //

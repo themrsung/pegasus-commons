@@ -34,6 +34,17 @@ public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
     }
 
     /**
+     * Creates a new tuple from the provided array of strings.
+     *
+     * @param values The values of which to contain
+     * @return The created tuple
+     * @throws NullPointerException When the provided array is {@code null}
+     */
+    static StringTuple of(String... values) {
+        return new StringTuple(values);
+    }
+
+    /**
      * Creates a new tuple from the provided stream of values.
      *
      * @param s   The stream of which to retrieve elements from
@@ -130,7 +141,7 @@ public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
      *                              the provided target class
      * @throws NullPointerException When the provided target class is {@code null}
      */
-    <U> Tuple<U> cast(Class<? extends U> target);
+    <U> Tuple<U> cast(Class<? extends U> target) throws ClassCastException;
 
     /**
      * {@inheritDoc}

@@ -1,6 +1,7 @@
 package pegasus.tensor;
 
 import pegasus.exception.IllegalInstanceException;
+import pegasus.pointer.DoublePointer;
 import pegasus.tuple.DoubleTuple;
 import pegasus.tuple.Tuple;
 
@@ -1067,6 +1068,109 @@ public final class Tensors {
         }
 
         return Tuple.of(rows);
+    }
+
+    //
+    // Pointer Conversion
+    //
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector<?> v) {
+        return DoublePointer.to(v.toArray());
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector2 v) {
+        return DoublePointer.to(v.x, v.y);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector3 v) {
+        return DoublePointer.to(v.x, v.y, v.z);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector4 v) {
+        return DoublePointer.to(v.w, v.x, v.y, v.z);
+    }
+
+    /**
+     * Converts the provided quaternion {@code q} into a pointer.
+     *
+     * @param q The quaternion of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided quaternion {@code q} is {@code null}
+     */
+    public static DoublePointer toPointer(Quaternion q) {
+        return DoublePointer.to(q.w, q.x, q.y, q.z);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector5 v) {
+        return DoublePointer.to(v.i, v.j, v.k, v.l, v.m);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector6 v) {
+        return DoublePointer.to(v.i, v.j, v.k, v.l, v.m, v.n);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector7 v) {
+        return DoublePointer.to(v.i, v.j, v.k, v.l, v.m, v.n, v.o);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoublePointer toPointer(Vector8 v) {
+        return DoublePointer.to(v.i, v.j, v.k, v.l, v.m, v.n, v.o, v.p);
     }
 
     //

@@ -1,6 +1,6 @@
 # Pegasus Commons
 
-The Pegasus Commons library for Java applications. This library includes:
+The Pegasus Commons library for Java applications. This library includes the following.
 
 - [Tensors](src%2Fmain%2Fjava%2Fpegasus%2Ftensor%2FTensor.java) (`double`-based mathematical tensors)
   - [Mathematical Operations](src%2Fmain%2Fjava%2Fpegasus%2Ftensor%2FTensors.java) 
@@ -15,3 +15,5 @@ The Pegasus Commons library for Java applications. This library includes:
 - [Pointers](src%2Fmain%2Fjava%2Fpegasus%2Fpointer%2FBasePointer.java) (mutable, fixed-size)
   - Reference-based generic pointers
   - Value-based primitive pointers (`double`, `long`, `int`)
+
+### [Documentation](https://themrsung.github.io/pegasus-commons/)

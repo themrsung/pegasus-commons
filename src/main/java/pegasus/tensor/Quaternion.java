@@ -33,6 +33,7 @@ import java.util.stream.DoubleStream;
  * @see Vector10
  * @see Vector11
  * @see Vector12
+ * @see LargeVector
  */
 public class Quaternion implements Vector<Quaternion> {
     @Serial

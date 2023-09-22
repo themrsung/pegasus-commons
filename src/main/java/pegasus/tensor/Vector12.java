@@ -19,6 +19,7 @@ import java.util.function.DoubleUnaryOperator;
  * @see Vector9
  * @see Vector10
  * @see Vector11
+ * @see LargeVector
  * @see Quaternion
  */
 public class Vector12 extends ArrayVector<Vector12> {

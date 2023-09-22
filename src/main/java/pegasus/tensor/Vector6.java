@@ -23,6 +23,7 @@ import java.util.stream.DoubleStream;
  * @see Vector10
  * @see Vector11
  * @see Vector12
+ * @see LargeVector
  * @see Quaternion
  */
 public class Vector6 implements Vector<Vector6> {

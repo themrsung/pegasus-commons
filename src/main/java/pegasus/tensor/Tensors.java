@@ -808,14 +808,14 @@ public final class Tensors {
      * @throws NullPointerException When a {@code null} parameter is provided
      */
     public static Quaternion lerp(Quaternion s, Quaternion e, double t) {
-        final double s1 = s.w();
-        final double e1 = e.w();
-        final double s2 = s.x();
-        final double e2 = e.x();
-        final double s3 = s.y();
-        final double e3 = e.y();
-        final double s4 = s.z();
-        final double e4 = e.z();
+        final double s1 = s.w;
+        final double e1 = e.w;
+        final double s2 = s.x;
+        final double e2 = e.x;
+        final double s3 = s.y;
+        final double e3 = e.y;
+        final double s4 = s.z;
+        final double e4 = e.z;
 
         return new Quaternion(
                 s1 + (e1 - s1) * t,

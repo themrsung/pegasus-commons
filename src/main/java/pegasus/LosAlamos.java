@@ -1,8 +1,12 @@
 package pegasus;
 
+import pegasus.event.*;
 import pegasus.tensor.LargeVector;
 import pegasus.tuple.StringTuple;
 import pegasus.tuple.Tuple;
+
+import java.util.List;
+import java.util.Queue;
 
 public class LosAlamos {
     public static void main(String[] args) {

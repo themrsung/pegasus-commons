@@ -159,7 +159,7 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
     void replaceLast(double oldValue, double newValue);
 
     /**
-     * Replaces all instances of ths old value to the new value.
+     * Replaces all instances of the old value to the new value.
      *
      * @param oldValue The old value of which to replace
      * @param newValue The new value of which to replace to
@@ -168,7 +168,7 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
 
     /**
      * Applies the provided mapper function to each value of this pointer, then returns a new pointer
-     * whose values are populated from that of the return values of ths provided mapper function.
+     * whose values are populated from that of the return values of the provided mapper function.
      *
      * @param mapper The mapper function of which to apply to each value of this pointer
      * @return The resulting pointer
@@ -178,7 +178,7 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
 
     /**
      * Applies the provided mapper function to each value of this pointer, then returns a new pointer
-     * whose values are populated from that of the return values of ths provided mapper function.
+     * whose values are populated from that of the return values of the provided mapper function.
      *
      * @param mapper The mapper function of which to apply to each value of this pointer
      * @param <U>    The type of object to map this pointer to
@@ -189,7 +189,7 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
 
     /**
      * Applies the provided mapper function to each value of this pointer, then returns a new pointer
-     * whose values are populated from that of the return values of ths provided mapper function.
+     * whose values are populated from that of the return values of the provided mapper function.
      *
      * @param mapper The mapper function of which to apply to each value of this pointer
      * @return The resulting pointer
@@ -199,7 +199,7 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
 
     /**
      * Applies the provided mapper function to each value of this pointer, then returns a new pointer
-     * whose values are populated from that of the return values of ths provided mapper function.
+     * whose values are populated from that of the return values of the provided mapper function.
      *
      * @param mapper The mapper function of which to apply to each value of this pointer
      * @return The resulting pointer

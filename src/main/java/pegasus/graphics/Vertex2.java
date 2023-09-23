@@ -1,5 +1,6 @@
 package pegasus.graphics;
 
+import pegasus.exception.DivisionByZeroException;
 import pegasus.tensor.Vector;
 import pegasus.tensor.Vector2;
 
@@ -76,6 +77,11 @@ public class Vertex2 extends Vector2 {
     private double normManhattan = Double.NaN;
 
     /**
+     * The normalized value of this vertex.
+     */
+    private Vertex2 normalized = null;
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}
@@ -112,6 +118,24 @@ public class Vertex2 extends Vector2 {
 
         normManhattan = super.normManhattan();
         return normManhattan;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     * @throws ArithmeticException {@inheritDoc}
+     */
+    @Override
+    public Vertex2 normalize() throws ArithmeticException {
+        if (normalized != null) return normalized;
+
+        double s = norm();
+        if (s == 0) throw new DivisionByZeroException();
+        double i = 1 / s;
+        normalized = new Vertex2(x * i, y * i);
+
+        return normalized;
     }
 
     static {

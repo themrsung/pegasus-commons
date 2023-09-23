@@ -240,6 +240,33 @@ public class LongArrayGrid implements LongGrid {
     /**
      * {@inheritDoc}
      *
+     * @param r1    The starting row index (inclusive)
+     * @param c1    The starting column index (inclusive)
+     * @param r2    The ending row index (exclusive)
+     * @param c2    The ending column index (exclusive)
+     * @param value The value of which to fill the sub-portion with
+     * @throws BinaryIndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public void fillRange(int r1, int c1, int r2, int c2, long value) throws BinaryIndexOutOfBoundsException {
+        if (r1 < 0 || r1 > rows || c1 < 0 || c1 > columns) {
+            throw new BinaryIndexOutOfBoundsException(r1, c1);
+        }
+
+        if (r2 < 0 || r2 > rows || c2 < 0 || c2 > columns) {
+            throw new BinaryIndexOutOfBoundsException(r2, c2);
+        }
+
+        for (int r = r1; r < r2; r++) {
+            for (int c = c1; c < c2; c++) {
+                values[r * columns + c] = value;
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @param r1 The starting row index (inclusive)
      * @param c1 The starting column index (inclusive)
      * @param r2 The ending row index (exclusive)

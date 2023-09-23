@@ -173,6 +173,19 @@ public class ArrayPointer<T> implements ObjectPointer<T> {
      *
      * @param startIndex The starting index at which to start filling values (inclusive)
      * @param endIndex   The ending index at which to stop filling values (exclusive)
+     * @param value      The value of which to fill the specified range with
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public void fillRange(int startIndex, int endIndex, T value) throws IndexOutOfBoundsException {
+        Arrays.fill(values, startIndex, endIndex, value);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param startIndex The starting index at which to start filling values (inclusive)
+     * @param endIndex   The ending index at which to stop filling values (exclusive)
      * @param p          The source pointer of which to retrieve values from
      * @throws IndexOutOfBoundsException {@inheritDoc}
      */

@@ -116,6 +116,16 @@ public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
     void fill(T value);
 
     /**
+     * Fills the specified range of this pointer with the provided value.
+     *
+     * @param startIndex The starting index at which to start filling values (inclusive)
+     * @param endIndex   The ending index at which to stop filling values (exclusive)
+     * @param value      The value of which to fill the specified range with
+     * @throws IndexOutOfBoundsException When the range is invalid, or is out of bounds
+     */
+    void fillRange(int startIndex, int endIndex, T value) throws IndexOutOfBoundsException;
+
+    /**
      * Fills the specified range of this pointer with the provided values.
      *
      * @param startIndex The starting index at which to start filling values (inclusive)

@@ -322,6 +322,25 @@ public class AtomicArrayGrid<T> implements AtomicGrid<T> {
     /**
      * {@inheritDoc}
      *
+     * @param r1    The starting row index (inclusive)
+     * @param c1    The starting column index (inclusive)
+     * @param r2    The ending row index (exclusive)
+     * @param c2    The ending column index (exclusive)
+     * @param value The value of which to fill the sub-portion with
+     * @throws BinaryIndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public void fillRange(int r1, int c1, int r2, int c2, T value) throws BinaryIndexOutOfBoundsException {
+        for (int r = r1; r < r2; r++) {
+            for (int c = c1; c < c2; c++) {
+                values[r * columns + c].set(value);
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @param r1 The starting row index (inclusive)
      * @param c1 The starting column index (inclusive)
      * @param r2 The ending row index (exclusive)

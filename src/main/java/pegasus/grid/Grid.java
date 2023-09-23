@@ -133,6 +133,18 @@ public interface Grid<T> extends BaseGrid<T>, BinaryIndexedIterable<T> {
     void fill(T value);
 
     /**
+     * Fills a sub-portion of this grid with the values of the provided value.
+     *
+     * @param r1    The starting row index (inclusive)
+     * @param c1    The starting column index (inclusive)
+     * @param r2    The ending row index (exclusive)
+     * @param c2    The ending column index (exclusive)
+     * @param value The value of which to fill the sub-portion with
+     * @throws BinaryIndexOutOfBoundsException When the range is invalid, or is out of bounds
+     */
+    void fillRange(int r1, int c1, int r2, int c2, T value) throws BinaryIndexOutOfBoundsException;
+
+    /**
      * Fills a sub-portion of this grid with the values of the provided grid {@code g}.
      *
      * @param r1 The starting row index (inclusive)

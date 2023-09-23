@@ -158,6 +158,14 @@ public interface ObjectContainer<T> extends BaseContainer<T> {
     Stream<T> stream();
 
     /**
+     * Performs the provided action for this container's value.
+     *
+     * @param action The action to be performed for this container's value
+     * @throws NullPointerException When the provided action is {@code null}
+     */
+    void peek(Consumer<? super T> action);
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

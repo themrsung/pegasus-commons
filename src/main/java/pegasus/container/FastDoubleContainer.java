@@ -215,6 +215,17 @@ public class FastDoubleContainer implements DoubleContainer {
     /**
      * {@inheritDoc}
      *
+     * @param action The action to be performed for this container's value
+     * @throws NullPointerException {@inheritDoc}
+     */
+    @Override
+    public void peek(DoubleConsumer action) {
+        action.accept(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

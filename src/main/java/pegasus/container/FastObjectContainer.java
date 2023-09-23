@@ -202,6 +202,17 @@ public class FastObjectContainer<T> implements ObjectContainer<T> {
     /**
      * {@inheritDoc}
      *
+     * @param action The action to be performed for this container's value
+     * @throws NullPointerException {@inheritDoc}
+     */
+    @Override
+    public void peek(Consumer<? super T> action) {
+        action.accept(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

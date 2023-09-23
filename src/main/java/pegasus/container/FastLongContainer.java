@@ -185,6 +185,17 @@ public class FastLongContainer implements LongContainer {
     /**
      * {@inheritDoc}
      *
+     * @param action The action to be performed for this container's value
+     * @throws NullPointerException {@inheritDoc}
+     */
+    @Override
+    public void peek(LongConsumer action) {
+        action.accept(value);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

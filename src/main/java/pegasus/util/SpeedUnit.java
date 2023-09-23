@@ -5,6 +5,7 @@ package pegasus.util;
  *
  * @see LengthUnit
  * @see MassUnit
+ * @see TemperatureUnit
  */
 public enum SpeedUnit {
     //

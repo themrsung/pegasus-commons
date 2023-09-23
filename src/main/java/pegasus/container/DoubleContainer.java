@@ -9,6 +9,8 @@ import java.util.stream.DoubleStream;
  * A value-based primitive container of a {@code double} value.
  *
  * @see BaseContainer
+ * @see FastDoubleContainer
+ * @see DoubleArrayElementReference
  */
 public interface DoubleContainer extends BaseContainer<Double> {
     static DoubleContainer of() {

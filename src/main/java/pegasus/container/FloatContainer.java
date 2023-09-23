@@ -8,6 +8,8 @@ import java.util.stream.Stream;
  * A value-based primitive container of a {@code float} value.
  *
  * @see BaseContainer
+ * @see FastFloatContainer
+ * @see FloatArrayElementReference
  */
 public interface FloatContainer extends BaseContainer<Float> {
     static FloatContainer of() {

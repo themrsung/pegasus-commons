@@ -9,6 +9,8 @@ import java.util.stream.IntStream;
  * A value-based primitive container of a {@code int} value.
  *
  * @see BaseContainer
+ * @see FastIntContainer
+ * @see IntArrayElementReference
  */
 public interface IntContainer extends BaseContainer<Integer> {
     static IntContainer of() {

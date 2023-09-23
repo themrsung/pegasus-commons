@@ -1,5 +1,7 @@
 package pegasus.pointer;
 
+import pegasus.container.IntArrayElementReference;
+import pegasus.container.IntContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.IntComparator;
 
@@ -96,6 +98,18 @@ public class IntArrayPointer implements IntPointer {
     @Override
     public int get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of which to reference
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public IntContainer getReference(int i) throws IndexOutOfBoundsException {
+        return new IntArrayElementReference(values, i, true);
     }
 
     /**

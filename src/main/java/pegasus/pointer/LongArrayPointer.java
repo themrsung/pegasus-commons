@@ -1,5 +1,7 @@
 package pegasus.pointer;
 
+import pegasus.container.LongArrayElementReference;
+import pegasus.container.LongContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.LongComparator;
 
@@ -96,6 +98,18 @@ public class LongArrayPointer implements LongPointer {
     @Override
     public long get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of which to reference
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public LongContainer getReference(int i) throws IndexOutOfBoundsException {
+        return new LongArrayElementReference(values, i, true);
     }
 
     /**

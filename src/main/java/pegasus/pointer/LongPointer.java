@@ -1,5 +1,6 @@
 package pegasus.pointer;
 
+import pegasus.container.LongContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.LongComparator;
 import pegasus.util.IndexedLongIterable;
@@ -96,6 +97,15 @@ public interface LongPointer extends BasePointer<Long>, IndexedLongIterable {
      * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
      */
     long get(int i) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns a reference to the {@code i}th value of this pointer.
+     *
+     * @param i The index of which to reference
+     * @return A reference to the {@code i}th value of this pointer
+     * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
+     */
+    LongContainer getReference(int i) throws IndexOutOfBoundsException;
 
     /**
      * Sets the {@code i}th value of this pointer.

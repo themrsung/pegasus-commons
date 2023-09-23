@@ -1,5 +1,7 @@
 package pegasus.pointer;
 
+import pegasus.container.DoubleArrayElementReference;
+import pegasus.container.DoubleContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.DoubleComparator;
 
@@ -96,6 +98,18 @@ public class DoubleArrayPointer implements DoublePointer {
     @Override
     public double get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of which to reference
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public DoubleContainer getReference(int i) throws IndexOutOfBoundsException {
+        return new DoubleArrayElementReference(values, i, true);
     }
 
     /**

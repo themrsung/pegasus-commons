@@ -7,6 +7,7 @@ package pegasus.function;
 public interface FloatConsumer {
     /**
      * Accepts this consumer.
+     *
      * @param value The input parameter
      */
     void accept(float value);

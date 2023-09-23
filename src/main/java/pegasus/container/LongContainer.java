@@ -9,14 +9,16 @@ import java.util.stream.LongStream;
  * A value-based primitive container of a {@code long} value.
  *
  * @see BaseContainer
+ * @see FastLongContainer
+ * @see LongArrayElementReference
  */
 public interface LongContainer extends BaseContainer<Long> {
     static LongContainer of() {
-        return null;
+        return new FastLongContainer(0);
     }
 
     static LongContainer of(long value) {
-        return null;
+        return new FastLongContainer(value);
     }
 
     /**

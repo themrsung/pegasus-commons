@@ -1,5 +1,7 @@
 package pegasus.pointer;
 
+import pegasus.container.ArrayElementReference;
+import pegasus.container.ObjectContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 
 import java.io.Serial;
@@ -97,6 +99,18 @@ public class ArrayPointer<T> implements ObjectPointer<T> {
     @Override
     public T get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of which to reference
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException {
+        return new ArrayElementReference<>(values, i, true);
     }
 
     /**

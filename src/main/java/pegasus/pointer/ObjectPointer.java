@@ -1,5 +1,6 @@
 package pegasus.pointer;
 
+import pegasus.container.ObjectContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.util.IndexedIterable;
 
@@ -101,6 +102,15 @@ public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
      * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
      */
     T get(int i) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns a reference to the {@code i}th value of this pointer.
+     *
+     * @param i The index of which to reference
+     * @return A reference to the {@code i}th value of this pointer
+     * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
+     */
+    ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException;
 
     /**
      * Sets the {@code i}th value of this pointer.

@@ -7,6 +7,11 @@ import java.util.stream.BaseStream;
  * The base interface for all container implementations.
  *
  * @param <T> The type of object of which to contain
+ * @see ObjectContainer
+ * @see DoubleContainer
+ * @see FloatContainer
+ * @see LongContainer
+ * @see IntContainer
  */
 public interface BaseContainer<T> extends Serializable {
     /**

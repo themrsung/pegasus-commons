@@ -1,5 +1,6 @@
 package pegasus.pointer;
 
+import pegasus.container.DoubleContainer;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.DoubleComparator;
 import pegasus.util.IndexedDoubleIterable;
@@ -96,6 +97,16 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
      * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
      */
     double get(int i) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns a reference to the {@code i}th value of this pointer.
+     *
+     * @param i The index of which to reference
+     * @return A reference to the {@code i}th value of this pointer
+     * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
+     */
+    DoubleContainer getReference(int i) throws IndexOutOfBoundsException;
+
 
     /**
      * Sets the {@code i}th value of this pointer.

@@ -21,6 +21,7 @@ public enum SpeedUnit {
 
     FEET_PER_SECOND(3.28084),
     MILES_PER_HOUR(2.23694),
+    KNOTS(1.94384),
 
     //
     // Scientific Units

@@ -6,10 +6,10 @@ import java.io.Serial;
 import java.util.Objects;
 import java.util.function.*;
 import java.util.stream.DoubleStream;
-import java.util.stream.Stream;
 
 /**
  * A reference to a {@code double} variables.
+ *
  * @see DoubleContainer
  */
 public class DoubleVariableReference implements DoubleContainer {
@@ -18,6 +18,7 @@ public class DoubleVariableReference implements DoubleContainer {
 
     /**
      * Returns a new read-only setter.
+     *
      * @return The read-only setter
      */
     public static DoubleConsumer readOnlySetter() {
@@ -28,6 +29,7 @@ public class DoubleVariableReference implements DoubleContainer {
 
     /**
      * Creates a new read-only variables reference.
+     *
      * @param getter The getter function
      * @throws NullPointerException When the provided getter function is {@code null}
      */
@@ -37,6 +39,7 @@ public class DoubleVariableReference implements DoubleContainer {
 
     /**
      * Creates a new variable reference.
+     *
      * @param getter The getter function
      * @param setter The setter function
      * @throws NullPointerException When a {@code null} function is provided

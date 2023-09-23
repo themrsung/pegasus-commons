@@ -7,6 +7,7 @@ package pegasus.function;
 public interface FloatSupplier {
     /**
      * Executes this supplier function.
+     *
      * @return The resulting value
      */
     float getAsFloat();

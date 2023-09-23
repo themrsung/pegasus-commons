@@ -1,6 +1,5 @@
 package pegasus.tuple;
 
-import pegasus.container.ObjectContainer;
 import pegasus.util.IndexedIterable;
 
 import java.util.Iterator;

@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 /**
  * A reference to a {@code float} variables.
+ *
  * @see FloatContainer
  */
 public class FloatVariableReference implements FloatContainer {
@@ -16,6 +17,7 @@ public class FloatVariableReference implements FloatContainer {
 
     /**
      * Returns a new read-only setter.
+     *
      * @return The read-only setter
      */
     public static FloatConsumer readOnlySetter() {
@@ -26,6 +28,7 @@ public class FloatVariableReference implements FloatContainer {
 
     /**
      * Creates a new read-only variables reference.
+     *
      * @param getter The getter function
      * @throws NullPointerException When the provided getter function is {@code null}
      */
@@ -35,6 +38,7 @@ public class FloatVariableReference implements FloatContainer {
 
     /**
      * Creates a new variable reference.
+     *
      * @param getter The getter function
      * @param setter The setter function
      * @throws NullPointerException When a {@code null} function is provided

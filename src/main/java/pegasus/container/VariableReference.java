@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 /**
  * A reference to variable of a class.
+ *
  * @param <T> The type of object of which to reference
  * @see ObjectContainer
  */
@@ -18,8 +19,9 @@ public class VariableReference<T> implements ObjectContainer<T> {
 
     /**
      * Returns a new read-only setter.
-     * @return The read-only setter
+     *
      * @param <T> The type of object
+     * @return The read-only setter
      */
     public static <T> Consumer<T> readOnlySetter() {
         return v -> {
@@ -29,6 +31,7 @@ public class VariableReference<T> implements ObjectContainer<T> {
 
     /**
      * Creates a new read-only variables reference.
+     *
      * @param getter The getter function
      * @throws NullPointerException When the provided getter function is {@code null}
      */
@@ -38,6 +41,7 @@ public class VariableReference<T> implements ObjectContainer<T> {
 
     /**
      * Creates a new variable reference.
+     *
      * @param getter The getter function
      * @param setter The setter function
      * @throws NullPointerException When a {@code null} function is provided

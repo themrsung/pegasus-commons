@@ -8,6 +8,7 @@ import java.io.Serial;
 
 /**
  * An immutable three-dimensional model.
+ *
  * @see Model
  */
 public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
@@ -16,9 +17,10 @@ public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
 
     /**
      * Creates a new model.
+     *
      * @param vertices The vertices of this model
-     * @param normals The normals of this model
-     * @param faces The faces of this model
+     * @param normals  The normals of this model
+     * @param faces    The faces of this model
      * @throws NullPointerException When a {@code null} parameter is provided
      */
     public Model3D(Tuple<Vector3> vertices, Tuple<Vector3> normals, Tuple<Face3D> faces) {
@@ -34,8 +36,9 @@ public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
 
         /**
          * Creates a new model face.
+         *
          * @param vertexIndices The vertex indices
-         * @param normalIndex The normal index
+         * @param normalIndex   The normal index
          * @throws NullPointerException When the provided tuple of indices is {@code null}
          */
         public Face3D(IntTriple vertexIndices, int normalIndex) {
@@ -45,6 +48,7 @@ public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
 
         /**
          * Creates a new model face.
+         *
          * @param f The face of which to copy values from
          */
         public Face3D(Model.Face f) {
@@ -64,6 +68,7 @@ public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
 
         /**
          * {@inheritDoc}
+         *
          * @return {@inheritDoc}
          */
         @Override
@@ -73,6 +78,7 @@ public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
 
         /**
          * {@inheritDoc}
+         *
          * @param i The index of the vertex index to get
          * @return {@inheritDoc}
          * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -84,6 +90,7 @@ public class Model3D extends AbstractModel<Vector3, Model3D.Face3D> {
 
         /**
          * {@inheritDoc}
+         *
          * @return {@inheritDoc}
          */
         @Override

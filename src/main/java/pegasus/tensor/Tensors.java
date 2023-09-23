@@ -1027,6 +1027,7 @@ public final class Tensors {
 
     /**
      * Inverts the Y component of the provided vector {@code v}, then returns the resulting vector.
+     *
      * @param v The vector of which to invert the Y component of
      * @return The resulting vector
      * @throws NullPointerException When the provided vector {@code v} is {@code null}
@@ -1037,6 +1038,7 @@ public final class Tensors {
 
     /**
      * Inverts the Y component of the provided vector {@code v}, then returns the resulting vector.
+     *
      * @param v The vector of which to invert the Y component of
      * @return The resulting vector
      * @throws NullPointerException When the provided vector {@code v} is {@code null}

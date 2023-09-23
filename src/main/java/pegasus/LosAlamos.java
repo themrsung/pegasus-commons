@@ -7,7 +7,6 @@ import pegasus.graphics.Triangle;
 import pegasus.scheduler.AtomicScheduler;
 import pegasus.scheduler.Scheduler;
 import pegasus.tensor.Vector2;
-import pegasus.tensor.Vector3;
 
 public class LosAlamos {
     static EventManager eventManager = new SyncEventManager();

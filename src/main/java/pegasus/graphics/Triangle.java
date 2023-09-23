@@ -1,5 +1,6 @@
 package pegasus.graphics;
 
+import pegasus.geometry.Boundary;
 import pegasus.tensor.*;
 
 import java.util.function.Consumer;
@@ -67,6 +68,13 @@ public interface Triangle<V extends Vector<V>> {
      * @return The geometric centroid of this triangle
      */
     V getCenter();
+
+    /**
+     * Returns the bounds of this triangle.
+     *
+     * @return The bounds of this triangle
+     */
+    Boundary<V> getBounds();
 
     /**
      * Returns the surface area of this triangle.

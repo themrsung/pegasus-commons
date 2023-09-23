@@ -48,6 +48,7 @@ public interface Task {
 
     /**
      * Returns a task which unregisters the provided scheduler.
+     *
      * @param scheduler The scheduler of which to interrupt
      * @return The constructed task
      * @throws NullPointerException When the provided scheduler is {@code null}

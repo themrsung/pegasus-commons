@@ -1,5 +1,6 @@
 package pegasus.graphics;
 
+import pegasus.geometry.BoundingSquare;
 import pegasus.tensor.Tensors;
 import pegasus.tensor.Vector2;
 
@@ -41,6 +42,16 @@ public class Triangle2D extends AbstractTriangle<Vector2> {
     @Override
     public Vector2 getCenter() {
         return Tensors.avg(a, b, c);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public BoundingSquare getBounds() {
+        return BoundingSquare.of(a, b, c);
     }
 
     /**

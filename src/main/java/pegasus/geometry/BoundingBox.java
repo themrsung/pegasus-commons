@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * A non-rotatable three-dimensional box represented by two boundary vectors.
  */
-public class BoundingBox {
+public class BoundingBox implements Boundary<Vector3> {
     /**
      * Creates a bounding box of the provided vertices.
      *
@@ -56,39 +56,43 @@ public class BoundingBox {
     protected final Vector3 max;
 
     /**
-     * Returns whether this bounding box contains the provided vertex {@code v}.
+     * {@inheritDoc}
      *
      * @param v The vertex of which to check for containment
-     * @return {@code true} if this bounding box contains the provided vertex {@code v}
-     * @throws NullPointerException When the provided vertex {@code v} is {@code null}
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
+    @Override
     public boolean contains(Vector3 v) {
         return Tensors.isInRange(v, min, max);
     }
 
     /**
-     * Returns the minimum boundary vector of this bounding box.
+     * {@inheritDoc}
      *
-     * @return The minimum boundary vector of this bounding box
+     * @return {@inheritDoc}
      */
+    @Override
     public Vector3 min() {
         return min;
     }
 
     /**
-     * Returns the maximum boundary vector of this bounding box.
+     * {@inheritDoc}
      *
-     * @return The maximum boundary vector of this bounding box
+     * @return {@inheritDoc}
      */
+    @Override
     public Vector3 max() {
         return max;
     }
 
     /**
-     * Returns a tuple containing the corners of this bounding box.
+     * {@inheritDoc}
      *
-     * @return A tuple of the corners of this bounding box
+     * @return {@inheritDoc}
      */
+    @Override
     public Tuple<Vector3> corners() {
         return Tuple.of(
                 min,
@@ -103,9 +107,9 @@ public class BoundingBox {
     }
 
     /**
-     * Serializes this bounding box into a string.
+     * {@inheritDoc}
      *
-     * @return The string representation of this bounding box
+     * @return {@inheritDoc}
      */
     @Override
     public String toString() {

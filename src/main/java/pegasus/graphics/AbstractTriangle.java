@@ -196,6 +196,7 @@ public abstract class AbstractTriangle<V extends Vector<V>> implements Triangle<
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

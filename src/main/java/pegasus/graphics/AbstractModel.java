@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 /**
  * The abstract base class for model implementations.
+ *
  * @param <V> The vector used to represent the vertices of this model
  * @param <F> The face used to represent the faces of this model
  * @see Model
@@ -16,9 +17,10 @@ import java.util.stream.Stream;
 public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> implements Model<V> {
     /**
      * Creates a new model.
+     *
      * @param vertices The vertices of this model
-     * @param normals The normals of this model
-     * @param faces The faces of this model
+     * @param normals  The normals of this model
+     * @param faces    The faces of this model
      * @throws NullPointerException When a {@code null} parameter is provided
      */
     protected AbstractModel(Tuple<V> vertices, Tuple<V> normals, Tuple<F> faces) {
@@ -44,6 +46,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -53,6 +56,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -62,6 +66,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of the vertex to get
      * @return {@inheritDoc}
      * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -73,6 +78,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -82,6 +88,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -91,6 +98,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of the normal vertex to get
      * @return {@inheritDoc}
      * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -102,6 +110,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -111,6 +120,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -120,6 +130,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @param i The index of the face to get
      * @return {@inheritDoc}
      * @throws IndexOutOfBoundsException {@inheritDoc}
@@ -131,6 +142,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -140,6 +152,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -149,6 +162,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -158,6 +172,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @param action The action to be performed for each vertex
      */
     @Override
@@ -167,6 +182,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @param action The action to be performed for each normal vertex
      */
     @Override
@@ -176,6 +192,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @param action The action to be performed for each face
      */
     @Override
@@ -185,6 +202,7 @@ public abstract class AbstractModel<V extends Vector<V>, F extends Model.Face> i
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

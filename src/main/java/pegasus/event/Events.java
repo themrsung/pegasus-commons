@@ -22,8 +22,8 @@ public final class Events {
      * including those declared in the listener's superclasses will be collected.
      *
      * @param listener The listener object of which to retrieve event handlers from
+     * @param <T>      The type of the listener
      * @return A collection of every valid event handler of the provided event listener
-     * @param <T> The type of the listener
      * @throws NullPointerException When the provided listener is {@code null}
      */
     public static <T> Collection<HandlerReference> getHandlersOf(T listener) {
@@ -32,10 +32,11 @@ public final class Events {
 
     /**
      * Returns a collection of every valid event handler.
-     * @param c The class of the listener
-     * @param l The listener instance
-     * @return A collection of event handlers
+     *
+     * @param c   The class of the listener
+     * @param l   The listener instance
      * @param <T> The type of listener
+     * @return A collection of event handlers
      * @throws NullPointerException When a parameter is {@code null}
      */
     static <T> Collection<HandlerReference> getHandlersOf(Class<? extends T> c, T l) {
@@ -56,6 +57,7 @@ public final class Events {
 
     /**
      * Returns whether the provided method is a valid event handler method.
+     *
      * @param handler The handler of which to validate
      * @return {@code true} if the method is a valid event handler
      * @throws NullPointerException When the method is {@code null}

@@ -13,6 +13,144 @@ import java.util.Random;
  */
 public final class Pointers {
     //
+    // Impure Operations
+    //
+
+    /**
+     * Copies an element from the source pointer to the destination pointer.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @param <T>       The type of element to copy
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static <T> void copy(
+            ObjectPointer<? extends T> src,
+            int srcIndex,
+            ObjectPointer<? super T> dest,
+            int destIndex
+    ) throws IndexOutOfBoundsException {
+        dest.set(destIndex, src.get(srcIndex));
+    }
+
+    /**
+     * Copies an element from the source pointer to the destination pointer.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static void copy(DoublePointer src, int srcIndex, DoublePointer dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        dest.set(destIndex, src.get(srcIndex));
+    }
+
+    /**
+     * Copies an element from the source pointer to the destination pointer.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static void copy(LongPointer src, int srcIndex, LongPointer dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        dest.set(destIndex, src.get(srcIndex));
+    }
+
+    /**
+     * Copies an element from the source pointer to the destination pointer.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static void copy(IntPointer src, int srcIndex, IntPointer dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        dest.set(destIndex, src.get(srcIndex));
+    }
+
+    /**
+     * Swaps a pair of elements between the source and destination pointers.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @param <T>       The type of element to swap
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static <T> void swap(ObjectPointer<T> src, int srcIndex, ObjectPointer<T> dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        var temp = dest.get(destIndex);
+        dest.set(destIndex, src.get(srcIndex));
+        src.set(srcIndex, temp);
+    }
+
+    /**
+     * Swaps a pair of elements between the source and destination pointers.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static void swap(DoublePointer src, int srcIndex, DoublePointer dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        var temp = dest.get(destIndex);
+        dest.set(destIndex, src.get(srcIndex));
+        src.set(srcIndex, temp);
+    }
+
+    /**
+     * Swaps a pair of elements between the source and destination pointers.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static void swap(LongPointer src, int srcIndex, LongPointer dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        var temp = dest.get(destIndex);
+        dest.set(destIndex, src.get(srcIndex));
+        src.set(srcIndex, temp);
+    }
+
+    /**
+     * Swaps a pair of elements between the source and destination pointers.
+     *
+     * @param src       The source pointer
+     * @param srcIndex  The source index
+     * @param dest      The destination pointer
+     * @param destIndex The destination index
+     * @throws IndexOutOfBoundsException When an index is out of bounds
+     * @throws NullPointerException      When a {@code null} pointer is provided
+     */
+    public static void swap(IntPointer src, int srcIndex, IntPointer dest, int destIndex)
+            throws IndexOutOfBoundsException {
+        var temp = dest.get(destIndex);
+        dest.set(destIndex, src.get(srcIndex));
+        src.set(srcIndex, temp);
+    }
+
+    //
     // Tuple Conversion
     //
 

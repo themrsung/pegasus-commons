@@ -4,8 +4,7 @@ import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.DoubleComparator;
 import pegasus.util.IndexedDoubleIterable;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 import java.util.function.*;
 import java.util.stream.DoubleStream;
 
@@ -36,6 +35,33 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
      */
     static DoublePointer from(DoubleStream s) {
         return new DoubleArrayPointer(s.toArray());
+    }
+
+    /**
+     * Creates and returns a shallow copy of the provided pointer {@code p}.
+     *
+     * @param p The pointer of which to copy
+     * @return A shallow copy of the provided pointer {@code p}
+     * @throws NullPointerException When the provided pointer {@code p} is {@code null}
+     */
+    static DoublePointer copyOf(DoublePointer p) {
+        return from(p.stream());
+    }
+
+    /**
+     * Creates and returns a shallow copy of the provided pointer {@code p}'s values within
+     * the range of {@code [from, to)}.
+     *
+     * @param p    The pointer of which to copy
+     * @param from The index at which to start the copy at (inclusive)
+     * @param to   The index at which to stop the copy at (exclusive)
+     * @return A shallow copy of the provided pointer {@code p}
+     * @throws NullPointerException      When the provided pointer {@code p} is {@code null}
+     * @throws IllegalArgumentException  When the range is invalid
+     * @throws IndexOutOfBoundsException When the range is out of bounds
+     */
+    static DoublePointer copyOfRange(DoublePointer p, int from, int to) {
+        return to(Arrays.copyOfRange(p.asArray(), from, to));
     }
 
     /**

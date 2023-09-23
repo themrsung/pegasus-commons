@@ -41,6 +41,35 @@ public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
     }
 
     /**
+     * Creates and returns a shallow copy of the provided pointer {@code p}.
+     *
+     * @param p   The pointer of which to copy
+     * @param <T> The type of object the pointer references
+     * @return A shallow copy of the provided pointer {@code p}
+     * @throws NullPointerException When the provided pointer {@code p} is {@code null}
+     */
+    static <T> ObjectPointer<T> copyOf(ObjectPointer<? extends T> p) {
+        return from(p.stream());
+    }
+
+    /**
+     * Creates and returns a shallow copy of the provided pointer {@code p}'s values within
+     * the range of {@code [from, to)}.
+     *
+     * @param p    The pointer of which to copy
+     * @param from The index at which to start the copy at (inclusive)
+     * @param to   The index at which to stop the copy at (exclusive)
+     * @param <T>  The type of object the pointer references
+     * @return A shallow copy of the provided pointer {@code p}
+     * @throws NullPointerException      When the provided pointer {@code p} is {@code null}
+     * @throws IllegalArgumentException  When the range is invalid
+     * @throws IndexOutOfBoundsException When the range is out of bounds
+     */
+    static <T> ObjectPointer<T> copyOfRange(ObjectPointer<? extends T> p, int from, int to) {
+        return to(Arrays.copyOfRange(p.asArray(), from, to));
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

@@ -27,7 +27,7 @@ public interface LongGrid extends BaseGrid<Long>, BinaryIndexedLongIterable {
      * @throws NullPointerException     When the array contains a {@code null} row
      */
     static LongGrid of(long[][] values) {
-        if (Arrays.stream(values).mapToInt(Array::getLength).distinct().count() >= 1) {
+        if (Arrays.stream(values).mapToInt(Array::getLength).distinct().count() > 1) {
             throw new IllegalArgumentException("The provided array is not rectangular.");
         }
 

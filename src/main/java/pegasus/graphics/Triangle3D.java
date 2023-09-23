@@ -67,6 +67,19 @@ public class Triangle3D extends AbstractTriangle<Vector3> {
     }
 
     /**
+     * Returns the normalized surface normal vector of this triangle.
+     *
+     * @return The normalized surface normal vector of this triangle
+     * @throws ArithmeticException When the Euclidean norm of the normal vector is zero
+     */
+    public Vector3 getUnitNormal() throws ArithmeticException {
+        var ab = b.subtract(a);
+        var ac = c.subtract(a);
+
+        return ab.cross(ac).normalize();
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @param mapper The mapper function of which to apply to each vertex of this triangle

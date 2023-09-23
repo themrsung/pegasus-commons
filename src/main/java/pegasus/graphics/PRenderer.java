@@ -15,6 +15,30 @@ public final class PRenderer {
     //
 
     /**
+     * Inverts the Y coordinates of the provided triangle {@code t}.
+     *
+     * @param t The triangle of which to invert the Y coordinates of
+     * @throws NullPointerException When the provided triangle {@code t} is {@code null}
+     */
+    public static void invertY(Triangle2D t) {
+        t.a = Tensors.invertY(t.a);
+        t.b = Tensors.invertY(t.b);
+        t.c = Tensors.invertY(t.c);
+    }
+
+    /**
+     * Inverts the Y coordinates of the provided triangle {@code t}.
+     *
+     * @param t The triangle of which to invert the Y coordinates of
+     * @throws NullPointerException When the provided triangle {@code t} is {@code null}
+     */
+    public static void invertY(Triangle3D t) {
+        t.a = Tensors.invertY(t.a);
+        t.b = Tensors.invertY(t.b);
+        t.c = Tensors.invertY(t.c);
+    }
+
+    /**
      * Draws the provided triangle {@code t} to the provided graphics object {@code g}.
      *
      * @param g The graphics object of which to render to

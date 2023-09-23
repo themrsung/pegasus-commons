@@ -7,6 +7,7 @@ package pegasus.function;
 public interface FloatToIntFunction {
     /**
      * Applies this function.
+     *
      * @param value The input parameter
      * @return The resulting value
      */

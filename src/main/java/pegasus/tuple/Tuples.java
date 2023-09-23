@@ -128,9 +128,10 @@ public final class Tuples {
 
     /**
      * Returns a pointer created from the values of the provided tuple {@code t}.
-     * @param t The tuple of which to extract the values from
-     * @return The converted pointer
+     *
+     * @param t   The tuple of which to extract the values from
      * @param <T> The type of element of which to reference
+     * @return The converted pointer
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
      */
     public static <T> ObjectPointer<T> toPointer(Tuple<? extends T> t) {
@@ -139,6 +140,7 @@ public final class Tuples {
 
     /**
      * Returns a pointer created from the values of the provided tuple {@code t}.
+     *
      * @param t The tuple of which to extract the values from
      * @return The converted pointer
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
@@ -149,6 +151,7 @@ public final class Tuples {
 
     /**
      * Returns a pointer created from the values of the provided tuple {@code t}.
+     *
      * @param t The tuple of which to extract the values from
      * @return The converted pointer
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}
@@ -159,6 +162,7 @@ public final class Tuples {
 
     /**
      * Returns a pointer created from the values of the provided tuple {@code t}.
+     *
      * @param t The tuple of which to extract the values from
      * @return The converted pointer
      * @throws NullPointerException When the provided tuple {@code t} is {@code null}

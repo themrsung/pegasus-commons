@@ -7,7 +7,8 @@ package pegasus.function;
 public interface FloatBinaryOperator {
     /**
      * Applies this operator to the provided value.
-     * @param left The left parameter
+     *
+     * @param left  The left parameter
      * @param right The right parameter
      * @return The resulting value
      */

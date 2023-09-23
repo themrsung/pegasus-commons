@@ -3,7 +3,6 @@ package pegasus.grid;
 import pegasus.exception.BinaryIndexOutOfBoundsException;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.IntBiFunction;
-import pegasus.pointer.ObjectPointer;
 import pegasus.util.BinaryIndexedIterable;
 
 import java.lang.reflect.Array;

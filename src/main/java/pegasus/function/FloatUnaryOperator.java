@@ -7,6 +7,7 @@ package pegasus.function;
 public interface FloatUnaryOperator {
     /**
      * Applies this operator to the provided value.
+     *
      * @param value The input parameter
      * @return The resulting value
      */

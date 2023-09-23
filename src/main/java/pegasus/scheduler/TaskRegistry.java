@@ -3,7 +3,7 @@ package pegasus.scheduler;
 import java.util.Objects;
 
 /**
- * Creates when a task is registered to a scheduler. Task registries are used to
+ * Created when a task is registered to a scheduler. Task registries are used to
  * reference registered tasks.
  */
 public class TaskRegistry {

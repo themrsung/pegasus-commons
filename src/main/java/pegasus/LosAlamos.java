@@ -17,12 +17,12 @@ public class LosAlamos {
     public static void main(String[] args) {
         long t1, t2;
 
-        Vector3 v = new Vector3(1, 2, 3);
-        Vertex3 vx = new Vertex3(1, 2, 3);
+        Vector3 v = Vector3.POSITIVE_Y;
+        Vertex3 vx = Vertex3.UP;
 
         t1 = System.currentTimeMillis();
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100000000; i++) {
             v.norm();
         }
 
@@ -33,7 +33,7 @@ public class LosAlamos {
 
         t1 = System.currentTimeMillis();
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100000000; i++) {
             vx.norm();
         }
 

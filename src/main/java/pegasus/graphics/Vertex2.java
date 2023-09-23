@@ -15,6 +15,31 @@ public class Vertex2 extends Vector2 {
     private static final long serialVersionUID = 0;
 
     /**
+     * The zero vertex.
+     */
+    public static final Vertex2 ZERO = new Vertex2(0, 0);
+
+    /**
+     * The right vertex.
+     */
+    public static final Vertex2 RIGHT = new Vertex2(1, 0);
+
+    /**
+     * The up vertex.
+     */
+    public static final Vertex2 UP = new Vertex2(0, 1);
+
+    /**
+     * The left vertex.
+     */
+    public static final Vertex2 LEFT = new Vertex2(-1, 0);
+
+    /**
+     * The down vertex.
+     */
+    public static final Vertex2 DOWN = new Vertex2(0, -1);
+
+    /**
      * Creates a new vertex.
      *
      * @param x The X coordinate of this vertex
@@ -38,17 +63,17 @@ public class Vertex2 extends Vector2 {
     /**
      * The Euclidean norm of this vertex.
      */
-    protected double norm = Double.NaN;
+    private double norm = Double.NaN;
 
     /**
      * The squared Euclidean norm of this vertex.
      */
-    protected double normSquared = Double.NaN;
+    private double normSquared = Double.NaN;
 
     /**
      * The squared Manhattan norm of this vertex.
      */
-    protected double normManhattan = Double.NaN;
+    private double normManhattan = Double.NaN;
 
     /**
      * {@inheritDoc}
@@ -87,5 +112,29 @@ public class Vertex2 extends Vector2 {
 
         normManhattan = super.normManhattan();
         return normManhattan;
+    }
+
+    static {
+        // Precalculate norms
+
+        ZERO.norm();
+        ZERO.normSquared();
+        ZERO.normManhattan();
+
+        RIGHT.norm();
+        RIGHT.normSquared();
+        RIGHT.normManhattan();
+
+        UP.norm();
+        UP.normSquared();
+        UP.normManhattan();
+
+        LEFT.norm();
+        LEFT.normSquared();
+        LEFT.normManhattan();
+
+        DOWN.norm();
+        DOWN.normSquared();
+        DOWN.normManhattan();
     }
 }

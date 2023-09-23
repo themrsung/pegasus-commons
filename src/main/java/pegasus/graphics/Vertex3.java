@@ -15,6 +15,41 @@ public class Vertex3 extends Vector3 {
     private static final long serialVersionUID = 0;
 
     /**
+     * The zero vertex.
+     */
+    public static final Vertex3 ZERO = new Vertex3(0, 0, 0);
+
+    /**
+     * The right vertex.
+     */
+    public static final Vertex3 RIGHT = new Vertex3(1, 0, 0);
+
+    /**
+     * The up vertex.
+     */
+    public static final Vertex3 UP = new Vertex3(0, 1, 0);
+
+    /**
+     * The front vertex.
+     */
+    public static final Vertex3 FRONT = new Vertex3(0, 0, 1);
+
+    /**
+     * The left vertex.
+     */
+    public static final Vertex3 LEFT = new Vertex3(-1, 0, 0);
+
+    /**
+     * The down vertex.
+     */
+    public static final Vertex3 DOWN = new Vertex3(0, -1, 0);
+
+    /**
+     * The back vertex.
+     */
+    public static final Vertex3 BACK = new Vertex3(0, 0, -1);
+
+    /**
      * Creates a new vertex.
      *
      * @param x The X coordinate of this vertex
@@ -39,17 +74,17 @@ public class Vertex3 extends Vector3 {
     /**
      * The Euclidean norm of this vertex.
      */
-    protected double norm = Double.NaN;
+    private double norm = Double.NaN;
 
     /**
      * The squared Euclidean norm of this vertex.
      */
-    protected double normSquared = Double.NaN;
+    private double normSquared = Double.NaN;
 
     /**
      * The squared Manhattan norm of this vertex.
      */
-    protected double normManhattan = Double.NaN;
+    private double normManhattan = Double.NaN;
 
     /**
      * {@inheritDoc}
@@ -88,5 +123,37 @@ public class Vertex3 extends Vector3 {
 
         normManhattan = super.normManhattan();
         return normManhattan;
+    }
+
+    static {
+        // Precalculate norms
+
+        ZERO.norm();
+        ZERO.normSquared();
+        ZERO.normManhattan();
+
+        RIGHT.norm();
+        RIGHT.normSquared();
+        RIGHT.normManhattan();
+
+        UP.norm();
+        UP.normSquared();
+        UP.normManhattan();
+
+        FRONT.norm();
+        FRONT.normSquared();
+        FRONT.normManhattan();
+
+        LEFT.norm();
+        LEFT.normSquared();
+        LEFT.normManhattan();
+
+        DOWN.norm();
+        DOWN.normSquared();
+        DOWN.normManhattan();
+
+        BACK.norm();
+        BACK.normSquared();
+        BACK.normManhattan();
     }
 }

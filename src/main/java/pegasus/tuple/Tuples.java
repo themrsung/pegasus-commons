@@ -1,6 +1,7 @@
 package pegasus.tuple;
 
 import pegasus.exception.IllegalInstanceException;
+import pegasus.pointer.*;
 import pegasus.tensor.*;
 
 import java.util.Arrays;
@@ -122,7 +123,52 @@ public final class Tuples {
     }
 
     //
-    // Conversion
+    // Pointer Conversion
+    //
+
+    /**
+     * Returns a pointer created from the values of the provided tuple {@code t}.
+     * @param t The tuple of which to extract the values from
+     * @return The converted pointer
+     * @param <T> The type of element of which to reference
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static <T> ObjectPointer<T> toPointer(Tuple<? extends T> t) {
+        return ObjectPointer.from(t.stream());
+    }
+
+    /**
+     * Returns a pointer created from the values of the provided tuple {@code t}.
+     * @param t The tuple of which to extract the values from
+     * @return The converted pointer
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static DoublePointer toPointer(DoubleTuple t) {
+        return DoublePointer.from(t.stream());
+    }
+
+    /**
+     * Returns a pointer created from the values of the provided tuple {@code t}.
+     * @param t The tuple of which to extract the values from
+     * @return The converted pointer
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static LongPointer toPointer(LongTuple t) {
+        return LongPointer.from(t.stream());
+    }
+
+    /**
+     * Returns a pointer created from the values of the provided tuple {@code t}.
+     * @param t The tuple of which to extract the values from
+     * @return The converted pointer
+     * @throws NullPointerException When the provided tuple {@code t} is {@code null}
+     */
+    public static IntPointer toPointer(IntTuple t) {
+        return IntPointer.from(t.stream());
+    }
+
+    //
+    // Vector Conversion
     //
 
     /**

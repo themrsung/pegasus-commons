@@ -1,10 +1,11 @@
-pegasus
+pegasus.event
 pegasus.exception
 pegasus.function
 pegasus.geometry
 pegasus.graphics
 pegasus.grid
 pegasus.pointer
+pegasus.scheduler
 pegasus.tensor
 pegasus.tuple
 pegasus.util

@@ -109,7 +109,7 @@ public class IntArrayPointer implements IntPointer {
      */
     @Override
     public IntContainer getReference(int i) throws IndexOutOfBoundsException {
-        return new IntArrayElementReference(values, i, true);
+        return new IntArrayElementReference(values, i, false);
     }
 
     /**

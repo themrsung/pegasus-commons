@@ -1,13 +1,14 @@
 package pegasus;
 
 
-import pegasus.container.DoubleContainer;
-import pegasus.container.ObjectContainer;
-import pegasus.tensor.Vector3;
+import pegasus.pointer.DoubleArrayPointer;
+import pegasus.pointer.DoublePointer;
 
 public class CommonsTesting {
     public static void main(String[] args) {
-        DoubleContainer container = DoubleContainer.of(13);
-        container.peek(System.out::println);
+        DoublePointer doubles = new DoubleArrayPointer(10, i -> Math.PI * i);
+        doubles.getReference(3).set(-1);
+
+        System.out.println(doubles);
     }
 }

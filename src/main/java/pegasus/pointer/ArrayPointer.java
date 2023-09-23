@@ -110,7 +110,7 @@ public class ArrayPointer<T> implements ObjectPointer<T> {
      */
     @Override
     public ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException {
-        return new ArrayElementReference<>(values, i, true);
+        return new ArrayElementReference<>(values, i, false);
     }
 
     /**

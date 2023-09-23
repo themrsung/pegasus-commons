@@ -107,7 +107,6 @@ public interface DoublePointer extends BasePointer<Double>, IndexedDoubleIterabl
      */
     DoubleContainer getReference(int i) throws IndexOutOfBoundsException;
 
-
     /**
      * Sets the {@code i}th value of this pointer.
      *

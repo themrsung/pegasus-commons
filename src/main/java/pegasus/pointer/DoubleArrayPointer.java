@@ -109,7 +109,7 @@ public class DoubleArrayPointer implements DoublePointer {
      */
     @Override
     public DoubleContainer getReference(int i) throws IndexOutOfBoundsException {
-        return new DoubleArrayElementReference(values, i, true);
+        return new DoubleArrayElementReference(values, i, false);
     }
 
     /**

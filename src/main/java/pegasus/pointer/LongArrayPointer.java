@@ -109,7 +109,7 @@ public class LongArrayPointer implements LongPointer {
      */
     @Override
     public LongContainer getReference(int i) throws IndexOutOfBoundsException {
-        return new LongArrayElementReference(values, i, true);
+        return new LongArrayElementReference(values, i, false);
     }
 
     /**

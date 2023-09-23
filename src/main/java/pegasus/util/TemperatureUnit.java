@@ -11,8 +11,8 @@ import java.util.function.DoubleUnaryOperator;
  */
 public enum TemperatureUnit {
     CELSIUS(DoubleUnaryOperator.identity(), DoubleUnaryOperator.identity()),
-    FAHRENHEIT(x -> (x - 32) * (5d / 9), x -> x * (9d / 5) + 32),
-    KELVIN(x -> x - 273.15, x -> x + 273.15);
+    FAHRENHEIT(TemperatureUnit::fahrenheitToCelsius, TemperatureUnit::celsiusToFahrenheit),
+    KELVIN(TemperatureUnit::kelvinToCelsius, TemperatureUnit::celsiusToKelvin);
 
     /**
      * Creates a new unit of temperature.
@@ -60,5 +60,45 @@ public enum TemperatureUnit {
     public static double convert(TemperatureUnit src, TemperatureUnit dest, double value) {
         double celsius = src.toCelsiusConversionFunction.applyAsDouble(value);
         return dest.fromCelsiusConversionFunction.applyAsDouble(celsius);
+    }
+
+    /**
+     * Converts Fahrenheit to Celsius.
+     *
+     * @param x The value to convert
+     * @return The converted value
+     */
+    public static double fahrenheitToCelsius(double x) {
+        return (x - 32) * (5d / 9);
+    }
+
+    /**
+     * Converts Kelvin to Celsius.
+     *
+     * @param x The value to convert
+     * @return The converted value
+     */
+    public static double kelvinToCelsius(double x) {
+        return x - 273.15;
+    }
+
+    /**
+     * Converts Celsius to Fahrenheit.
+     *
+     * @param x The value to convert
+     * @return The converted value
+     */
+    public static double celsiusToFahrenheit(double x) {
+        return x * (9d / 5) + 32;
+    }
+
+    /**
+     * Converts Celsius to Kelvin.
+     *
+     * @param x The value to convert
+     * @return The converted value
+     */
+    public static double celsiusToKelvin(double x) {
+        return x + 273.15;
     }
 }

@@ -1,5 +1,6 @@
 package pegasus.tuple;
 
+import pegasus.container.ObjectContainer;
 import pegasus.util.IndexedIterable;
 
 import java.util.Iterator;
@@ -88,6 +89,16 @@ public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
      * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
      */
     T get(int i) throws IndexOutOfBoundsException;
+
+    // TODO: 2023-09-24 Complete this
+//
+//    /**
+//     * Returns a rad
+//     * @param i
+//     * @return
+//     * @throws IndexOutOfBoundsException
+//     */
+//    ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException;
 
     /**
      * Applies the provided mapper function to each element of this tuple, then returns a new

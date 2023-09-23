@@ -11,5 +11,5 @@ public interface FloatToIntFunction {
      * @param value The input parameter
      * @return The resulting value
      */
-    double applyAsDouble(int value);
+    int applyAsInt(float value);
 }

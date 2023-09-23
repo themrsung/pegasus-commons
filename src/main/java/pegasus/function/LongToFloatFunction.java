@@ -11,5 +11,5 @@ public interface LongToFloatFunction {
      * @param value The input parameter
      * @return The resulting value
      */
-    float applyAsLong(long value);
+    float applyAsFloat(long value);
 }

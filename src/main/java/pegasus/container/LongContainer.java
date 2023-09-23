@@ -1,7 +1,8 @@
 package pegasus.container;
 
-import java.util.function.LongBinaryOperator;
-import java.util.function.LongUnaryOperator;
+import pegasus.function.LongToFloatFunction;
+
+import java.util.function.*;
 import java.util.stream.LongStream;
 
 /**
@@ -10,6 +11,14 @@ import java.util.stream.LongStream;
  * @see BaseContainer
  */
 public interface LongContainer extends BaseContainer<Long> {
+    static LongContainer of() {
+        return null;
+    }
+
+    static LongContainer of(long value) {
+        return null;
+    }
+
     /**
      * Returns the value of this container.
      *
@@ -33,6 +42,17 @@ public interface LongContainer extends BaseContainer<Long> {
     void update(LongUnaryOperator operator);
 
     /**
+     * Applies the provided accumulator function to this container's value and the provided
+     * identity value, then sets the value of this container to the return value of the provided
+     * accumulator function.
+     *
+     * @param next        The next value of which to accumulate this container's value with
+     * @param accumulator The accumulator function of which to handle the accumulation
+     * @throws NullPointerException When the provided accumulator function is {@code null}
+     */
+    void accumulate(long next, LongBinaryOperator accumulator);
+
+    /**
      * Applies the provided mapper function to the value of this container, then returns
      * the return value of the provided mapper function.
      *
@@ -51,6 +71,47 @@ public interface LongContainer extends BaseContainer<Long> {
      * @throws NullPointerException When the provided mapper function is {@code null}
      */
     LongContainer map(LongUnaryOperator mapper);
+
+    /**
+     * Applies the provided mapper function to the value of this container, then returns
+     * a new container containing the return value of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @param <U>    The type of object to map this container's value to
+     * @return The resulting container
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    <U> ObjectContainer<U> mapToObj(LongFunction<? extends U> mapper);
+
+    /**
+     * Applies the provided mapper function to the value of this container, then returns
+     * a new container containing the return value of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return The resulting container
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    DoubleContainer mapToDouble(LongToDoubleFunction mapper);
+
+    /**
+     * Applies the provided mapper function to the value of this container, then returns
+     * a new container containing the return value of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return The resulting container
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    FloatContainer mapToFloat(LongToFloatFunction mapper);
+
+    /**
+     * Applies the provided mapper function to the value of this container, then returns
+     * a new container containing the return value of the provided mapper function.
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return The resulting container
+     * @throws NullPointerException When the provided mapper function is {@code null}
+     */
+    IntContainer mapToInt(LongToIntFunction mapper);
 
     /**
      * Applies the provided merger function to this container's value and the provided

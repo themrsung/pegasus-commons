@@ -11,6 +11,35 @@ import java.util.stream.DoubleStream;
  * @see BaseContainer
  */
 public interface DoubleContainer extends BaseContainer<Double> {
+    static DoubleContainer of() {
+        return new FastDoubleContainer(Double.NaN);
+    }
+
+    static DoubleContainer of(double value) {
+        return new FastDoubleContainer(value);
+    }
+
+    /**
+     * Returns whether this container's value is not a number.
+     *
+     * @return {@code true} if this container's value is not a number
+     */
+    boolean isNaN();
+
+    /**
+     * Returns whether this container's value is finite.
+     *
+     * @return {@code true} if container's value is finite
+     */
+    boolean isFinite();
+
+    /**
+     * Returns whether this container's value is infinite.
+     *
+     * @return {@code true} if this container's value is infinite
+     */
+    boolean isInfinite();
+
     /**
      * Returns the value of this container.
      *
@@ -32,6 +61,17 @@ public interface DoubleContainer extends BaseContainer<Double> {
      * @throws NullPointerException When the provided update function is {@code null}
      */
     void update(DoubleUnaryOperator operator);
+
+    /**
+     * Applies the provided accumulator function to this container's value and the provided
+     * identity value, then sets the value of this container to the return value of the provided
+     * accumulator function.
+     *
+     * @param next        The next value of which to accumulate this container's value with
+     * @param accumulator The accumulator function of which to handle the accumulation
+     * @throws NullPointerException When the provided accumulator function is {@code null}
+     */
+    void accumulate(double next, DoubleBinaryOperator accumulator);
 
     /**
      * Applies the provided mapper function to the value of this container, then returns

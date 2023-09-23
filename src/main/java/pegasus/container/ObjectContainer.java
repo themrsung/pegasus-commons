@@ -12,6 +12,21 @@ import java.util.stream.Stream;
  * @see BaseContainer
  */
 public interface ObjectContainer<T> extends BaseContainer<T> {
+    static <T> ObjectContainer<T> of() {
+        return new FastObjectContainer<>(null);
+    }
+
+    static <T> ObjectContainer<T> of(T value) {
+        return new FastObjectContainer<>(value);
+    }
+
+    /**
+     * Returns whether this container's value is {@code null}.
+     *
+     * @return {@code true} if this container's value is {@code null}
+     */
+    boolean isNull();
+
     /**
      * Returns the value of this container.
      *
@@ -33,6 +48,17 @@ public interface ObjectContainer<T> extends BaseContainer<T> {
      * @throws NullPointerException When the provided update function is {@code null}
      */
     void update(UnaryOperator<T> operator);
+
+    /**
+     * Applies the provided accumulator function to this container's value and the provided
+     * identity value, then sets the value of this container to the return value of the provided
+     * accumulator function.
+     *
+     * @param next        The next value of which to accumulate this container's value with
+     * @param accumulator The accumulator function of which to handle the accumulation
+     * @throws NullPointerException When the provided accumulator function is {@code null}
+     */
+    void accumulate(T next, BinaryOperator<T> accumulator);
 
     /**
      * Applies the provided mapper function to the value of this container, then returns

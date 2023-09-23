@@ -11,5 +11,5 @@ public interface IntToFloatFunction {
      * @param value The input parameter
      * @return The resulting value
      */
-    float applyAsLong(int value);
+    float applyAsFloat(int value);
 }

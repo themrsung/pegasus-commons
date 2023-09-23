@@ -11,6 +11,14 @@ import java.util.stream.IntStream;
  * @see BaseContainer
  */
 public interface IntContainer extends BaseContainer<Integer> {
+    static IntContainer of() {
+        return new FastIntContainer(0);
+    }
+
+    static IntContainer of(int value) {
+        return new FastIntContainer(value);
+    }
+
     /**
      * Returns the value of this container.
      *
@@ -32,6 +40,17 @@ public interface IntContainer extends BaseContainer<Integer> {
      * @throws NullPointerException When the provided update function is {@code null}
      */
     void update(IntUnaryOperator operator);
+
+    /**
+     * Applies the provided accumulator function to this container's value and the provided
+     * identity value, then sets the value of this container to the return value of the provided
+     * accumulator function.
+     *
+     * @param next        The next value of which to accumulate this container's value with
+     * @param accumulator The accumulator function of which to handle the accumulation
+     * @throws NullPointerException When the provided accumulator function is {@code null}
+     */
+    void accumulate(int next, IntBinaryOperator accumulator);
 
     /**
      * Applies the provided mapper function to the value of this container, then returns

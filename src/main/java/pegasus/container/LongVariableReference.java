@@ -23,7 +23,7 @@ public class LongVariableReference implements LongContainer {
      */
     public static LongConsumer readOnlySetter() {
         return v -> {
-            throw new UnsupportedOperationException("This reference if read-only.");
+            throw new UnsupportedOperationException("This reference is read-only.");
         };
     }
 

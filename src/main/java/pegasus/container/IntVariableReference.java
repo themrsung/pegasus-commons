@@ -23,7 +23,7 @@ public class IntVariableReference implements IntContainer {
      */
     public static IntConsumer readOnlySetter() {
         return v -> {
-            throw new UnsupportedOperationException("This reference if read-only.");
+            throw new UnsupportedOperationException("This reference is read-only.");
         };
     }
 

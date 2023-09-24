@@ -9,7 +9,6 @@ import java.util.function.DoubleUnaryOperator;
  *
  * @see Tensor
  * @see Vector
- * @see Vector0
  * @see Vector1
  * @see Vector2
  * @see Vector3

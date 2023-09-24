@@ -13,6 +13,7 @@ import java.util.stream.Stream;
  * @see FastObjectContainer
  * @see AtomicContainer
  * @see ArrayElementReference
+ * @see VariableReference
  */
 public interface ObjectContainer<T> extends BaseContainer<T>, Supplier<T> {
     /**

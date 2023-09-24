@@ -10,6 +10,7 @@ import java.util.stream.Stream;
  * @see BaseContainer
  * @see FastFloatContainer
  * @see FloatArrayElementReference
+ * @see FloatVariableReference
  */
 public interface FloatContainer extends BaseContainer<Float>, FloatSupplier {
     /**

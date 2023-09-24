@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
  * @see BaseContainer
  * @see FastIntContainer
  * @see IntArrayElementReference
+ * @see IntVariableReference
  */
 public interface IntContainer extends BaseContainer<Integer>, IntSupplier {
     /**

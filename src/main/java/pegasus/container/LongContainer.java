@@ -11,6 +11,7 @@ import java.util.stream.LongStream;
  * @see BaseContainer
  * @see FastLongContainer
  * @see LongArrayElementReference
+ * @see LongVariableReference
  */
 public interface LongContainer extends BaseContainer<Long>, LongSupplier {
     /**

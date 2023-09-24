@@ -11,6 +11,7 @@ import java.util.stream.DoubleStream;
  * @see BaseContainer
  * @see FastDoubleContainer
  * @see DoubleArrayElementReference
+ * @see DoubleVariableReference
  */
 public interface DoubleContainer extends BaseContainer<Double>, DoubleSupplier {
     /**

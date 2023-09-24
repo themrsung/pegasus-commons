@@ -84,7 +84,7 @@ public class FloatArrayElementReference implements FloatContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public float get() {
+    public float getAsFloat() {
         return source[index];
     }
 
@@ -216,7 +216,7 @@ public class FloatArrayElementReference implements FloatContainer {
      */
     @Override
     public float mergeToValue(FloatContainer c, FloatBinaryOperator merger) {
-        return merger.applyAsFloat(source[index], c.get());
+        return merger.applyAsFloat(source[index], c.getAsFloat());
     }
 
     /**
@@ -229,7 +229,7 @@ public class FloatArrayElementReference implements FloatContainer {
      */
     @Override
     public FloatContainer merge(FloatContainer c, FloatBinaryOperator merger) {
-        return FloatContainer.of(merger.applyAsFloat(source[index], c.get()));
+        return FloatContainer.of(merger.applyAsFloat(source[index], c.getAsFloat()));
     }
 
     /**

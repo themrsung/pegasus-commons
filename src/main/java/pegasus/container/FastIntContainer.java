@@ -36,7 +36,7 @@ public class FastIntContainer implements IntContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public int get() {
+    public int getAsInt() {
         return value;
     }
 
@@ -156,7 +156,7 @@ public class FastIntContainer implements IntContainer {
      */
     @Override
     public int mergeToValue(IntContainer c, IntBinaryOperator merger) {
-        return merger.applyAsInt(value, c.get());
+        return merger.applyAsInt(value, c.getAsInt());
     }
 
     /**
@@ -169,7 +169,7 @@ public class FastIntContainer implements IntContainer {
      */
     @Override
     public IntContainer merge(IntContainer c, IntBinaryOperator merger) {
-        return IntContainer.of(merger.applyAsInt(value, c.get()));
+        return IntContainer.of(merger.applyAsInt(value, c.getAsInt()));
     }
 
     /**
@@ -212,7 +212,7 @@ public class FastIntContainer implements IntContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof IntContainer c)) return false;
-        return value == c.get();
+        return value == c.getAsInt();
     }
 
     /**

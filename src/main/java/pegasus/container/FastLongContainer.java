@@ -36,7 +36,7 @@ public class FastLongContainer implements LongContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public long get() {
+    public long getAsLong() {
         return value;
     }
 
@@ -156,7 +156,7 @@ public class FastLongContainer implements LongContainer {
      */
     @Override
     public long mergeToValue(LongContainer c, LongBinaryOperator merger) {
-        return merger.applyAsLong(value, c.get());
+        return merger.applyAsLong(value, c.getAsLong());
     }
 
     /**
@@ -169,7 +169,7 @@ public class FastLongContainer implements LongContainer {
      */
     @Override
     public LongContainer merge(LongContainer c, LongBinaryOperator merger) {
-        return LongContainer.of(merger.applyAsLong(value, c.get()));
+        return LongContainer.of(merger.applyAsLong(value, c.getAsLong()));
     }
 
     /**
@@ -212,7 +212,7 @@ public class FastLongContainer implements LongContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LongContainer c)) return false;
-        return value == c.get();
+        return value == c.getAsLong();
     }
 
     /**

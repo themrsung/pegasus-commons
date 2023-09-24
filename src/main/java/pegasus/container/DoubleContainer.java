@@ -12,11 +12,22 @@ import java.util.stream.DoubleStream;
  * @see FastDoubleContainer
  * @see DoubleArrayElementReference
  */
-public interface DoubleContainer extends BaseContainer<Double> {
+public interface DoubleContainer extends BaseContainer<Double>, DoubleSupplier {
+    /**
+     * Returns a container with an initial value of {@link Double#NaN NaN}.
+     *
+     * @return The constructed container
+     */
     static DoubleContainer of() {
         return new FastDoubleContainer(Double.NaN);
     }
 
+    /**
+     * Returns a container with the provided initial value.
+     *
+     * @param value The initial value
+     * @return The constructed container
+     */
     static DoubleContainer of(double value) {
         return new FastDoubleContainer(value);
     }
@@ -47,7 +58,7 @@ public interface DoubleContainer extends BaseContainer<Double> {
      *
      * @return The value of this container
      */
-    double get();
+    double getAsDouble();
 
     /**
      * Sets the value of this container.

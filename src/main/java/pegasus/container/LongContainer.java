@@ -12,11 +12,22 @@ import java.util.stream.LongStream;
  * @see FastLongContainer
  * @see LongArrayElementReference
  */
-public interface LongContainer extends BaseContainer<Long> {
+public interface LongContainer extends BaseContainer<Long>, LongSupplier {
+    /**
+     * Returns a container with an initial value of {@code 0}.
+     *
+     * @return The constructed container
+     */
     static LongContainer of() {
         return new FastLongContainer(0);
     }
 
+    /**
+     * Returns a container with the provided initial value.
+     *
+     * @param value The initial value
+     * @return The constructed container
+     */
     static LongContainer of(long value) {
         return new FastLongContainer(value);
     }
@@ -26,7 +37,7 @@ public interface LongContainer extends BaseContainer<Long> {
      *
      * @return The value of this container
      */
-    long get();
+    long getAsLong();
 
     /**
      * Sets the value of this container.

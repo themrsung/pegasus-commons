@@ -66,7 +66,7 @@ public class IntVariableReference implements IntContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public int get() {
+    public int getAsInt() {
         return getter.getAsInt();
     }
 
@@ -186,7 +186,7 @@ public class IntVariableReference implements IntContainer {
      */
     @Override
     public int mergeToValue(IntContainer c, IntBinaryOperator merger) {
-        return merger.applyAsInt(getter.getAsInt(), c.get());
+        return merger.applyAsInt(getter.getAsInt(), c.getAsInt());
     }
 
     /**
@@ -199,7 +199,7 @@ public class IntVariableReference implements IntContainer {
      */
     @Override
     public IntContainer merge(IntContainer c, IntBinaryOperator merger) {
-        return IntContainer.of(merger.applyAsInt(getter.getAsInt(), c.get()));
+        return IntContainer.of(merger.applyAsInt(getter.getAsInt(), c.getAsInt()));
     }
 
     /**
@@ -242,7 +242,7 @@ public class IntVariableReference implements IntContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof IntContainer c)) return false;
-        return getter.getAsInt() == c.get();
+        return getter.getAsInt() == c.getAsInt();
     }
 
     /**

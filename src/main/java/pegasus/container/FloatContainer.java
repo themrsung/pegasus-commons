@@ -11,11 +11,22 @@ import java.util.stream.Stream;
  * @see FastFloatContainer
  * @see FloatArrayElementReference
  */
-public interface FloatContainer extends BaseContainer<Float> {
+public interface FloatContainer extends BaseContainer<Float>, FloatSupplier {
+    /**
+     * Returns a container with an initial value of {@link Float#NaN NaN}.
+     *
+     * @return The constructed container
+     */
     static FloatContainer of() {
         return new FastFloatContainer(Float.NaN);
     }
 
+    /**
+     * Returns a container with the provided initial value.
+     *
+     * @param value The initial value
+     * @return The constructed container
+     */
     static FloatContainer of(float value) {
         return new FastFloatContainer(value);
     }
@@ -46,7 +57,7 @@ public interface FloatContainer extends BaseContainer<Float> {
      *
      * @return The value of this container
      */
-    float get();
+    float getAsFloat();
 
     /**
      * Sets the value of this container.

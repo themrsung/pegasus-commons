@@ -66,7 +66,7 @@ public class LongVariableReference implements LongContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public long get() {
+    public long getAsLong() {
         return getter.getAsLong();
     }
 
@@ -186,7 +186,7 @@ public class LongVariableReference implements LongContainer {
      */
     @Override
     public long mergeToValue(LongContainer c, LongBinaryOperator merger) {
-        return merger.applyAsLong(getter.getAsLong(), c.get());
+        return merger.applyAsLong(getter.getAsLong(), c.getAsLong());
     }
 
     /**
@@ -199,7 +199,7 @@ public class LongVariableReference implements LongContainer {
      */
     @Override
     public LongContainer merge(LongContainer c, LongBinaryOperator merger) {
-        return LongContainer.of(merger.applyAsLong(getter.getAsLong(), c.get()));
+        return LongContainer.of(merger.applyAsLong(getter.getAsLong(), c.getAsLong()));
     }
 
     /**
@@ -242,7 +242,7 @@ public class LongVariableReference implements LongContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof LongContainer c)) return false;
-        return getter.getAsLong() == c.get();
+        return getter.getAsLong() == c.getAsLong();
     }
 
     /**

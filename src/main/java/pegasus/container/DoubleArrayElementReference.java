@@ -85,7 +85,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public double get() {
+    public double getAsDouble() {
         return source[index];
     }
 
@@ -217,7 +217,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
      */
     @Override
     public double mergeToValue(DoubleContainer c, DoubleBinaryOperator merger) {
-        return merger.applyAsDouble(source[index], c.get());
+        return merger.applyAsDouble(source[index], c.getAsDouble());
     }
 
     /**
@@ -230,7 +230,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
      */
     @Override
     public DoubleContainer merge(DoubleContainer c, DoubleBinaryOperator merger) {
-        return DoubleContainer.of(merger.applyAsDouble(source[index], c.get()));
+        return DoubleContainer.of(merger.applyAsDouble(source[index], c.getAsDouble()));
     }
 
     /**

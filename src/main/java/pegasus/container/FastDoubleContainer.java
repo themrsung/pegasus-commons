@@ -66,7 +66,7 @@ public class FastDoubleContainer implements DoubleContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public double get() {
+    public double getAsDouble() {
         return value;
     }
 
@@ -186,7 +186,7 @@ public class FastDoubleContainer implements DoubleContainer {
      */
     @Override
     public double mergeToValue(DoubleContainer c, DoubleBinaryOperator merger) {
-        return merger.applyAsDouble(value, c.get());
+        return merger.applyAsDouble(value, c.getAsDouble());
     }
 
     /**
@@ -199,7 +199,7 @@ public class FastDoubleContainer implements DoubleContainer {
      */
     @Override
     public DoubleContainer merge(DoubleContainer c, DoubleBinaryOperator merger) {
-        return DoubleContainer.of(merger.applyAsDouble(value, c.get()));
+        return DoubleContainer.of(merger.applyAsDouble(value, c.getAsDouble()));
     }
 
     /**
@@ -242,7 +242,7 @@ public class FastDoubleContainer implements DoubleContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof DoubleContainer c)) return false;
-        return value == c.get();
+        return value == c.getAsDouble();
     }
 
     /**

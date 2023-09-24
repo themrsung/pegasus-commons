@@ -55,7 +55,7 @@ public class LongArrayElementReference implements LongContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public long get() {
+    public long getAsLong() {
         return source[index];
     }
 
@@ -187,7 +187,7 @@ public class LongArrayElementReference implements LongContainer {
      */
     @Override
     public long mergeToValue(LongContainer c, LongBinaryOperator merger) {
-        return merger.applyAsLong(source[index], c.get());
+        return merger.applyAsLong(source[index], c.getAsLong());
     }
 
     /**
@@ -200,7 +200,7 @@ public class LongArrayElementReference implements LongContainer {
      */
     @Override
     public LongContainer merge(LongContainer c, LongBinaryOperator merger) {
-        return LongContainer.of(merger.applyAsLong(source[index], c.get()));
+        return LongContainer.of(merger.applyAsLong(source[index], c.getAsLong()));
     }
 
     /**

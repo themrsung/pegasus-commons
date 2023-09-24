@@ -96,7 +96,7 @@ public class DoubleVariableReference implements DoubleContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public double get() {
+    public double getAsDouble() {
         return getter.getAsDouble();
     }
 
@@ -216,7 +216,7 @@ public class DoubleVariableReference implements DoubleContainer {
      */
     @Override
     public double mergeToValue(DoubleContainer c, DoubleBinaryOperator merger) {
-        return merger.applyAsDouble(getter.getAsDouble(), c.get());
+        return merger.applyAsDouble(getter.getAsDouble(), c.getAsDouble());
     }
 
     /**
@@ -229,7 +229,7 @@ public class DoubleVariableReference implements DoubleContainer {
      */
     @Override
     public DoubleContainer merge(DoubleContainer c, DoubleBinaryOperator merger) {
-        return DoubleContainer.of(merger.applyAsDouble(getter.getAsDouble(), c.get()));
+        return DoubleContainer.of(merger.applyAsDouble(getter.getAsDouble(), c.getAsDouble()));
     }
 
     /**
@@ -272,7 +272,7 @@ public class DoubleVariableReference implements DoubleContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof DoubleContainer c)) return false;
-        return getter.getAsDouble() == c.get();
+        return getter.getAsDouble() == c.getAsDouble();
     }
 
     /**

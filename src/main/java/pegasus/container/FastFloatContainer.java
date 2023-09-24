@@ -65,7 +65,7 @@ public class FastFloatContainer implements FloatContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public float get() {
+    public float getAsFloat() {
         return value;
     }
 
@@ -185,7 +185,7 @@ public class FastFloatContainer implements FloatContainer {
      */
     @Override
     public float mergeToValue(FloatContainer c, FloatBinaryOperator merger) {
-        return merger.applyAsFloat(value, c.get());
+        return merger.applyAsFloat(value, c.getAsFloat());
     }
 
     /**
@@ -198,7 +198,7 @@ public class FastFloatContainer implements FloatContainer {
      */
     @Override
     public FloatContainer merge(FloatContainer c, FloatBinaryOperator merger) {
-        return FloatContainer.of(merger.applyAsFloat(value, c.get()));
+        return FloatContainer.of(merger.applyAsFloat(value, c.getAsFloat()));
     }
 
     /**
@@ -241,7 +241,7 @@ public class FastFloatContainer implements FloatContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof FloatContainer c)) return false;
-        return value == c.get();
+        return value == c.getAsFloat();
     }
 
     /**

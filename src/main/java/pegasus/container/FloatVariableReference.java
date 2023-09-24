@@ -95,7 +95,7 @@ public class FloatVariableReference implements FloatContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public float get() {
+    public float getAsFloat() {
         return getter.getAsFloat();
     }
 
@@ -215,7 +215,7 @@ public class FloatVariableReference implements FloatContainer {
      */
     @Override
     public float mergeToValue(FloatContainer c, FloatBinaryOperator merger) {
-        return merger.applyAsFloat(getter.getAsFloat(), c.get());
+        return merger.applyAsFloat(getter.getAsFloat(), c.getAsFloat());
     }
 
     /**
@@ -228,7 +228,7 @@ public class FloatVariableReference implements FloatContainer {
      */
     @Override
     public FloatContainer merge(FloatContainer c, FloatBinaryOperator merger) {
-        return FloatContainer.of(merger.applyAsFloat(getter.getAsFloat(), c.get()));
+        return FloatContainer.of(merger.applyAsFloat(getter.getAsFloat(), c.getAsFloat()));
     }
 
     /**
@@ -271,7 +271,7 @@ public class FloatVariableReference implements FloatContainer {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof FloatContainer c)) return false;
-        return getter.getAsFloat() == c.get();
+        return getter.getAsFloat() == c.getAsFloat();
     }
 
     /**

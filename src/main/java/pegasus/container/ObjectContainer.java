@@ -13,11 +13,24 @@ import java.util.stream.Stream;
  * @see FastObjectContainer
  * @see ArrayElementReference
  */
-public interface ObjectContainer<T> extends BaseContainer<T> {
+public interface ObjectContainer<T> extends BaseContainer<T>, Supplier<T> {
+    /**
+     * Returns a container with an initial value of {@code null}.
+     *
+     * @param <T> The type of object to hold
+     * @return The constructed container
+     */
     static <T> ObjectContainer<T> of() {
         return new FastObjectContainer<>(null);
     }
 
+    /**
+     * Returns a container with the provided initial value.
+     *
+     * @param value The initial value
+     * @param <T>   The type of object to hold
+     * @return The constructed container
+     */
     static <T> ObjectContainer<T> of(T value) {
         return new FastObjectContainer<>(value);
     }

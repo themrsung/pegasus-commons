@@ -12,11 +12,22 @@ import java.util.stream.IntStream;
  * @see FastIntContainer
  * @see IntArrayElementReference
  */
-public interface IntContainer extends BaseContainer<Integer> {
+public interface IntContainer extends BaseContainer<Integer>, IntSupplier {
+    /**
+     * Returns a container with an initial value of {@code 0}.
+     *
+     * @return The constructed container
+     */
     static IntContainer of() {
         return new FastIntContainer(0);
     }
 
+    /**
+     * Returns a container with the provided initial value.
+     *
+     * @param value The initial value
+     * @return The constructed container
+     */
     static IntContainer of(int value) {
         return new FastIntContainer(value);
     }
@@ -26,7 +37,7 @@ public interface IntContainer extends BaseContainer<Integer> {
      *
      * @return The value of this container
      */
-    int get();
+    int getAsInt();
 
     /**
      * Sets the value of this container.

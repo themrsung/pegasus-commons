@@ -55,7 +55,7 @@ public class IntArrayElementReference implements IntContainer {
      * @return {@inheritDoc}
      */
     @Override
-    public int get() {
+    public int getAsInt() {
         return source[index];
     }
 
@@ -187,7 +187,7 @@ public class IntArrayElementReference implements IntContainer {
      */
     @Override
     public int mergeToValue(IntContainer c, IntBinaryOperator merger) {
-        return merger.applyAsInt(source[index], c.get());
+        return merger.applyAsInt(source[index], c.getAsInt());
     }
 
     /**
@@ -200,7 +200,7 @@ public class IntArrayElementReference implements IntContainer {
      */
     @Override
     public IntContainer merge(IntContainer c, IntBinaryOperator merger) {
-        return IntContainer.of(merger.applyAsInt(source[index], c.get()));
+        return IntContainer.of(merger.applyAsInt(source[index], c.getAsInt()));
     }
 
     /**

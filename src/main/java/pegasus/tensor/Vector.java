@@ -15,7 +15,7 @@ import java.util.stream.DoubleStream;
  * called instead for optimal performance.
  * </p>
  * <p>
- * Sizes {@code 2-8} are component-based, meaning that the individual components are
+ * Sizes {@code 1-8} are component-based, meaning that the individual components are
  * declared as independent variables. (e.g. {@code x, y, z}) Sizes {@code 9} and above
  * are {@link ArrayVector array-based}, meaning the components are stored as a primitive
  * array of {@code double} values. ({@code double[]})
@@ -31,6 +31,8 @@ import java.util.stream.DoubleStream;
  *
  * @param <V> The vector itself (the input parameters and return values of various operations)
  * @see Tensor
+ * @see Vector0
+ * @see Vector1
  * @see Vector2
  * @see Vector3
  * @see Vector4
@@ -54,6 +56,8 @@ public interface Vector<V extends Vector<V>> extends Tensor {
      */
     static Vector<?> newVector(double... values) throws IllegalArgumentException {
         return switch (values.length) {
+            case 0 -> Vector0.INSTANCE;
+            case 1 -> new Vector1(values[0]);
             case 2 -> new Vector2(values[0], values[1]);
             case 3 -> new Vector3(values[0], values[1], values[2]);
             case 4 -> new Vector4(values[0], values[1], values[2], values[3]);
@@ -72,6 +76,15 @@ public interface Vector<V extends Vector<V>> extends Tensor {
                     new Vector12(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11]);
             default -> new LargeVector(values);
         };
+    }
+
+    /**
+     * Returns an empty vector.
+     *
+     * @return An empty vector
+     */
+    static Vector0 empty() {
+        return Vector0.INSTANCE;
     }
 
     /**

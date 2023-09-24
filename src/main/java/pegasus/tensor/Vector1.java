@@ -9,12 +9,12 @@ import java.util.function.DoubleUnaryOperator;
 import java.util.stream.DoubleStream;
 
 /**
- * An immutable two-dimensional vector.
+ * An immutable one-dimensional vector.
  *
  * @see Tensor
  * @see Vector
  * @see Vector0
- * @see Vector1
+ * @see Vector2
  * @see Vector3
  * @see Vector4
  * @see Vector5
@@ -28,97 +28,53 @@ import java.util.stream.DoubleStream;
  * @see LargeVector
  * @see Quaternion
  */
-public class Vector2 implements Vector<Vector2> {
+public class Vector1 implements Vector<Vector1> {
     @Serial
     private static final long serialVersionUID = 0;
 
     /**
      * The zero vector.
      */
-    public static final Vector2 ZERO = new Vector2(0, 0);
+    public static final Vector1 ZERO = new Vector1(0);
 
     /**
      * The positive X unit vector.
      */
-    public static final Vector2 POSITIVE_X = new Vector2(1, 0);
-
-    /**
-     * The positive Y unit vector.
-     */
-    public static final Vector2 POSITIVE_Y = new Vector2(0, 1);
+    public static final Vector1 POSITIVE_X = new Vector1(1);
 
     /**
      * The negative X unit vector.
      */
-    public static final Vector2 NEGATIVE_X = new Vector2(-1, 0);
-
-    /**
-     * The negative Y unit vector.
-     */
-    public static final Vector2 NEGATIVE_Y = new Vector2(0, -1);
+    public static final Vector1 NEGATIVE_X = new Vector1(-1);
 
     /**
      * Creates a new vector.
      *
      * @param x The X component of this vector
-     * @param y The Y component of this vector
      */
-    public Vector2(double x, double y) {
+    public Vector1(double x) {
         this.x = x;
-        this.y = y;
     }
 
     /**
      * Creates a new vector.
      *
      * @param v The vector of which to copy component values from
-     * @throws IllegalArgumentException When the provided vector {@code v}'s size is not {@code 2}
+     * @throws IllegalArgumentException When the provided vector {@code v}'s size is not {@code 1}
      * @throws NullPointerException     When the provided vector {@code v} is {@code null}
      */
-    public Vector2(Vector<?> v) {
-        if (v.size() != 2) {
-            throw new IllegalArgumentException("The provided vector's size is not 2.");
+    public Vector1(Vector<?> v) {
+        if (v.size() != 1) {
+            throw new IllegalArgumentException("The provided vector's size is not 1.");
         }
 
         this.x = v.valueAt(0);
-        this.y = v.valueAt(1);
     }
 
     /**
      * The X component of this vector.
      */
     protected final double x;
-
-    /**
-     * The Y component of this vector.
-     */
-    protected final double y;
-
-    /**
-     * {@inheritDoc}
-     *
-     * @return {@inheritDoc}
-     */
-    @Override
-    public int size() {
-        return 2;
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param i The index of the component to get
-     * @return {@inheritDoc}
-     * @throws IndexOutOfBoundsException {@inheritDoc}
-     */
-    @Override
-    public double valueAt(int i) throws IndexOutOfBoundsException {
-        return switch (i) {
-            case 0 -> x;
-            case 1 -> y;
-            default -> throw new IndexOutOfBoundsException(i);
-        };
-    }
 
     /**
      * Returns the X component of this vector.
@@ -130,12 +86,26 @@ public class Vector2 implements Vector<Vector2> {
     }
 
     /**
-     * Returns the Y component of this vector.
+     * {@inheritDoc}
      *
-     * @return The Y component of this vector
+     * @return {@inheritDoc}
      */
-    public double y() {
-        return y;
+    @Override
+    public int size() {
+        return 1;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the component to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public double valueAt(int i) throws IndexOutOfBoundsException {
+        if (i != 0) throw new IndexOutOfBoundsException(i);
+        return x;
     }
 
     /**
@@ -145,7 +115,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public boolean isNaN() {
-        return Double.isNaN(x) || Double.isNaN(y);
+        return Double.isNaN(x);
     }
 
     /**
@@ -155,7 +125,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public boolean isFinite() {
-        return Double.isFinite(x) && Double.isFinite(y);
+        return Double.isFinite(x);
     }
 
     /**
@@ -165,7 +135,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public boolean isInfinite() {
-        return Double.isInfinite(x) || Double.isInfinite(y);
+        return Double.isInfinite(x);
     }
 
     /**
@@ -175,7 +145,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public double norm() {
-        return Math.sqrt(x * x + y * y);
+        return Math.abs(x);
     }
 
     /**
@@ -185,7 +155,8 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public double normSquared() {
-        return x * x + y * y;
+        double norm = Math.abs(x);
+        return norm * norm;
     }
 
     /**
@@ -195,7 +166,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public double normManhattan() {
-        return Math.abs(x) + Math.abs(y);
+        return Math.abs(x);
     }
 
     /**
@@ -205,8 +176,8 @@ public class Vector2 implements Vector<Vector2> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector2 add(double s) {
-        return new Vector2(x + s, y + s);
+    public Vector1 add(double s) {
+        return new Vector1(x + s);
     }
 
     /**
@@ -216,8 +187,8 @@ public class Vector2 implements Vector<Vector2> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector2 subtract(double s) {
-        return new Vector2(x - s, y - s);
+    public Vector1 subtract(double s) {
+        return new Vector1(x - s);
     }
 
     /**
@@ -227,8 +198,8 @@ public class Vector2 implements Vector<Vector2> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector2 multiply(double s) {
-        return new Vector2(x * s, y * s);
+    public Vector1 multiply(double s) {
+        return new Vector1(x * s);
     }
 
     /**
@@ -239,10 +210,9 @@ public class Vector2 implements Vector<Vector2> {
      * @throws ArithmeticException {@inheritDoc}
      */
     @Override
-    public Vector2 divide(double s) throws ArithmeticException {
+    public Vector1 divide(double s) throws ArithmeticException {
         if (s == 0) throw new DivisionByZeroException();
-        double i = 1 / s;
-        return new Vector2(x * i, y * i);
+        return new Vector1(x / s);
     }
 
     /**
@@ -253,8 +223,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector2 add(Vector2 v) {
-        return new Vector2(x + v.x, y + v.y);
+    public Vector1 add(Vector1 v) {
+        return new Vector1(x + v.x);
     }
 
     /**
@@ -265,8 +235,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector2 subtract(Vector2 v) {
-        return new Vector2(x - v.x, y - v.y);
+    public Vector1 subtract(Vector1 v) {
+        return new Vector1(x - v.x);
     }
 
     /**
@@ -277,8 +247,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double dot(Vector2 v) {
-        return x * v.x + y * v.y;
+    public double dot(Vector1 v) {
+        return x * v.x;
     }
 
     /**
@@ -287,8 +257,8 @@ public class Vector2 implements Vector<Vector2> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector2 abs() {
-        return new Vector2(Math.abs(x), Math.abs(y));
+    public Vector1 abs() {
+        return new Vector1(Math.abs(x));
     }
 
     /**
@@ -297,8 +267,8 @@ public class Vector2 implements Vector<Vector2> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector2 round() {
-        return new Vector2(Math.round(x), Math.round(y));
+    public Vector1 round() {
+        return new Vector1(Math.round(x));
     }
 
     /**
@@ -307,8 +277,8 @@ public class Vector2 implements Vector<Vector2> {
      * @return {@inheritDoc}
      */
     @Override
-    public Vector2 negate() {
-        return new Vector2(-x, -y);
+    public Vector1 negate() {
+        return new Vector1(-x);
     }
 
     /**
@@ -318,57 +288,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws ArithmeticException {@inheritDoc}
      */
     @Override
-    public Vector2 normalize() throws ArithmeticException {
-        double s = Math.sqrt(x * x + y * y);
-        if (s == 0) throw new DivisionByZeroException();
-        double i = 1 / s;
-        return new Vector2(x * i, y * i);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param v The boundary vector of which to compare to
-     * @return {@inheritDoc}
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public Vector2 min(Vector2 v) {
-        return new Vector2(
-                Math.min(x, v.x),
-                Math.min(y, v.y)
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param v The boundary vector of which to compare to
-     * @return {@inheritDoc}
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public Vector2 max(Vector2 v) {
-        return new Vector2(
-                Math.max(x, v.x),
-                Math.max(y, v.y)
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param min The minimum boundary vector of which to compare to
-     * @param max The maximum boundary vector of which to compare to
-     * @return {@inheritDoc}
-     * @throws NullPointerException {@inheritDoc}
-     */
-    @Override
-    public Vector2 clamp(Vector2 min, Vector2 max) {
-        return new Vector2(
-                Math.min(Math.max(x, min.x), max.x),
-                Math.min(Math.max(y, min.y), max.y)
-        );
+    public Vector1 normalize() throws ArithmeticException {
+        return POSITIVE_X;
     }
 
     /**
@@ -379,11 +300,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector2 map(DoubleUnaryOperator mapper) {
-        return new Vector2(
-                mapper.applyAsDouble(x),
-                mapper.applyAsDouble(y)
-        );
+    public Vector1 map(DoubleUnaryOperator mapper) {
+        return new Vector1(mapper.applyAsDouble(x));
     }
 
     /**
@@ -395,24 +313,45 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public Vector2 merge(Vector2 v, DoubleBinaryOperator merger) {
-        return new Vector2(
-                merger.applyAsDouble(x, v.x),
-                merger.applyAsDouble(y, v.y)
-        );
+    public Vector1 merge(Vector1 v, DoubleBinaryOperator merger) {
+        return new Vector1(merger.applyAsDouble(x, v.x));
     }
 
     /**
-     * Rotates this vector counter-clockwise along the XY plane by the provided angle.
+     * {@inheritDoc}
      *
-     * @param angRads The angle of rotation to apply to this vector in radians
-     * @return The rotated vector
+     * @param v The boundary vector of which to compare to
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
      */
-    public Vector2 rotate(double angRads) {
-        double c = Math.cos(angRads);
-        double s = Math.sin(angRads);
+    @Override
+    public Vector1 min(Vector1 v) {
+        return new Vector1(Math.min(x, v.x));
+    }
 
-        return new Vector2(x * c - y * s, x * s + y * c);
+    /**
+     * {@inheritDoc}
+     *
+     * @param v The boundary vector of which to compare to
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
+    @Override
+    public Vector1 max(Vector1 v) {
+        return new Vector1(Math.max(x, v.x));
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param min The minimum boundary vector of which to compare to
+     * @param max The maximum boundary vector of which to compare to
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
+    @Override
+    public Vector1 clamp(Vector1 min, Vector1 max) {
+        return new Vector1(Math.min(Math.max(x, min.x), max.x));
     }
 
     /**
@@ -423,11 +362,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double distance(Vector2 v) {
-        double dx = x - v.x;
-        double dy = y - v.y;
-
-        return Math.sqrt(dx * dx + dy * dy);
+    public double distance(Vector1 v) {
+        return Math.abs(x - v.x);
     }
 
     /**
@@ -438,11 +374,9 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double distanceSquared(Vector2 v) {
+    public double distanceSquared(Vector1 v) {
         double dx = x - v.x;
-        double dy = y - v.y;
-
-        return dx * dx + dy * dy;
+        return dx * dx;
     }
 
     /**
@@ -453,11 +387,8 @@ public class Vector2 implements Vector<Vector2> {
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
-    public double distanceManhattan(Vector2 v) {
-        double ax = Math.abs(x - v.x);
-        double ay = Math.abs(y - v.y);
-
-        return ax * ay;
+    public double distanceManhattan(Vector1 v) {
+        return Math.abs(x - v.x);
     }
 
     /**
@@ -467,7 +398,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public DoubleStream stream() {
-        return DoubleStream.of(x, y);
+        return DoubleStream.of(x);
     }
 
     /**
@@ -477,7 +408,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public double[] toArray() {
-        return new double[]{x, y};
+        return new double[]{x};
     }
 
     /**
@@ -487,7 +418,7 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(x);
     }
 
     /**
@@ -499,8 +430,8 @@ public class Vector2 implements Vector<Vector2> {
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Vector<?> v)) return false;
-        if (v.size() != 2) return false;
-        return x == v.valueAt(0) && y == v.valueAt(1);
+        if (v.size() != 1) return false;
+        return x == v.valueAt(0);
     }
 
     /**
@@ -510,6 +441,6 @@ public class Vector2 implements Vector<Vector2> {
      */
     @Override
     public String toString() {
-        return "[" + x + ", " + y + "]";
+        return "[" + x + "]";
     }
 }

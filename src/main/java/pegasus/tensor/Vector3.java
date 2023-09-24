@@ -20,6 +20,8 @@ import java.util.stream.DoubleStream;
  *
  * @see Tensor
  * @see Vector
+ * @see Vector0
+ * @see Vector1
  * @see Vector2
  * @see Vector4
  * @see Vector5

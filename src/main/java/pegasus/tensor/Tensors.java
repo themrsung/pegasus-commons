@@ -1115,6 +1115,17 @@ public final class Tensors {
      * @return The converted pointer
      * @throws NullPointerException When the provided vector {@code v} is {@code null}
      */
+    public static DoublePointer toPointer(Vector1 v) {
+        return DoublePointer.to(v.x);
+    }
+
+    /**
+     * Converts the provided vector {@code v} into a pointer.
+     *
+     * @param v The vector of which to convert into a pointer
+     * @return The converted pointer
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
     public static DoublePointer toPointer(Vector2 v) {
         return DoublePointer.to(v.x, v.y);
     }

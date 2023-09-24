@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.LongContainer;
+import pegasus.container.LongVariableReference;
+
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.*;
@@ -58,6 +61,22 @@ public record LongPair(long x, long y) implements LongTuple {
         return switch (i) {
             case 0 -> x;
             case 1 -> y;
+            default -> throw new IndexOutOfBoundsException(i);
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public LongContainer getReference(int i) throws IndexOutOfBoundsException {
+        return switch (i) {
+            case 0 -> new LongVariableReference(() -> x, LongVariableReference.readOnlySetter());
+            case 1 -> new LongVariableReference(() -> y, LongVariableReference.readOnlySetter());
             default -> throw new IndexOutOfBoundsException(i);
         };
     }

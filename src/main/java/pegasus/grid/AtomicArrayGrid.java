@@ -1,5 +1,7 @@
 package pegasus.grid;
 
+import pegasus.container.ObjectContainer;
+import pegasus.container.VariableReference;
 import pegasus.exception.BinaryIndexOutOfBoundsException;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.BinaryIndexedConsumer;
@@ -230,6 +232,23 @@ public class AtomicArrayGrid<T> implements AtomicGrid<T> {
         }
 
         return values[r * columns + c].get();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param r The row index
+     * @param c The column index
+     * @return {@inheritDoc}
+     * @throws BinaryIndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public ObjectContainer<T> getReference(int r, int c) throws BinaryIndexOutOfBoundsException {
+        if (r < 0 || r >= rows || c < 0 || c >= columns) {
+            throw new BinaryIndexOutOfBoundsException(r, c);
+        }
+
+        return new VariableReference<>(() -> get(r, c), v -> set(r, c, v));
     }
 
     /**

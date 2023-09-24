@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.ObjectContainer;
+import pegasus.container.VariableReference;
+
 import java.io.Serial;
 import java.util.Iterator;
 import java.util.Objects;
@@ -64,6 +67,22 @@ public record Pair<A, B>(A a, B b) implements Tuple<Object> {
         return switch (i) {
             case 0 -> a;
             case 1 -> b;
+            default -> throw new IndexOutOfBoundsException(i);
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public ObjectContainer<Object> getReference(int i) throws IndexOutOfBoundsException {
+        return switch (i) {
+            case 0 -> new VariableReference<>(() -> a, VariableReference.readOnlySetter());
+            case 1 -> new VariableReference<>(() -> b, VariableReference.readOnlySetter());
             default -> throw new IndexOutOfBoundsException(i);
         };
     }

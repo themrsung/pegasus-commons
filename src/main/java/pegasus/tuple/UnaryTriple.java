@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.ObjectContainer;
+import pegasus.container.VariableReference;
+
 import java.io.Serial;
 import java.util.Iterator;
 import java.util.Objects;
@@ -65,6 +68,23 @@ public record UnaryTriple<T>(T a, T b, T c) implements Tuple<T> {
             case 0 -> a;
             case 1 -> b;
             case 2 -> c;
+            default -> throw new IndexOutOfBoundsException(i);
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException {
+        return switch (i) {
+            case 0 -> new VariableReference<>(() -> a, VariableReference.readOnlySetter());
+            case 1 -> new VariableReference<>(() -> b, VariableReference.readOnlySetter());
+            case 2 -> new VariableReference<>(() -> c, VariableReference.readOnlySetter());
             default -> throw new IndexOutOfBoundsException(i);
         };
     }

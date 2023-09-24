@@ -1,5 +1,6 @@
 package pegasus.grid;
 
+import pegasus.container.DoubleContainer;
 import pegasus.exception.BinaryIndexOutOfBoundsException;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.IntToDoubleBiFunction;
@@ -111,6 +112,16 @@ public interface DoubleGrid extends BaseGrid<Double>, BinaryIndexedDoubleIterabl
      * @throws BinaryIndexOutOfBoundsException When the provided index is out of bounds
      */
     double get(int r, int c) throws BinaryIndexOutOfBoundsException;
+
+    /**
+     * Returns a reference to the value at the specified index.
+     *
+     * @param r The row index
+     * @param c The column index
+     * @return A reference to the value at the specified index
+     * @throws BinaryIndexOutOfBoundsException When the provided index is out of bounds
+     */
+    DoubleContainer getReference(int r, int c) throws BinaryIndexOutOfBoundsException;
 
     /**
      * Sets the value at the specified index.

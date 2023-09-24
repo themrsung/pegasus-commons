@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.IntArrayElementReference;
+import pegasus.container.IntContainer;
+
 import java.io.Serial;
 import java.util.*;
 import java.util.function.*;
@@ -82,6 +85,18 @@ public class IntArrayTuple implements IntTuple {
     @Override
     public int get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public IntContainer getReference(int i) throws IndexOutOfBoundsException {
+        return new IntArrayElementReference(values, i, true);
     }
 
     /**

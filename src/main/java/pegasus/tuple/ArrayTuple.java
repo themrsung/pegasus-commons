@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.ArrayElementReference;
+import pegasus.container.ObjectContainer;
+
 import java.io.Serial;
 import java.util.*;
 import java.util.function.*;
@@ -104,6 +107,18 @@ public class ArrayTuple<T> implements Tuple<T> {
     @Override
     public T get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException {
+        return new ArrayElementReference<>(values, i, true);
     }
 
     /**

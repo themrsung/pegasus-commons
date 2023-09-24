@@ -49,11 +49,19 @@ public class LongArrayElementReference implements LongContainer {
      */
     private final boolean readOnly;
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public long get() {
         return source[index];
     }
 
+    /**
+     * {@inheritDoc}
+     * @param value The value of this container
+     */
     @Override
     public void set(long value) {
         if (readOnly) {
@@ -63,6 +71,11 @@ public class LongArrayElementReference implements LongContainer {
         source[index] = value;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param operator The update function of which to apply
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public void update(LongUnaryOperator operator) {
         if (readOnly) {
@@ -72,6 +85,12 @@ public class LongArrayElementReference implements LongContainer {
         source[index] = operator.applyAsLong(source[index]);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param next        The next value of which to accumulate this container's value with
+     * @param accumulator The accumulator function of which to handle the accumulation
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public void accumulate(long next, LongBinaryOperator accumulator) {
         if (readOnly) {
@@ -81,67 +100,140 @@ public class LongArrayElementReference implements LongContainer {
         source[index] = accumulator.applyAsLong(source[index], next);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public long mapToValue(LongUnaryOperator mapper) {
         return mapper.applyAsLong(source[index]);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public LongContainer map(LongUnaryOperator mapper) {
         return LongContainer.of(mapper.applyAsLong(source[index]));
     }
 
+    /**
+     * {@inheritDoc}
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @param <U> {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public <U> ObjectContainer<U> mapToObj(LongFunction<? extends U> mapper) {
         return ObjectContainer.of(mapper.apply(source[index]));
     }
 
+    /**
+     * {@inheritDoc}
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public DoubleContainer mapToDouble(LongToDoubleFunction mapper) {
         return DoubleContainer.of(mapper.applyAsDouble(source[index]));
     }
 
+    /**
+     * {@inheritDoc}
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public FloatContainer mapToFloat(LongToFloatFunction mapper) {
         return FloatContainer.of(mapper.applyAsFloat(source[index]));
     }
 
+    /**
+     * {@inheritDoc}
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public IntContainer mapToInt(LongToIntFunction mapper) {
         return IntContainer.of(mapper.applyAsInt(source[index]));
     }
 
+    /**
+     * {@inheritDoc}
+     * @param c      The container of which to merge this container with
+     * @param merger The merger function of which to handle the merging of the two containers
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public long mergeToValue(LongContainer c, LongBinaryOperator merger) {
         return merger.applyAsLong(source[index], c.get());
     }
 
+    /**
+     * {@inheritDoc}
+     * @param c      The container of which to merge this container with
+     * @param merger The merger function of which to handle the merging of the two containers
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public LongContainer merge(LongContainer c, LongBinaryOperator merger) {
         return LongContainer.of(merger.applyAsLong(source[index], c.get()));
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public LongStream stream() {
         return LongStream.of(source[index]);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param action The action to be performed for this container's value
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public void peek(LongConsumer action) {
         action.accept(source[index]);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(source[index]);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param obj The object to compare to
+     * @return {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof ObjectContainer<?> c)) return false;
         return Objects.equals(source[index], c.get());
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public String toString() {
         return Objects.toString(source[index]);

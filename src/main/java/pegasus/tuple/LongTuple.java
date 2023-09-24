@@ -1,5 +1,6 @@
 package pegasus.tuple;
 
+import pegasus.container.LongContainer;
 import pegasus.util.IndexedLongIterable;
 
 import java.util.Iterator;
@@ -73,6 +74,15 @@ public interface LongTuple extends BaseTuple<Long>, IndexedLongIterable {
      * @throws IndexOutOfBoundsException When the provided index {@code i} is out of bounds
      */
     long get(int i) throws IndexOutOfBoundsException;
+
+    /**
+     * Returns a read-only reference to the {@code i}th element of this tuple.
+     *
+     * @param i The index of the element to get
+     * @return A reference to the {@code i}th element of this tuple
+     * @throws IndexOutOfBoundsException WHen the provided index {@code i} is out of bounds
+     */
+    LongContainer getReference(int i) throws IndexOutOfBoundsException;
 
     /**
      * Applies the provided mapper function to each element of this tuple, then returns a new

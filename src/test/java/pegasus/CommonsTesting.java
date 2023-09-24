@@ -1,20 +1,16 @@
 package pegasus;
 
 
-import pegasus.pointer.DoubleArrayPointer;
+import pegasus.container.DoubleContainer;
 import pegasus.pointer.DoublePointer;
-
-import java.util.function.*;
+import pegasus.tensor.Matrix;
+import pegasus.tuple.DoubleTuple;
 
 public class CommonsTesting {
     public static void main(String[] args) {
-    }
+        Matrix m = new Matrix(3, 3);
+        m.getReference(1, 1).set(1000);
 
-    public static boolean test(double n) {
-        return true;
-    }
-
-    public static double testd(boolean nein, boolean ja) {
-        return 3;
+        System.out.println(m);
     }
 }

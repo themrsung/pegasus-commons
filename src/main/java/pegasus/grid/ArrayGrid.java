@@ -1,5 +1,7 @@
 package pegasus.grid;
 
+import pegasus.container.ArrayElementReference;
+import pegasus.container.ObjectContainer;
 import pegasus.exception.BinaryIndexOutOfBoundsException;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.BinaryIndexedConsumer;
@@ -213,6 +215,23 @@ public class ArrayGrid<T> implements Grid<T> {
         }
 
         return values[r * columns + c];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param r The row index
+     * @param c The column index
+     * @return {@inheritDoc}
+     * @throws BinaryIndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public ObjectContainer<T> getReference(int r, int c) throws BinaryIndexOutOfBoundsException {
+        if (r < 0 || r >= rows || c < 0 || c >= columns) {
+            throw new BinaryIndexOutOfBoundsException(r, c);
+        }
+
+        return new ArrayElementReference<>(values, r * columns + c, false);
     }
 
     /**

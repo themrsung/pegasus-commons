@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.DoubleArrayElementReference;
+import pegasus.container.DoubleContainer;
+
 import java.io.Serial;
 import java.util.*;
 import java.util.function.*;
@@ -82,6 +85,18 @@ public class DoubleArrayTuple implements DoubleTuple {
     @Override
     public double get(int i) throws IndexOutOfBoundsException {
         return values[i];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public DoubleContainer getReference(int i) throws IndexOutOfBoundsException {
+        return new DoubleArrayElementReference(values, i, true);
     }
 
     /**

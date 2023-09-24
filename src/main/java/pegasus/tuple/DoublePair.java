@@ -1,5 +1,8 @@
 package pegasus.tuple;
 
+import pegasus.container.DoubleContainer;
+import pegasus.container.DoubleVariableReference;
+
 import java.io.Serial;
 import java.util.Iterator;
 import java.util.Objects;
@@ -62,6 +65,22 @@ public record DoublePair(double x, double y) implements DoubleTuple {
         return switch (i) {
             case 0 -> x;
             case 1 -> y;
+            default -> throw new IndexOutOfBoundsException(i);
+        };
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param i The index of the element to get
+     * @return {@inheritDoc}
+     * @throws IndexOutOfBoundsException {@inheritDoc}
+     */
+    @Override
+    public DoubleContainer getReference(int i) throws IndexOutOfBoundsException {
+        return switch (i) {
+            case 0 -> new DoubleVariableReference(() -> x, DoubleVariableReference.readOnlySetter());
+            case 1 -> new DoubleVariableReference(() -> y, DoubleVariableReference.readOnlySetter());
             default -> throw new IndexOutOfBoundsException(i);
         };
     }

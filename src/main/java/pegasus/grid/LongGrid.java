@@ -1,5 +1,6 @@
 package pegasus.grid;
 
+import pegasus.container.LongContainer;
 import pegasus.exception.BinaryIndexOutOfBoundsException;
 import pegasus.exception.IncompatibleDimensionsException;
 import pegasus.function.IntToLongBiFunction;
@@ -111,6 +112,16 @@ public interface LongGrid extends BaseGrid<Long>, BinaryIndexedLongIterable {
      * @throws BinaryIndexOutOfBoundsException When the provided index is out of bounds
      */
     long get(int r, int c) throws BinaryIndexOutOfBoundsException;
+
+    /**
+     * Returns a reference to the value at the specified index.
+     *
+     * @param r The row index
+     * @param c The column index
+     * @return A reference to the value at the specified index
+     * @throws BinaryIndexOutOfBoundsException When the provided index is out of bounds
+     */
+    LongContainer getReference(int r, int c) throws BinaryIndexOutOfBoundsException;
 
     /**
      * Sets the value at the specified index.

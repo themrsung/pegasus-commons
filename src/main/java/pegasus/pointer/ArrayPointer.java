@@ -434,6 +434,16 @@ public class ArrayPointer<T> implements ObjectPointer<T> {
      * @return {@inheritDoc}
      */
     @Override
+    public List<T> asList() {
+        return Arrays.asList(values);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
     public Iterator<T> iterator() {
         return stream().iterator();
     }

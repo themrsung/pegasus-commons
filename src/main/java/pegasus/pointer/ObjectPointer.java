@@ -340,6 +340,13 @@ public interface ObjectPointer<T> extends BasePointer<T>, IndexedIterable<T> {
     T[] asArray();
 
     /**
+     * Returns a list referencing the values of this pointer. Changes in the return value of
+     * this method will be reflected to this pointer.
+     * @return The list representation of this pointer
+     */
+    List<T> asList();
+
+    /**
      * {@inheritDoc}
      *
      * @return {@inheritDoc}

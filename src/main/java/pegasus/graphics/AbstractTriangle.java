@@ -153,7 +153,7 @@ public abstract class AbstractTriangle<V extends Vector<V>> implements Triangle<
      * @return {@inheritDoc}
      */
     @Override
-    public Stream<V> stream() {
+    public Stream<V> vertexStream() {
         return Stream.of(a, b, c);
     }
 

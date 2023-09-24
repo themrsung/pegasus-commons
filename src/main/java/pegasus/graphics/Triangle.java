@@ -131,7 +131,7 @@ public interface Triangle<V extends Vector<V>> {
      *
      * @return A stream of this triangle's vertices
      */
-    Stream<V> stream();
+    Stream<V> vertexStream();
 
     /**
      * Executes the provided action once for each vertex of this triangle.

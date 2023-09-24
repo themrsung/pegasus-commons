@@ -1,5 +1,6 @@
 package pegasus.tensor;
 
+import pegasus.container.DoubleContainer;
 import pegasus.exception.IllegalInstanceException;
 import pegasus.pointer.DoublePointer;
 import pegasus.tuple.DoubleTuple;
@@ -1193,6 +1194,21 @@ public final class Tensors {
      */
     public static DoublePointer toPointer(Vector8 v) {
         return DoublePointer.to(v.i, v.j, v.k, v.l, v.m, v.n, v.o, v.p);
+    }
+
+    //
+    // Container Conversion
+    //
+
+    /**
+     * Converts the provided vector {@code v} into a container.
+     *
+     * @param v The vector of which to convert into a container
+     * @return The converted container
+     * @throws NullPointerException When the provided vector {@code v} is {@code null}
+     */
+    public static DoubleContainer toContainer(Vector1 v) {
+        return DoubleContainer.of(v.x);
     }
 
     //

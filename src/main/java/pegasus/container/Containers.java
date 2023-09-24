@@ -6,6 +6,11 @@ import pegasus.tuple.*;
 
 /**
  * Contains container utilities.
+ * @see ObjectContainer
+ * @see DoubleContainer
+ * @see LongContainer
+ * @see FloatContainer
+ * @see IntContainer
  */
 public final class Containers {
     //

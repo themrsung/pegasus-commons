@@ -21,7 +21,7 @@ public interface IndexedDoubleIterable extends Iterable<Double> {
                 value = 0;
             }
 
-            action.accept(i, value);
+            action.accept(i++, value);
         }
     }
 }

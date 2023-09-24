@@ -21,7 +21,7 @@ public interface IndexedIntIterable extends Iterable<Integer> {
                 value = 0;
             }
 
-            action.accept(i, value);
+            action.accept(i++, value);
         }
     }
 }

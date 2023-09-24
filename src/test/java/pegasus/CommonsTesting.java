@@ -3,6 +3,7 @@ package pegasus;
 
 import pegasus.container.Containers;
 import pegasus.container.DoubleContainer;
+import pegasus.pointer.DoubleArrayPointer;
 import pegasus.pointer.DoublePointer;
 import pegasus.tensor.Matrix;
 import pegasus.tuple.DoubleTuple;
@@ -14,10 +15,8 @@ import java.util.logging.Logger;
 
 public class CommonsTesting {
     public static void main(String[] args) {
-        AtomicReference<String> ref = new AtomicReference<>();
-    }
-
-    public static void printDouble(DoubleSupplier s) {
-        System.out.println(s.getAsDouble());
+        DoublePointer doubles = DoublePointer.to(1, 2, 3, 4, 5);
+        
+        doubles.forEachIndexed((i, v) -> System.out.println(i + ": " + v));
     }
 }

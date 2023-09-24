@@ -11,6 +11,7 @@ import java.util.stream.Stream;
  * @param <T> The type of object this container is to hold
  * @see BaseContainer
  * @see FastObjectContainer
+ * @see AtomicContainer
  * @see ArrayElementReference
  */
 public interface ObjectContainer<T> extends BaseContainer<T>, Supplier<T> {

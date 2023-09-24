@@ -51,6 +51,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -60,6 +61,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -69,6 +71,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -78,6 +81,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -87,6 +91,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param value The value of this container
      */
     @Override
@@ -100,6 +105,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param operator The update function of which to apply
      * @throws NullPointerException {@inheritDoc}
      */
@@ -114,6 +120,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param next        The next value of which to accumulate this container's value with
      * @param accumulator The accumulator function of which to handle the accumulation
      * @throws NullPointerException {@inheritDoc}
@@ -129,6 +136,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -140,6 +148,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -151,9 +160,10 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -163,6 +173,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -174,6 +185,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -185,6 +197,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -196,6 +209,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param c      The container of which to merge this container with
      * @param merger The merger function of which to handle the merging of the two containers
      * @return {@inheritDoc}
@@ -208,6 +222,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param c      The container of which to merge this container with
      * @param merger The merger function of which to handle the merging of the two containers
      * @return {@inheritDoc}
@@ -220,6 +235,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -229,6 +245,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param action The action to be performed for this container's value
      * @throws NullPointerException {@inheritDoc}
      */
@@ -239,6 +256,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -248,6 +266,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @param obj The object to compare to
      * @return {@inheritDoc}
      */
@@ -259,6 +278,7 @@ public class DoubleArrayElementReference implements DoubleContainer {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

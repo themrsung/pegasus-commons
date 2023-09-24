@@ -60,87 +60,196 @@ public class IntVariableReference implements IntContainer {
      */
     protected final IntConsumer setter;
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     @Override
     public int get() {
         return getter.getAsInt();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param value The value of this container
+     */
     @Override
     public void set(int value) {
         setter.accept(value);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param operator The update function of which to apply
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public void update(IntUnaryOperator operator) {
         setter.accept(operator.applyAsInt(getter.getAsInt()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param next        The next value of which to accumulate this container's value with
+     * @param accumulator The accumulator function of which to handle the accumulation
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public void accumulate(int next, IntBinaryOperator accumulator) {
         setter.accept(accumulator.applyAsInt(getter.getAsInt(), next));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public int mapToValue(IntUnaryOperator mapper) {
         return mapper.applyAsInt(getter.getAsInt());
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public IntContainer map(IntUnaryOperator mapper) {
         return IntContainer.of(mapper.applyAsInt(getter.getAsInt()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @param <U>    {@inheritDoc}
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public <U> ObjectContainer<U> mapToObj(IntFunction<? extends U> mapper) {
         return ObjectContainer.of(mapper.apply(getter.getAsInt()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public DoubleContainer mapToDouble(IntToDoubleFunction mapper) {
         return DoubleContainer.of(mapper.applyAsDouble(getter.getAsInt()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public LongContainer mapToLong(IntToLongFunction mapper) {
         return LongContainer.of(mapper.applyAsLong(getter.getAsInt()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param mapper The mapper function of which to apply to this container's value
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public FloatContainer mapToFloat(IntToFloatFunction mapper) {
         return FloatContainer.of(mapper.applyAsFloat(getter.getAsInt()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param c      The container of which to merge this container with
+     * @param merger The merger function of which to handle the merging of the two containers
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public int mergeToValue(IntContainer c, IntBinaryOperator merger) {
         return merger.applyAsInt(getter.getAsInt(), c.get());
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param c      The container of which to merge this container with
+     * @param merger The merger function of which to handle the merging of the two containers
+     * @return {@inheritDoc}
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public IntContainer merge(IntContainer c, IntBinaryOperator merger) {
         return IntContainer.of(merger.applyAsInt(getter.getAsInt(), c.get()));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     @Override
     public IntStream stream() {
         return IntStream.of(getter.getAsInt());
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param action The action to be performed for this container's value
+     * @throws NullPointerException {@inheritDoc}
+     */
     @Override
     public void peek(IntConsumer action) {
         action.accept(getter.getAsInt());
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(getter.getAsInt());
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param obj The object to compare to
+     * @return {@inheritDoc}
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof IntContainer c)) return false;
         return getter.getAsInt() == c.get();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
     @Override
     public String toString() {
         return Objects.toString(getter.getAsInt());

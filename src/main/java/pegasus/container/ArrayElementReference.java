@@ -54,6 +54,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -63,6 +64,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -72,6 +74,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param value The value of this container
      */
     @Override
@@ -85,6 +88,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param operator The update function of which to apply
      * @throws NullPointerException {@inheritDoc}
      */
@@ -99,6 +103,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param next        The next value of which to accumulate this container's value with
      * @param accumulator The accumulator function of which to handle the accumulation
      * @throws NullPointerException {@inheritDoc}
@@ -114,9 +119,10 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -126,9 +132,10 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
+     * @param <U>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -138,6 +145,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -149,6 +157,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -160,6 +169,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -171,6 +181,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param mapper The mapper function of which to apply to this container's value
      * @return {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
@@ -182,11 +193,12 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param c      The container of which to merge this container with
      * @param merger The merger function of which to handle the merging of the two containers
+     * @param <U>    {@inheritDoc}
+     * @param <V>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
-     * @param <V> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -196,11 +208,12 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param c      The container of which to merge this container with
      * @param merger The merger function of which to handle the merging of the two containers
+     * @param <U>    {@inheritDoc}
+     * @param <V>    {@inheritDoc}
      * @return {@inheritDoc}
-     * @param <U> {@inheritDoc}
-     * @param <V> {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
     @Override
@@ -210,6 +223,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -219,6 +233,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param action The action to be performed for this container's value
      * @throws NullPointerException {@inheritDoc}
      */
@@ -229,6 +244,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -238,6 +254,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @param obj The object to compare to
      * @return {@inheritDoc}
      */
@@ -249,6 +266,7 @@ public final class ArrayElementReference<T> implements ObjectContainer<T> {
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

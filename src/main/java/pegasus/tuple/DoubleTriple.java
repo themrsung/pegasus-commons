@@ -1,8 +1,5 @@
 package pegasus.tuple;
 
-import pegasus.container.DoubleContainer;
-import pegasus.container.DoubleVariableReference;
-
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.*;
@@ -63,23 +60,6 @@ public record DoubleTriple(double x, double y, double z) implements DoubleTuple 
             case 0 -> x;
             case 1 -> y;
             case 2 -> z;
-            default -> throw new IndexOutOfBoundsException(i);
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param i The index of the element to get
-     * @return {@inheritDoc}
-     * @throws IndexOutOfBoundsException {@inheritDoc}
-     */
-    @Override
-    public DoubleContainer getReference(int i) throws IndexOutOfBoundsException {
-        return switch (i) {
-            case 0 -> new DoubleVariableReference(() -> x, DoubleVariableReference.readOnlySetter());
-            case 1 -> new DoubleVariableReference(() -> y, DoubleVariableReference.readOnlySetter());
-            case 2 -> new DoubleVariableReference(() -> z, DoubleVariableReference.readOnlySetter());
             default -> throw new IndexOutOfBoundsException(i);
         };
     }

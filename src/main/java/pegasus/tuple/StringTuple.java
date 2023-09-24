@@ -1,8 +1,5 @@
 package pegasus.tuple;
 
-import pegasus.container.ArrayElementReference;
-import pegasus.container.ObjectContainer;
-
 import java.io.File;
 import java.io.Serial;
 import java.util.*;
@@ -146,18 +143,6 @@ public class StringTuple implements Tuple<String> {
      */
     public String getAsLowerCase(int i) throws IndexOutOfBoundsException {
         return values[i].toLowerCase();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param i The index of the element to get
-     * @return {@inheritDoc}
-     * @throws IndexOutOfBoundsException {@inheritDoc}
-     */
-    @Override
-    public ObjectContainer<String> getReference(int i) throws IndexOutOfBoundsException {
-        return new ArrayElementReference<>(values, i, true);
     }
 
     /**

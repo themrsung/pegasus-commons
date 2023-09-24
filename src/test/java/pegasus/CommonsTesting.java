@@ -1,21 +1,15 @@
 package pegasus;
 
-import pegasus.collection.Lists;
 import pegasus.container.DoubleContainer;
-import pegasus.pointer.ArrayPointer;
-import pegasus.pointer.ObjectPointer;
-
-import java.util.*;
+import pegasus.pointer.DoublePointer;
 
 public class CommonsTesting {
     public static void main(String[] args) {
-        ObjectPointer<String> stringPointer = new ArrayPointer<>(10);
-        stringPointer.setAll(i -> "VALUE_" + i);
+        DoublePointer doubles = DoublePointer.to(1);
+        DoubleContainer reference = doubles.getReference(0);
 
-        System.out.println(stringPointer);
-
-        stringPointer.asList().replaceAll(String::toLowerCase);
-
-        System.out.println(stringPointer);
+        reference.set(100);
+        
+        System.out.println(doubles);
     }
 }

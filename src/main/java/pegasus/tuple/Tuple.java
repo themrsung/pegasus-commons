@@ -91,15 +91,6 @@ public interface Tuple<T> extends BaseTuple<T>, IndexedIterable<T> {
     T get(int i) throws IndexOutOfBoundsException;
 
     /**
-     * Returns a read-only reference to the {@code i}th element of this tuple.
-     *
-     * @param i The index of the element to get
-     * @return A reference to the {@code i}th element of this tuple
-     * @throws IndexOutOfBoundsException WHen the provided index {@code i} is out of bounds
-     */
-    ObjectContainer<T> getReference(int i) throws IndexOutOfBoundsException;
-
-    /**
      * Applies the provided mapper function to each element of this tuple, then returns a new
      * tuple containing the return values of the provided mapper function.
      *

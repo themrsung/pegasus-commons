@@ -1,8 +1,5 @@
 package pegasus.tuple;
 
-import pegasus.container.IntContainer;
-import pegasus.container.IntVariableReference;
-
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.*;
@@ -61,22 +58,6 @@ public record IntPair(int x, int y) implements IntTuple {
         return switch (i) {
             case 0 -> x;
             case 1 -> y;
-            default -> throw new IndexOutOfBoundsException(i);
-        };
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @param i The index of the element to get
-     * @return {@inheritDoc}
-     * @throws IndexOutOfBoundsException {@inheritDoc}
-     */
-    @Override
-    public IntContainer getReference(int i) throws IndexOutOfBoundsException {
-        return switch (i) {
-            case 0 -> new IntVariableReference(() -> x, IntVariableReference.readOnlySetter());
-            case 1 -> new IntVariableReference(() -> y, IntVariableReference.readOnlySetter());
             default -> throw new IndexOutOfBoundsException(i);
         };
     }

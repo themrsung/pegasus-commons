@@ -1004,8 +1004,8 @@ public final class Tensors {
      */
     public static Vector2 to2D(Vector3 v, double focalLength) {
         return new Vector2(
-                (focalLength * (focalLength + v.z)) * v.x,
-                (focalLength * (focalLength + v.z)) * -v.y
+                (focalLength / (focalLength + v.z)) * v.x,
+                (focalLength / (focalLength + v.z)) * -v.y
         );
     }
 
@@ -1021,8 +1021,8 @@ public final class Tensors {
      */
     public static Vector2 to2D(Vector3 v, double focalLength, boolean invertY) {
         return new Vector2(
-                (focalLength * (focalLength + v.z)) * v.x,
-                (focalLength * (focalLength + v.z)) * (invertY ? -v.y : v.y)
+                (focalLength / (focalLength + v.z)) * v.x,
+                (focalLength / (focalLength + v.z)) * (invertY ? -v.y : v.y)
         );
     }
 
